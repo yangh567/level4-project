@@ -10,6 +10,16 @@ Week-by-week plan for the whole project. Update this as you go along.
 ## Winter semester
 
 * **Week 1**
+
+1.fully understand the concepts of the recommendation system（what data should I put in and train, what result should i get from training and validate
+2.decide on which recommendation systems should I use(Collaborative Recommender System, Content Based Recommender System, Demographic Based Recommender System, Utility Based Recommender System, Knowledge Based Recommender System, Hybrid recommender system)
+3.draw a workflow for the recommender system and provide it next week.
+4.write the status report for next week
+5.prepare for the slides for next week
+
+
+
+
 * **Week 2**
 * **Week 3**
 * **Week 4**

@@ -1,9 +1,9 @@
 # Timelog
 
-* PROJECT NAME
-* YOUR NAME
-* STUDENT_ID
-* SUPERVISOR NAME
+* Molecular Recommendation system
+* Zhouyang shen
+* 2359009s
+* Ke Yuan
 
 ## Guidance
 
@@ -14,13 +14,36 @@
 
 ## Week 1
 
-### 19 Oct 2019
+### 29 sep 2020 Tuesday
 
-* *4 hours* Read the project guidance notes
-* *0.5 hour* Created GitLab repository and cloned the cookiecutter for the projects
-* *1 hour* Modified dissertation template, compiled  
+* *4 hours* Read the project guidance notes to understand the process of initiating and processing on individual project.
+* *5 hours*  looked through the information about how would the molecular be used to determine the existence of tumor 
 
-## 20 Oct 2019
+### 30 sep 2020 Wednesday
 
-* *1 hour* meeting with supervisor
-* *2 hours* writing initial version of test harness
+* *5 hours* Looked through the existing recommendation for understanding the structure of recommendation system and the common tools for building the recommendation system
+* *5 hours* Practice myself with some other recommendation system to understand teh process of a recommendation system  
+
+## 31 sep 2020 Thursday
+
+* *2 hour* preparing slides for meeting with supervisor
+* *2 hours* creating and configure the Gitlab repository and uploading for individual project
+* *1 hour* install the essential tools for recommendation system(sklearn,pandas,numpy)
+* *30 min* writing the status report for meeting
+
+## 1 oct 2020 Friday
+
+* *3 hours* deciding on the model and type of recommendation system should use
+* *30 min* meeting with supervisor
+* *30 min* writing the plan and minute for the meeting 
+
+## 2 oct 2020 Saturday
+
+* *1 hour* building the process or the workflow of the recommendation system 
+* *5 hour* try to code on project and get familier with tools for development
+ 
+## 3 oct 2020 Sunday
+
+* *6 hour* working on figuring out the functions for the recommendation system
+
+## 4 oct 2020 Monday
