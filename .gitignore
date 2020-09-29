@@ -1,1 +1,1 @@
-*.csv
+**/datafiles/**/*.csv
