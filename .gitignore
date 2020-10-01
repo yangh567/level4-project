@@ -1,4 +1,4 @@
 **/datafiles/**/*.csv
 
 # Directories #
-venv
+venv/*
