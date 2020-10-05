@@ -44,9 +44,8 @@
 * *5 min* writing timelog
 * *6 hours* working on figuring out the functions for the recommendation system
 
-
 ## Week 2
 
 ## 4 oct 2020 Monday
 * *3 hours* learning content-based recommender system,simple recommender  with examples
-* *5 minutes* writing timelog
+* *5 minutes* writing timelogs
