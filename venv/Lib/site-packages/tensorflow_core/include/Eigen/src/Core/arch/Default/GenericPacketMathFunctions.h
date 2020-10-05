@@ -233,10 +233,6 @@ Packet pexp_float(const Packet _x)
   return pmax(pldexp(y,m), _x);
 }
 
-// make it the default path for scalar float
-template<>
-EIGEN_DEVICE_FUNC inline float pexp(const float& a) { return pexp_float(a); }
-
 template <typename Packet>
 EIGEN_DEFINE_FUNCTION_ALLOWING_MULTIPLE_DEFINITIONS
 EIGEN_UNUSED
@@ -304,10 +300,6 @@ Packet pexp_double(const Packet _x)
   // non-finite values in the input.
   return pmax(pldexp(x,fx), _x);
 }
-
-// make it the default path for scalar double
-template<>
-EIGEN_DEVICE_FUNC inline double pexp(const double& a) { return pexp_double(a); }
 
 // The following code is inspired by the following stack-overflow answer:
 //   https://stackoverflow.com/questions/30463616/payne-hanek-algorithm-implementation-in-c/30465751#30465751
@@ -575,77 +567,6 @@ struct ppolevl<Packet, 0> {
   static EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Packet run(const Packet& x, const typename unpacket_traits<Packet>::type coeff[]) {
     EIGEN_UNUSED_VARIABLE(x);
     return pset1<Packet>(coeff[0]);
-  }
-};
-
-/* chbevl (modified for Eigen)
- *
- *     Evaluate Chebyshev series
- *
- *
- *
- * SYNOPSIS:
- *
- * int N;
- * Scalar x, y, coef[N], chebevl();
- *
- * y = chbevl( x, coef, N );
- *
- *
- *
- * DESCRIPTION:
- *
- * Evaluates the series
- *
- *        N-1
- *         - '
- *  y  =   >   coef[i] T (x/2)
- *         -            i
- *        i=0
- *
- * of Chebyshev polynomials Ti at argument x/2.
- *
- * Coefficients are stored in reverse order, i.e. the zero
- * order term is last in the array.  Note N is the number of
- * coefficients, not the order.
- *
- * If coefficients are for the interval a to b, x must
- * have been transformed to x -> 2(2x - b - a)/(b-a) before
- * entering the routine.  This maps x from (a, b) to (-1, 1),
- * over which the Chebyshev polynomials are defined.
- *
- * If the coefficients are for the inverted interval, in
- * which (a, b) is mapped to (1/b, 1/a), the transformation
- * required is x -> 2(2ab/x - b - a)/(b-a).  If b is infinity,
- * this becomes x -> 4a/x - 1.
- *
- *
- *
- * SPEED:
- *
- * Taking advantage of the recurrence properties of the
- * Chebyshev polynomials, the routine requires one more
- * addition per loop than evaluating a nested polynomial of
- * the same degree.
- *
- */
-
-template <typename Packet, int N>
-struct pchebevl {
-  EIGEN_DEVICE_FUNC
-  static EIGEN_STRONG_INLINE Packet run(Packet x, const typename unpacket_traits<Packet>::type coef[]) {
-    typedef typename unpacket_traits<Packet>::type Scalar;
-    Packet b0 = pset1<Packet>(coef[0]);
-    Packet b1 = pset1<Packet>(static_cast<Scalar>(0.f));
-    Packet b2;
-
-    for (int i = 1; i < N; i++) {
-      b2 = b1;
-      b1 = b0;
-      b0 = psub(pmadd(x, b1, pset1<Packet>(coef[i])), b2);
-    }
-
-    return pmul(pset1<Packet>(static_cast<Scalar>(0.5f)), psub(b0, b2));
   }
 };
 

@@ -34,8 +34,6 @@
 ## 1 oct 2020 Friday
 * *5 min* writing timelog
 * *3 hours* deciding on the model and type of recommendation system should use
-* *30 min* meeting with supervisor
-* *30 min* writing the plan and minute for the meeting 
 
 ## 2 oct 2020 Saturday
 * *5 min* writing timelog
@@ -44,6 +42,11 @@
  
 ## 3 oct 2020 Sunday
 * *5 min* writing timelog
-* *6 hour* working on figuring out the functions for the recommendation system
+* *6 hours* working on figuring out the functions for the recommendation system
+
+
+## Week 2
 
 ## 4 oct 2020 Monday
+* *3 hours* learning content-based recommender system,simple recommender  with examples
+* *5 minutes* writing timelog

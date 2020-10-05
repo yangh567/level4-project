@@ -41,13 +41,15 @@ def map_flat_values(op, *args, **kwargs):
 
   Examples:
 
-  >>> rt = tf.ragged.constant([[1, 2, 3], [], [4, 5], [6]])
-  >>> map_flat_values(tf.ones_like, rt).to_list()
+  ```python
+  >>> rt = ragged.constant([[1, 2, 3], [], [4, 5], [6]])
+  >>> ragged.map_flat_values(tf.ones_like, rt).eval().tolist()
   [[1, 1, 1], [], [1, 1], [1]]
-  >>> map_flat_values(tf.multiply, rt, rt).to_list()
+  >>> ragged.map_flat_values(tf.multiply, rt, rt).eval().tolist()
   [[1, 4, 9], [], [16, 25], [36]]
-  >>> map_flat_values(tf.add, rt, 5).to_list()
+  >>> ragged.map_flat_values(tf.add, rt, 5).eval().tolist()
   [[6, 7, 8], [], [9, 10], [11]]
+  ```
 
   Args:
     op: The operation that should be applied to the RaggedTensor `flat_values`.

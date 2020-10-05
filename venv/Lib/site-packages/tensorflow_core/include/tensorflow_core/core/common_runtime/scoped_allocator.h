@@ -35,8 +35,7 @@ class ScopedAllocator {
   struct Field {
     int32 scope_id;
     size_t offset;
-    size_t bytes_requested;
-    size_t bytes_allocated;
+    size_t bytes;
   };
   // Field index that refers to backing tensor, not any aliased field.
   static const int32 kBackingIndex = -1;
