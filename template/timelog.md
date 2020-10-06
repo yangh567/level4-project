@@ -49,3 +49,9 @@
 ## 5 oct 2020 Monday
 * *3 hours* learning content-based recommender system,simple recommender  with examples
 * *5 minutes* writing timelogs
+
+## 6 oct 2020 Wednesday
+* *3 hours* doing research on graph neural network and figure out how to apply it to recommendation system
+* *5 minutes* writing timelog
+* *2 hours* learning collaborative filtering recommendation system
+ 
