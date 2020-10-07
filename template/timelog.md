@@ -55,3 +55,6 @@
 * *5 minutes* writing timelog
 * *2 hours* learning collaborative filtering recommendation system
  
+## 7 oct 2020 Thursday
+* *1 hour* summarize what i have done this week and write the status report 
+* *2 hours* complete the presentation for the weekly meeting
