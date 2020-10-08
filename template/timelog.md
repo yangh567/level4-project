@@ -58,3 +58,9 @@
 ## 7 oct 2020 Thursday
 * *1 hour* summarize what i have done this week and write the status report 
 * *2 hours* complete the presentation for the weekly meeting
+
+## 8oct 2020 Friday
+* *30 min* meeting with supervisor
+* *30 min* writing the plan and minute for the meeting 
+* *1 hour* complete the workflow and understand what is the structure or the type of recommendation system to use
+* *5 minute* write timelog
