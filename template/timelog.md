@@ -50,16 +50,21 @@
 * *3 hours* learning content-based recommender system,simple recommender  with examples
 * *5 minutes* writing timelogs
 
-## 6 oct 2020 Wednesday
+## 6 oct 2020 Tuseday
 * *3 hours* doing research on graph neural network and figure out how to apply it to recommendation system
 * *5 minutes* writing timelog
 * *2 hours* learning collaborative filtering recommendation system
  
-## 7 oct 2020 Thursday
+## 7 oct 2020 Wednesday
 * *1 hour* summarize what i have done this week and write the status report 
 * *2 hours* complete the presentation for the weekly meeting
 
-## 8oct 2020 Friday
+## 8 oct 2020 Thursday
+* *3 hours* practice my self with memory based and model based collaborative recommendation system examples
+* *5 minute* write timelog
+
+
+## 9 oct 2020 Friday
 * *30 min* meeting with supervisor
 * *30 min* writing the plan and minute for the meeting 
 * *1 hour* complete the workflow and understand what is the structure or the type of recommendation system to use

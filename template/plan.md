@@ -1,9 +1,9 @@
 # Plan
 
-* PROJECT TITLE
-* YOUR NAME
-* STUDENT ID
-* SUPERVISOR NAME
+* Molecular Recommendation System
+* Zhouyang Shen
+* 2359009s
+* Ke Yuan
 
 Week-by-week plan for the whole project. Update this as you go along.
 
@@ -17,10 +17,14 @@ Week-by-week plan for the whole project. Update this as you go along.
 4.write the status report for next week
 5.prepare for the slides for next week
 
-
-
-
 * **Week 2**
+
+1.read the article that supervisor provided for project and understand the clustering technique for project
+2.fully understand the concepts of the recommendation system（what data should I put in and train, what result should i get from training and validate
+3.comprehend the article in order to use it as literature review in the future
+4.write the status report for next week
+5.prepare for the slides for next week
+
 * **Week 3**
 * **Week 4**
 * **Week 5**
