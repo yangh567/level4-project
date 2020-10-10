@@ -69,3 +69,7 @@
 * *30 min* writing the plan and minute for the meeting 
 * *1 hour* complete the workflow and understand what is the structure or the type of recommendation system to use
 * *5 minute* write timelog
+
+## 10 oct 2020 Saturday
+* *5 hours* working on reading the article about pan-cancer
+* *5 minutes* write timelog
