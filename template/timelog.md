@@ -74,6 +74,7 @@
 * *5 hours* working on reading the article about pan-cancer
 * *5 minutes* write timelog
 
-## 10 oct 2020 Sunday
+## 11 oct 2020 Sunday
 * *6 hours* working on understanding the workflow and the clustering method for project
 * *5 minutes* write timelog
+
