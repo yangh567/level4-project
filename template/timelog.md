@@ -78,3 +78,11 @@
 * *6 hours* working on understanding the workflow and the clustering method for project
 * *5 minutes* write timelog
 
+
+## week 3
+
+## 12 oct 2020 Monday
+* *3 hours* reading molecular related clustering technique for project
+* *5 minutes* writing timelog
+
+
