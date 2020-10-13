@@ -85,4 +85,8 @@
 * *3 hours* reading molecular related clustering technique for project
 * *5 minutes* writing timelog
 
+## 13 oct 2020 Tuesday
+* *5 hours* working on practicing clustering recommendation system with examples
+* *5 minutes* writing timelog
+
 
