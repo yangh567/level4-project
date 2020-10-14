@@ -78,7 +78,7 @@ plt.savefig('elbow_method.png')
 
 
 # Save machine learning model
-filename = 'finalized_model.sav'
-pickle.dump(model, open(filename, 'wb'))
+#filename = 'finalized_model.sav'
+#pickle.dump(model, open(filename, 'wb'))
 
 

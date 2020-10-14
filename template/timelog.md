@@ -89,4 +89,8 @@
 * *5 hours* working on practicing clustering recommendation system with examples
 * *5 minutes* writing timelog
 
+## 14 oct 2020 Wednesday
+* *4 hours* constructing the working flow of the recommendation system
+* *5 minutes* writing timelog
+
 
