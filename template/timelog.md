@@ -93,4 +93,9 @@
 * *4 hours* constructing the working flow of the recommendation system
 * *5 minutes* writing timelog
 
+## 15 oct 2020 Thursday
+* *3 hours* preparing the presentation and status report for next week's weekly meeting
+* *5 minutes* writing the status report 
+
+
 
