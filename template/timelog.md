@@ -98,4 +98,7 @@
 * *5 minutes* writing the status report 
 
 
+## 16 oct 2020 Friday
+* *5 hours* try to get datafiles from website and try to build basic first workflow on the data 
+* *5 minutes* writing the timelog
 
