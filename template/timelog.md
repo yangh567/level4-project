@@ -102,3 +102,6 @@
 * *5 hours* try to get datafiles from website and try to build basic first workflow on the data 
 * *5 minutes* writing the timelog
 
+## 17 oct 2020 Saturday
+* *5 hours*  working on the recommendation system and debugging
+* *5 minutes* writing timelog
