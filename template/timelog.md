@@ -105,3 +105,8 @@
 ## 17 oct 2020 Saturday
 * *5 hours*  working on the recommendation system and debugging
 * *5 minutes* writing timelog
+
+## 18 oct 2020 Sunday
+* *5 hours* working on recommendation system and debugging
+* *5 minutes* writing timelog
+
