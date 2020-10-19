@@ -26,6 +26,12 @@ Week-by-week plan for the whole project. Update this as you go along.
 5.prepare for the slides for next week
 
 * **Week 3**
+
+1. figure out the substance(pattern) that will be used for molecular recommendation system to classify the tumor into different cancers
+2. get the files from lecturer or from TCGA platform 
+3. working on the workflow of the recommendation system
+4. try to construct a basic recommendation system to simply clustering the tumors with the data file provided 
+
 * **Week 4**
 * **Week 5**
 * **Week 6**

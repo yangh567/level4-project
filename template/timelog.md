@@ -110,3 +110,6 @@
 * *5 hours* working on recommendation system and debugging
 * *5 minutes* writing timelog
 
+## 19 oct 2020 Monday
+* *5 hours* reading articles about the cancer classification and tr to understand what pattern are used to classify the tumors
+* *5 minutes* writing timelog
