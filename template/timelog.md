@@ -113,3 +113,7 @@
 ## 19 oct 2020 Monday
 * *5 hours* reading articles about the cancer classification and tr to understand what pattern are used to classify the tumors
 * *5 minutes* writing timelog
+
+## 20 oct 2020 Tuesday
+* *5 hours* working on learning clustering algorithm for classifying cancers
+* *5 minutes* writing timelog
