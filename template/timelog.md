@@ -117,3 +117,7 @@
 ## 20 oct 2020 Tuesday
 * *5 hours* working on learning clustering algorithm for classifying cancers
 * *5 minutes* writing timelog
+
+## 21 oct 2020 Wednesday
+* *5 hours* learning icluster as it might be used as tool to perform clustering on tumors
+* *5 minutes* writing timelog
