@@ -121,3 +121,7 @@
 ## 21 oct 2020 Wednesday
 * *5 hours* learning icluster as it might be used as tool to perform clustering on tumors
 * *5 minutes* writing timelog
+
+## 22 oct 2020 Thursday
+* *3 hours* writing the status report as well as founding presentation notes for this week's weekly meeting
+* *5 minutes* writing timelog
