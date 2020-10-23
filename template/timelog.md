@@ -125,3 +125,8 @@
 ## 22 oct 2020 Thursday
 * *3 hours* writing the status report as well as founding presentation notes for this week's weekly meeting
 * *5 minutes* writing timelog
+
+## 23 oct 2020 Friday
+* *30 minutes* meet with supervisor and  discuss about the question i had
+* *1 hour* writing the plan and organize the procedure of the recommendation system 
+
