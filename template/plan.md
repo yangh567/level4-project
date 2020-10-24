@@ -33,6 +33,12 @@ Week-by-week plan for the whole project. Update this as you go along.
 4. try to construct a basic recommendation system to simply clustering the tumors with the data file provided 
 
 * **Week 4**
+
+1.practicing on the file downloaded from TCGA platform and practicing on the tools that i am going to use
+2.read the article of how to use somatic mutation to train on data and classify tumors
+3.improve the workflow for the recommendation system
+4.try to get the somatic mutation part of classification of the tumors done
+ 
 * **Week 5**
 * **Week 6**
 * **Week 7**

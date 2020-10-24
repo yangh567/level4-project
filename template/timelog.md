@@ -133,3 +133,9 @@
 ## 24 oct 2020 Saturday 
 * *5 hours* finding the data files and reconstructing the work flow of the project 
 * *5 minutes* writing timelog
+
+## 25 oct 2020 Sunday
+* *5 hours* working on the code of project and doing debugging
+* *5 minutes* writing timelog 
+
+
