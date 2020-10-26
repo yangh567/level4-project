@@ -97,7 +97,6 @@
 * *3 hours* preparing the presentation and status report for next week's weekly meeting
 * *5 minutes* writing the status report 
 
-
 ## 16 oct 2020 Friday
 * *5 hours* try to get datafiles from website and try to build basic first workflow on the data 
 * *5 minutes* writing the timelog
@@ -109,6 +108,9 @@
 ## 18 oct 2020 Sunday
 * *5 hours* working on recommendation system and debugging
 * *5 minutes* writing timelog
+
+
+## week 4
 
 ## 19 oct 2020 Monday
 * *5 hours* reading articles about the cancer classification and tr to understand what pattern are used to classify the tumors
@@ -138,4 +140,6 @@
 * *5 hours* working on the code of project and doing debugging
 * *5 minutes* writing timelog 
 
-
+## 26 oct 2020 Monday
+* *5 hours* practicing and analysing the file downloaded from TCGA platform
+* *5 minutes* writing timelog
