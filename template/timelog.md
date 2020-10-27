@@ -143,3 +143,7 @@
 ## 26 oct 2020 Monday
 * *5 hours* practicing and analysing the file downloaded from TCGA platform
 * *5 minutes* writing timelog
+
+## 27 oct 2020 Tuesday
+* *5 hours* still practicing on the file and learn the features with file and what will they be used for
+* *5 minutes* writing timelog
