@@ -147,3 +147,7 @@
 ## 27 oct 2020 Tuesday
 * *5 hours* still practicing on the file and learn the features with file and what will they be used for
 * *5 minutes* writing timelog
+
+## 28 oct 2020 Wednesday
+* *6 hours* working on adjusting the workflow of the recommendation system and figure out whether to write the classification method myself or using the default KNN classification method
+* *5 minutes* writing timelog
