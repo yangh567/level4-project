@@ -151,3 +151,7 @@
 ## 28 oct 2020 Wednesday
 * *6 hours* working on adjusting the workflow of the recommendation system and figure out whether to write the classification method myself or using the default KNN classification method
 * *5 minutes* writing timelog
+
+## 29 oct 2020 Thursday
+* *5 hours* working on build the somatic mutation part of recommendation system 
+* *5 minutes* writing timelog
