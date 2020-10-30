@@ -155,3 +155,7 @@
 ## 29 oct 2020 Thursday
 * *5 hours* working on build the somatic mutation part of recommendation system 
 * *5 minutes* writing timelog
+
+## 30 oct 2020 Friday
+* *2 hours* working on somatic mutation part of recommendation system 
+* *5 minutes* writing timelog
