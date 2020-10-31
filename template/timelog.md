@@ -159,3 +159,7 @@
 ## 30 oct 2020 Friday
 * *2 hours* working on somatic mutation part of recommendation system 
 * *5 minutes* writing timelog
+
+## 31 oct 2020 Saturday
+* *5 hours* working on somatic mutation part of recommendation system 
+* *5 minutes* writing timelog
