@@ -113,7 +113,7 @@
 ## week 4
 
 ## 19 oct 2020 Monday
-* *5 hours* reading articles about the cancer classification and tr to understand what pattern are used to classify the tumors
+* *5 hours* reading articles about the cancer classification and try to understand what pattern are used to classify the tumors
 * *5 minutes* writing timelog
 
 ## 20 oct 2020 Tuesday
@@ -140,6 +140,9 @@
 * *5 hours* working on the code of project and doing debugging
 * *5 minutes* writing timelog 
 
+
+## week 5
+
 ## 26 oct 2020 Monday
 * *5 hours* practicing and analysing the file downloaded from TCGA platform
 * *5 minutes* writing timelog
@@ -163,3 +166,8 @@
 ## 31 oct 2020 Saturday
 * *5 hours* working on somatic mutation part of recommendation system 
 * *5 minutes* writing timelog
+
+## 1 Nov 2020 Sunday
+* *5 hours* working on somatic mutation part of recommendation system 
+* *5 minutes* writing timelog
+

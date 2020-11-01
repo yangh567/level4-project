@@ -40,6 +40,11 @@ Week-by-week plan for the whole project. Update this as you go along.
 4.try to get the somatic mutation part of classification of the tumors done
  
 * **Week 5**
+1.looking for th method of organizing the tumor instance in data file  
+2.read the article of how to use somatic mutation to train on data and classify tumors
+3.try to do classification on the data using somatic mutation
+4.try to get the somatic mutation part of classification of the tumors done
+
 * **Week 6**
 * **Week 7**
 * **Week 8**
