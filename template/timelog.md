@@ -171,3 +171,10 @@
 * *5 hours* working on somatic mutation part of recommendation system 
 * *5 minutes* writing timelog
 
+## week 6
+
+## 2 Nov 2020 Monday
+* *5 hours* reading articles about the TCGA bar code reading and learn how to find cancer type from it
+* *5 minutes* writing timelog
+
+
