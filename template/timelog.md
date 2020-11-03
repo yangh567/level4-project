@@ -177,4 +177,8 @@
 * *5 hours* reading articles about the TCGA bar code reading and learn how to find cancer type from it
 * *5 minutes* writing timelog
 
+## 3 Nov 2020 Tuesday
+* *5 hours* reading the articles about how to identify different cancers based on the changes on reference at the position of genome
+* *5 minutes* writing timelog
+
 
