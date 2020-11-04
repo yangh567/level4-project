@@ -181,4 +181,7 @@
 * *5 hours* reading the articles about how to identify different cancers based on the changes on reference at the position of genome
 * *5 minutes* writing timelog
 
+## 4 Nov 2020 Wednesday
+* *5 hours* reading the articles about how to identify different cancers based on the changes on reference at the position of genome
+* *5 minutes* writing timelog
 
