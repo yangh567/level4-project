@@ -185,3 +185,8 @@
 * *5 hours* reading the articles about how to identify different cancers based on the changes on reference at the position of genome
 * *5 minutes* writing timelog
 
+## 5 Nov 2020 Thursday
+* *3 hours* learn the how to do vectoring and transforming on the instance in the data file 
+* *5 minutes* writing timelog
+
+
