@@ -189,4 +189,8 @@
 * *3 hours* learn the how to do vectoring and transforming on the instance in the data file 
 * *5 minutes* writing timelog
 
+## 6 Nov 2020 Friday
+* *30 minutes* meet with supervisor and  discuss about the question i had
+* *1 hour* writing the plan and organize the procedure of the recommendation system 
+
 
