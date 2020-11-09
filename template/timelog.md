@@ -201,5 +201,10 @@
 * *5 hours* working on the code of project and doing debugging
 * *5 minutes* writing timelog 
 
+## week 7
+
+## 9 Nov 2020 Monday
+* *5 hours* reread the article "HRDetect is a predictor of BRCA1 and BRCA2 deficiency based on mutational signatures" to learn what did author do with mutation signature for classification
+* *5 minutes* writing timelog
 
 
