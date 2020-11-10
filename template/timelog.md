@@ -207,4 +207,7 @@
 * *5 hours* reread the article "HRDetect is a predictor of BRCA1 and BRCA2 deficiency based on mutational signatures" to learn what did author do with mutation signature for classification
 * *5 minutes* writing timelog
 
+## 10 Nov 2020 Tuesday
+* *5 hours* figure out the way to reformat the data into one tumor id corresponding to 20 gene with corresponding features
+* *5 minutes* writing timelog
 
