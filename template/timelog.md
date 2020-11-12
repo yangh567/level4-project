@@ -215,4 +215,7 @@
 * *5 hours* reading the articles about how to identify different cancers based on the changes on reference at the position of genome
 * *5 minutes* writing timelog
 
+## 12 Nov 2020 Thursday
+* *3 hours* read article about how to perform graph convolutional network on tumor data
+* *5 minutes* writing timelog
 
