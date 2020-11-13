@@ -219,3 +219,7 @@
 * *3 hours* read article about how to perform graph convolutional network on tumor data
 * *5 minutes* writing timelog
 
+## 13 Nov 2020 Friday
+* *30 minutes* try to build the data processing model
+* *1 hour* writing timelog
+
