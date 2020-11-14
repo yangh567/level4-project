@@ -223,3 +223,7 @@
 * *30 minutes* try to build the data processing model
 * *1 hour* writing timelog
 
+## 14 Nov 2020 Saturday 
+* *5 hours* doing the research on article "HRDetect is a predictor of BRCA1 and BRCA2 deficiency based on mutational signatures 
+* *5 minutes* writing timelog
+
