@@ -231,4 +231,11 @@
 * *5 hours* watched decision tree classification algorithm to help with classification
 * *5 minutes* writing timelog 
 
+## week 8
+
+## 16 Nov 2020 Monday
+* *4 hours* read the Metrics To Evaluate Machine Learning Model such as classification model
+* *5 minutes* writing timelog
+
+
 

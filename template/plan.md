@@ -46,6 +46,12 @@ Week-by-week plan for the whole project. Update this as you go along.
 4.try to get the somatic mutation part of classification of the tumors done
 
 * **Week 6**
+1. Establish the basic knowledge of machine learning; 
+2. Have a preliminary general understanding of the method of research papers.
+3. Understand and utilize the composition of the survey data set
+
+
+* **Week 6**
 * **Week 7**
 * **Week 8**
 * **Week 9**
