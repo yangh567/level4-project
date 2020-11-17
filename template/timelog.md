@@ -237,5 +237,9 @@
 * *4 hours* read the Metrics To Evaluate Machine Learning Model such as classification model
 * *5 minutes* writing timelog
 
+## 16 Nov 2020 Monday
+* *4 hours* looking into the random forest classifier to help understanding the article
+* *5 minutes* writing timelog
+
 
 
