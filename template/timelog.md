@@ -248,4 +248,8 @@ what does each field mean, what is the value or other values
 in the field, and what is the distribution?
 * *5 minutes* writing timelog
 
+## 18 Nov 2020 Wednesday
+* *3 hours* doing researching on feature selection technique for selecting the most representative features of data 
+* *5 minutes* writing timelog
+
 
