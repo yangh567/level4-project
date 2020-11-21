@@ -257,6 +257,11 @@ in the field, and what is the distribution?
  selection with principal component analysis as well as learning how to do t-sne algorithm
 * *5 minutes* writing timelog
 
+## 21 Nov 2020 Saturday
+* *4 hours* searching for the information about the data processing
+* *3 hours* trying coding
+* *5 minutes* writing timelog
+
 
 
 
