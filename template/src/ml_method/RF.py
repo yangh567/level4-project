@@ -14,8 +14,9 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
 
-path_data = '../../data/raw/GDC-PANCAN.muse_snv.tsv'
-# path_data = '../dataset/example/SomaticMutation/GDC-PANCAN.muse_snv_sample.tsv'
+#path_data = '../../data/raw/GDC-PANCAN.muse_snv.tsv'
+
+path_data = '../../data/raw/GDC-PANCAN.muse_snv_short.tsv'
 train = pd.read_csv(path_data, sep='\t')
 
 # construct the label
@@ -34,6 +35,7 @@ clf = RandomForestClassifier()
 clf.fit(x_train, y_train)
 
 y_pred = clf.predict(x_test)
+print(y_pred)
 acc = accuracy_score(y_pred, y_test)
 confusion_mat = confusion_matrix(y_test, y_pred)
 print('Acc: %.4f' % acc)
