@@ -262,6 +262,10 @@ in the field, and what is the distribution?
 * *3 hours* trying coding
 * *5 minutes* writing timelog
 
+## 22 Nov 2020 Sunday
+* *4 hours* learning the neural network and try to implement it in the work
+* *5 minutes* writing timelog
+
 
 
 
