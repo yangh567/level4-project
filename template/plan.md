@@ -51,7 +51,6 @@ Week-by-week plan for the whole project. Update this as you go along.
 3. Understand and utilize the composition of the survey data set
 
 
-* **Week 6**
 * **Week 7**
 * **Week 8**
 * **Week 9**
