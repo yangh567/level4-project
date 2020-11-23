@@ -241,7 +241,6 @@
 * *4 hours* looking into the random forest classifier to help understanding the article
 * *5 minutes* writing timelog
 
-
 ## 18 Nov 2020 Wednesday
 * *3 hours* Look at what the data set looks like and what constitutes 
 what does each field mean, what is the value or other values 
@@ -264,6 +263,12 @@ in the field, and what is the distribution?
 
 ## 22 Nov 2020 Sunday
 * *4 hours* learning the neural network and try to implement it in the work
+* *5 minutes* writing timelog
+
+## week 9
+
+## 23 Nov 2020 Monday
+* *2 hours* Investigate the data set for 2 hours.
 * *5 minutes* writing timelog
 
 

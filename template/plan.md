@@ -50,8 +50,11 @@ Week-by-week plan for the whole project. Update this as you go along.
 2. Have a preliminary general understanding of the method of research papers.
 3. Understand and utilize the composition of the survey data set
 
-
 * **Week 7**
+1. Complete and careful research data.
+2. Realize the classification of ml methods
+3. Research the literature to further use deep learning methods.
+
 * **Week 8**
 * **Week 9**
 * **Week 10**
