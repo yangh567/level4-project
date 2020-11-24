@@ -271,6 +271,11 @@ in the field, and what is the distribution?
 * *2 hours* Investigate the data set for 2 hours.
 * *5 minutes* writing timelog
 
+## 24 Nov 2020 Tuesday
+* *2 hours* Investigate the data set for 2 hours.
+* *5 minutes* writing timelog
+
+
 
 
 
