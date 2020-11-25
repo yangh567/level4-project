@@ -275,6 +275,10 @@ in the field, and what is the distribution?
 * *2 hours* Investigate the data set for 2 hours.
 * *5 minutes* writing timelog
 
+## 25 Nov 2020 Wednesday
+* *4 hours& read about the statistical hypothesis testing to help with validating model
+* *5 minutes* writing timelog
+
 
 
 
