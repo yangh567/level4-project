@@ -276,7 +276,11 @@ in the field, and what is the distribution?
 * *5 minutes* writing timelog
 
 ## 25 Nov 2020 Wednesday
-* *4 hours& read about the statistical hypothesis testing to help with validating model
+* *4 hours* read about the statistical hypothesis testing to help with validating model to see if the feature data used for classification reliable
+* *5 minutes* writing timelog
+
+## 26 Nov 2020 Thursday
+* *4 hours* read the article "HRDetect is a predictor of BRCA1 and BRCA2 deficiency based on mutational signatures again and analyse on the method it used
 * *5 minutes* writing timelog
 
 
