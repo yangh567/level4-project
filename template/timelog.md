@@ -283,7 +283,9 @@ in the field, and what is the distribution?
 * *4 hours* read the article "HRDetect is a predictor of BRCA1 and BRCA2 deficiency based on mutational signatures again and analyse on the method it used
 * *5 minutes* writing timelog
 
-
+## 27 Nov 2020 Friday
+* *4 hours* continuously working on the cancer classification 
+* *5 minutes* writing timelog
 
 
 
