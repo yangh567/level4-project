@@ -287,5 +287,16 @@ in the field, and what is the distribution?
 * *4 hours* continuously working on the cancer classification 
 * *5 minutes* writing timelog
 
+## 28 Nov 2020 Saturday
+
+* *4 hours* analyzing on regulation method,The main usage of regularization is 
+to prevent over-fitting. Adding regularization items to the model can limit the 
+complexity of the classification model(overfitting), and make the model reach a balance between 
+complexity and performance,also,it helps the balance between non-cancer and cancer population 
+
+* *5 minutes* writing timelog
+
+
+
 
 
