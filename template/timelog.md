@@ -301,6 +301,12 @@ complexity and performance,also,it helps the balance between non-cancer and canc
 * *3 hours* coding on the project
 * *5 minutes* writing timelog
 
+## 30 Nov 2020 Monday
+
+* *2 hours* coding on project
+* *3 hours* data research 
+* *5 minutes* writing timelog 
+
 
 
 
