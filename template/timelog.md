@@ -307,6 +307,13 @@ complexity and performance,also,it helps the balance between non-cancer and canc
 * *3 hours* data research 
 * *5 minutes* writing timelog 
 
+## 1 Dec 2020 Tuesday
+
+* *4 hours* read the AlexNet article and ResNet article (2. A. Krizhevsky, I. Sutskever,and G. 
+Hinton. Imagenet classification with deep convolutional neural networks.In NIPS, 2012.)
+(4. K. He, X. Zhang, S. Ren, and J.Sun. Deep residual learning for image recognition. In CVPR, 2016.)
+* *5 minutes* writing timelog
+
 
 
 
