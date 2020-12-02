@@ -314,6 +314,14 @@ Hinton. Imagenet classification with deep convolutional neural networks.In NIPS,
 (4. K. He, X. Zhang, S. Ren, and J.Sun. Deep residual learning for image recognition. In CVPR, 2016.)
 * *5 minutes* writing timelog
 
+## 2 Dec 2020 Wednesday
+
+*3 hours* check related article and reference about the graph embedding to help with forming convolutional
+neural network using the graph structure
+* *5 minutes* writing tiemlog
+ 
+## 3 Dec 2020 Thursday
+
 
 
 
