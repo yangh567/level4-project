@@ -321,7 +321,8 @@ neural network using the graph structure
 * *5 minutes* writing tiemlog
  
 ## 3 Dec 2020 Thursday
-
+*4 hours* coding on the project
+* *5 minutes* writing timelog
 
 
 
