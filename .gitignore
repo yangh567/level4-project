@@ -3,5 +3,6 @@
 # Directories #
 venv/*
 **/data/**/raw/*.tsv
+**/data/**/raw/*.csv
 .DS_Store
 .idea

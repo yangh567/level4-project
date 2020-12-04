@@ -324,6 +324,17 @@ neural network using the graph structure
 *4 hours* coding on the project
 * *5 minutes* writing timelog
 
+## 4 Dec 2020 Friday
+*3 hours* read the articles about densenet for convolutional neural network
+*5 minutes* writing timelog
+
+## 5 Dec 2020 Saturday
+
+## 6 Dec 2020 Sunday
+
+
+
+
 
 
 
