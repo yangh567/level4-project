@@ -61,7 +61,15 @@ Week-by-week plan for the whole project. Update this as you go along.
 3. figure out the way to improve the accuracy of the classification
 
 * **Week 9**
+1. Analyzing on regulation method
+2. Download all of the somatic mutational data for each different cancer from TCGA platform
+3. Coding on the project 
+
 * **Week 10**
+1. solve the problem caused by the one-hot encoding and figure out teh way to represent data
+2. try to deploy the matrix dot method for acquiring the data representation
+3. try to do the project with machine learning method first
+
 * **Week 11 [PROJECT WEEK]**
 * **Week 12 [PROJECT WEEK]** Status report submitted.
 
