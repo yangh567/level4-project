@@ -56,6 +56,10 @@ Week-by-week plan for the whole project. Update this as you go along.
 3. Research the literature to further use deep learning methods.
 
 * **Week 8**
+1. Try to get the classification with mutational signature done
+2. Do the research on the convolutional neural network
+3. figure out the way to improve the accuracy of the classification
+
 * **Week 9**
 * **Week 10**
 * **Week 11 [PROJECT WEEK]**
