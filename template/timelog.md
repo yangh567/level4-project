@@ -316,19 +316,21 @@ Hinton. Imagenet classification with deep convolutional neural networks.In NIPS,
 
 ## 2 Dec 2020 Wednesday
 
-*3 hours* check related article and reference about the graph embedding to help with forming convolutional
+* *3 hours* check related article and reference about the graph embedding to help with forming convolutional
 neural network using the graph structure
 * *5 minutes* writing tiemlog
  
 ## 3 Dec 2020 Thursday
-*4 hours* coding on the project
+* *4 hours* coding on the project
 * *5 minutes* writing timelog
 
 ## 4 Dec 2020 Friday
-*3 hours* read the articles about densenet for convolutional neural network
-*5 minutes* writing timelog
+* *3 hours* read the articles about densenet for convolutional neural network
+* *5 minutes* writing timelog
 
 ## 5 Dec 2020 Saturday
+* *2 hours* downloaded all of the somatic mutation data for all cancer types from website
+* *5 minutes* writing timelog
 
 ## 6 Dec 2020 Sunday
 
