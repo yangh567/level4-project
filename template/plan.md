@@ -71,7 +71,9 @@ Week-by-week plan for the whole project. Update this as you go along.
 3. try to do the project with machine learning method first
 
 * **Week 11 [PROJECT WEEK]**
-  
+1. Implement the todo item written in the last code
+2. Realize the fusion of our sbs and matrix features
+3. DL-based method scale
 
 * **Week 12 [PROJECT WEEK]** Status report submitted.
 
