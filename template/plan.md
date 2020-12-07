@@ -71,6 +71,8 @@ Week-by-week plan for the whole project. Update this as you go along.
 3. try to do the project with machine learning method first
 
 * **Week 11 [PROJECT WEEK]**
+  
+
 * **Week 12 [PROJECT WEEK]** Status report submitted.
 
 ## Winter break

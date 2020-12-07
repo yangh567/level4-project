@@ -333,6 +333,15 @@ neural network using the graph structure
 * *5 minutes* writing timelog
 
 ## 6 Dec 2020 Sunday
+* *2 hours* Statistics analysis on the somatic mutation data downloaded
+* *5 minutes* writing timelog
+
+## 7 Dec 2020 Monday
+* *2 hours* Data analysis and studying
+* *5 minutes* writing timelog
+
+## 8 Dec 2020 Tuesday
+
 
 
 
