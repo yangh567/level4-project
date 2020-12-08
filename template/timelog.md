@@ -341,6 +341,8 @@ neural network using the graph structure
 * *5 minutes* writing timelog
 
 ## 8 Dec 2020 Tuesday
+* *2 hours* Try to figure out how to do the confusion between signature data and sample data 
+* *5 minutes* writing timelog
 
 
 
