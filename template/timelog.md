@@ -344,6 +344,14 @@ neural network using the graph structure
 * *2 hours* Try to figure out how to do the confusion between signature data and sample data 
 * *5 minutes* writing timelog
 
+## 9 Dec 2020 Wednesday
+* *3 hours* Doing research on Landscape of somatic mutations in 560 breast cancer whole- genome sequences and 
+Deciphering signatures of mutational processes operative in human cancer to understand the method used for matrix factorization
+  
+* *5 minutes* writing timelog
+
+## 10 Dec 2020 Friday
+
 
 
 
