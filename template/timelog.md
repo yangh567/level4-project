@@ -351,7 +351,9 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 * *5 minutes* writing timelog
 
 ## 10 Dec 2020 Friday
-
+* *2 hours* still Doing research on Landscape of somatic mutations in 560 breast cancer whole- genome sequences and 
+Deciphering signatures of mutational processes operative in human cancer to understand the method used for matrix factorization
+* *5 minutes* writing timelog
 
 
 
