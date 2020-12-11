@@ -355,7 +355,10 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 Deciphering signatures of mutational processes operative in human cancer to understand the method used for matrix factorization
 * *5 minutes* writing timelog
 
-
+## 11 Dec 2020 Friday
+* *4 hours* writing the code to implement the classification mentioned in "HRDetect is a predictor of BRCA1 and BRCA2 deficiency based on mutational signatures"
+  to help with understanding the implementation method
+* *5 minutes* writing timelog
 
 
 
