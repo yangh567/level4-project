@@ -360,8 +360,12 @@ Deciphering signatures of mutational processes operative in human cancer to unde
   to help with understanding the implementation method
 * *5 minutes* writing timelog
 
-## 11 Dec 2020 Friday
+## 12 Dec 2020 Friday
 * *4 hours* writing the code and do analysis on the feature extraction
+* *5 minutes* writing timelog
+
+## 13 Dec 2020 Friday
+* *4 hours* writing the code
 * *5 minutes* writing timelog
 
 
