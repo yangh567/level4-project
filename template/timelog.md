@@ -350,7 +350,7 @@ Deciphering signatures of mutational processes operative in human cancer to unde
   
 * *5 minutes* writing timelog
 
-## 10 Dec 2020 Friday
+## 10 Dec 2020 Thursday
 * *2 hours* still Doing research on Landscape of somatic mutations in 560 breast cancer whole- genome sequences and 
 Deciphering signatures of mutational processes operative in human cancer to understand the method used for matrix factorization
 * *5 minutes* writing timelog
@@ -360,12 +360,17 @@ Deciphering signatures of mutational processes operative in human cancer to unde
   to help with understanding the implementation method
 * *5 minutes* writing timelog
 
-## 12 Dec 2020 Friday
+## 12 Dec 2020 Saturday
 * *4 hours* writing the code and do analysis on the feature extraction
 * *5 minutes* writing timelog
 
-## 13 Dec 2020 Friday
+## 13 Dec 2020 Sunday
 * *4 hours* writing the code
+* *5 minutes* writing timelog
+
+## 14 Dec 2020 Monday
+* *3 hours* feature extraction
+* *6 hours* writing the code
 * *5 minutes* writing timelog
 
 

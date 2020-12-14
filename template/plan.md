@@ -76,6 +76,10 @@ Week-by-week plan for the whole project. Update this as you go along.
 3. DL-based method scale
 
 * **Week 12 [PROJECT WEEK]** Status report submitted.
+1.get the feature set we needed all extracted.
+2.write the classification algorithm based on those features.
+3.improve the classification accuracy.
+4.get the status report done
 
 ## Winter break
 
