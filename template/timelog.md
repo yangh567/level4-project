@@ -373,6 +373,10 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 * *6 hours* writing the code
 * *5 minutes* writing timelog
 
+## 15 Dec 2020 Tuesday
+* *5 hours* writing the code
+* *5 minutes* writing timelog
+
 
 
 
