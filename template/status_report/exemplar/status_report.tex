@@ -8,40 +8,40 @@
 
     \begin{document}
     \maketitle
-
-
-
+    
+    
+     
 
 
 
 \section{Project description}\label{project-description}
 
 \subsection{Motivation}\label{motivation}
-Over the last decade, the extraordinary understanding of the inner functioning of tumours has been developed by the enormous scale endeavours of molecular profiling of human cancer. The data that has been utilized in those experiments has reflected the massive complexity of the changes across the genome, proteome of tumours, and the transcriptome. Consequently, the conventional statistical modelling of making useful predictions will be limited due to the fact stated above. Therefore, another innovation of using the data-driving method to analyze the information is applied to help with overcoming the difficulty. Besides, with the information perceived in the article “Cell-of-Origin Patterns Dominate the Molecular Classification of 10,000 Tumors from 33 Types of Cancer”, the idea of utilizing the features from 5 platforms and somatic mutation file from TCGA to classify different cancer is gained.
+Over the last decade, the extraordinary understanding of the inner functioning of tumours has been developed by the enormous scale endeavours of molecular profiling of human cancer. The data that has been utilized in those experiments has reflected the massive complexity of the changes across the genome, proteome of tumours, and the transcriptome. Consequently, the conventional statistical modelling of making useful predictions will be limited due to the fact stated above. Therefore, another innovation of using the data-driving method to analyze the information is applied to help with overcoming the difficulty. Besides, with the information perceived in the article “Cell-of-Origin Patterns Dominate the Molecular Classification of 10,000 Tumors from 33 Types of Cancer”, the idea of utilizing the features from 5 platforms and mutational signatures from TCGA platform to classify different cancer is gained.
 
 
 \subsection{Aims}\label{aims}
-In this project, we aim to investigate what a tumour is? And We will answer this question by building a recommendation system that can estimate the molecular characteristics of tumours given incomplete data. To be more specific, The project contains two-part of the job. The base section is to find the appropriate features from 5 platform and somatic mutation files and classify the cancer of the tumour based on them. Hopefully, we will find those features that are useful when it comes to classifying the cancers accurately, and we will assume that they are the patterns for the specific cancers. The second part of the work is to predict the cancer type of the tumour given the sample id using the pattern we found. Furthermore, if the time is sufficient enough, the convolutional neural network will also be applied to help to improve the accuracy of recommendation and reduce the possible problems that might be elicited from the data sparsity.
+In this project, we aim to investigate what a tumour is? And We will answer this question by building a recommendation system that can estimate the molecular characteristics of tumours given incomplete data. To be more specific, The project contains two-part of the job. The base section is to find the appropriate features from 5 platform and mutational signatures and classify the cancer of the tumour based on them. Hopefully, we will find those features that are useful when it comes to classifying the cancers accurately, and we will assume that they are the patterns for the specific cancers. The second part of the work is to predict the cancer type of the tumour given the sample id using the pattern we found. Furthermore, if the time is sufficient enough, the convolutional neural network will also be applied to help to improve the accuracy of recommendation and reduce the possible problems that might be elicited from the data sparsity.
 
 \newpage
 \section{Progress report}\label{progress-report}
 
 \begin{itemize}
-\item Read the article “Cell-of-Origin Patterns Dominate the Molecular Classification of 10,000 Tumors from 33 Types of Cancer” and comprehend the methods and concepts it used to classify cancer. The idea of classifying cancers based on the features from different platforms and somatic mutation is also developed after the researching.
+\item Read the article“Cell-of-Origin Patterns Dominate the Molecular Classification of 10,000 Tumors from 33 Types of Cancer”and comprehend the methods and concepts it used to classify cancer. The idea of classifying cancers based on the features from different platforms and mutational signatures are also developed after the researching.
 
-\item Read the article "HRDetect is a predictor of BRCA1 and BRCA2 deficiency based on mutational signatures" and understand the approach it utilized for classification and realized that the features it utilized would be used classify the tumours.
+\item Read the article "HRDetect is a predictor of BRCA1 and BRCA2 deficiency based on mutational signatures" and understand the approach it utilized for classification and realized that the features it utilized would be used classify the different type of tumours.
 
-\item Statistically researched the features and the sample id of the files from TCGA platform and learned the process of how the mutational signature could be used for classification.
+\item Statistically researched the features and the sample id of the files from TCGA platform and learned the process of how the mutational signatures could be used for classification.
 
 \item Learned the random forest algorithm and logistic regression algorithm to help with classifying.
 
 \item Learned statistical hypothesis testing,regulation method for improving the classification process.
 
-\item Extract the remaining features from the somatic mutation file using the tools provided.
+\item Extract the features using the algorithm provided.
 
 \item Wrote the code to classify the tumours based on the single based substitution signature part.
 
-\item Wrote the classification algorithm and framework for clasifying the tumor based on the whole feature set that we extracted from the somatic mutation data.
+\item Wrote the classification algorithm and framework for classifying the tumor based on the mutational signatures(single based substitution signature and rearrangement signatures).
 \end{itemize}
 
 \section{Problems and risks}\label{problems-and-risks}
@@ -50,9 +50,11 @@ In this project, we aim to investigate what a tumour is? And We will answer this
 
 The following issues were encountered in the project so far.
 \begin{itemize}
+ 
 
+\item The tools that extract the features requires the specific type file as input where i do not have the authority and the application of the access of those data requires lots of time and procedures,the file is hard to obtain.
 \item The data set is enormous, and it requires massive memory for processing data, a server is probably needed in the future development.
-\item Some of the samples in TCGA (lung etc) does not have the indel and rearrangement related signatures(incomplete data).
+\item Some of the samples does not have the indel and rearrangement related signatures(incomplete data).
 \item some features such as rearrangements which are found using matrix factorization are approximated values. Thus, the accuracy of the model could be affected by them.
 \item Some of the cancer types of somatic mutation data is hard to find on platform and missing.
 \item The classification accuracy will be reduced after the involving of the incomplete data.
@@ -68,18 +70,18 @@ The following issues were encountered in the project so far.
 background research to investigate how the success of classification based on molecular features has
 been performed in the research literature.
 \end{itemize}
-
+    
 \section{Plan of work}\label{plan-of-work}
 
 \subsection{Semester 2}
 
 \begin{itemize}
-
+    
     \item
-	Week 1-2: Do research on the article related to classification improvement and improve the prediction of the recommendation project and writing dissertation \textbf{Deliverable:}
-	The improved recommendation system that use molecular features to predict the sample's cancer type
+	Week 1-3: Do research on the article and try to append other features(indel and hrd index) into classification and adding 5 other platform's feature and writing dissertation \textbf{Deliverable:}
+	The improved recommendation system that use required molecular features to predict the sample's cancer type
 	\item
-	Week 3-5: Investigate on the related articles about the convolutional neural network that is used on classification and writing dissertation \textbf{Deliverable:}
+	Week 4-5: Investigate on the related articles about the convolutional neural network that is used on classification and writing dissertation \textbf{Deliverable:}
 	construct the idea of how to apply the convolutional neural network on the project to improve the accuracy of the recommendation system
 	\item
 	Week 6: ensure the method that is going to be applied to the recommendation system, and implement it and writing dissertation
@@ -96,7 +98,7 @@ been performed in the research literature.
 	Week 8-10: Write up. and polishing dissertation \textbf{Deliverable: first draft submitted to
 	supervisor two weeks before the final deadline.}
     \end{itemize}
-
+    
 
 \section{Ethics}
 

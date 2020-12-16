@@ -4,5 +4,6 @@
 venv/*
 **/data/**/raw/*.tsv
 **/data/**/raw/*.csv
+**/data/**/raw/*.xlsx
 .DS_Store
 .idea
