@@ -381,6 +381,10 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 * *5 hours* finding and extracting features and coding
 * *5 minutes* writing timelog
 
+## 17 Dec 2020 Thursday
+* *3 hours* finding the pattern of each cancer type and writing status report
+* *5 minutes* writing timelog
+
 
 
 

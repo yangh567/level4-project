@@ -27,7 +27,7 @@ import sklearn.exceptions
 warnings.filterwarnings("ignore", category=sklearn.exceptions.UndefinedMetricWarning)
 
 
-model = 'rf'    # The model that we use (logistic regression)
+model = 'lr'    # The model that we use (logistic regression)
 k = 10  # This is the time we do cross validation
 path_data = '../../data/raw/cancer_signature_data.csv'
 
@@ -48,6 +48,8 @@ train = pd.read_csv(path_data)
 
 # construct the label
 x = train[set(train.columns) - set(['id', 'organ'])]
+feature_set = set(train.columns) - set(['id', 'organ'])
+
 x = x.values   # find data
 # standardization
 # z = (x - u) / s
@@ -87,9 +89,16 @@ print(report)
 print('The classification intercept ：')
 print(clf.intercept_)
 print('The classification coefficient aka the patterns ：')
-print(clf.coef_)
 
 
+# now we check which feature do have max weight
+import operator
+
+for i in range(21):
+    coef_dict = {}
+    for coef, feat in zip(clf.coef_[i,:],feature_set):
+        coef_dict[feat] = coef
+    print(max(coef_dict.items(), key=operator.itemgetter(1))[0])
 # result = {}
 # clf = get_model(model)
 # kf = KFold(n_splits=k)
