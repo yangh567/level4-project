@@ -12,6 +12,8 @@
 * This timelog should be filled out honestly, regularly (daily) and accurately. It is for *your* benefit.
 * Follow the structure provided, grouping time by weeks.  Quantise time to the half hour.
 
+## Semester 1
+
 ## Week 1
 
 ### 29 sep 2020 Tuesday
@@ -301,6 +303,8 @@ complexity and performance,also,it helps the balance between non-cancer and canc
 * *3 hours* coding on the project
 * *5 minutes* writing timelog
 
+## week 10
+
 ## 30 Nov 2020 Monday
 
 * *2 hours* coding on project
@@ -336,6 +340,8 @@ neural network using the graph structure
 * *2 hours* Statistics analysis on the somatic mutation data downloaded
 * *5 minutes* writing timelog
 
+## week 11
+
 ## 7 Dec 2020 Monday
 * *2 hours* Data analysis and studying，Pytorch studying
 * *5 minutes* writing timelog
@@ -368,6 +374,8 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 * *4 hours* writing the code
 * *5 minutes* writing timelog
 
+## week 12
+
 ## 14 Dec 2020 Monday
 * *3 hours* feature extraction
 * *6 hours* writing the code
@@ -393,3 +401,11 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 * *4 hours* still doing research on the extraction of indel and hrd index and finding the approperiate file for processing
 * *5 minutes* writing timelog
 
+
+## Semester 2
+
+## week 1
+
+## 12 Jan 2020 Monday
+* *3 hours* doing research on the article Convolutional neural network models for cancer type prediction based on gene expression.BMC Med Genomics.
+* *5 minutes* writing timelog

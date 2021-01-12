@@ -86,6 +86,12 @@ Week-by-week plan for the whole project. Update this as you go along.
 ## Spring Semester
 
 * **Week 13**
+  
+1.do the research in the usage of graph convolutional neural network and learn the method it used
+2.summarize the steps of deploying graph convolutional neural network
+3.try to deploy the graph convolutional neural network
+4.try to get the required mutational signature features extracted.
+
 * **Week 14**
 * **Week 15**
 * **Week 16**
