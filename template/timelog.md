@@ -406,10 +406,14 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 
 ## week 1
 
-## 12 Jan 2020 Monday
+## 12 Jan 2020 Tuesday
 * *3 hours* doing research on the article Convolutional neural network models for cancer type prediction based on gene expression.BMC Med Genomics.
 * *5 minutes* writing timelog
 
-## 13 Jan 2020 Tuesday
+## 13 Jan 2020 Wednesday
 * *3 hours* doing research on an article  A comprehensive survey on graph neural networks.IEEE Transactions on Neural Networks and Learning Systems.
+* *5 minutes* writing timelog
+
+## 13 Jan 2020 Thursday
+* *4 hours* handling the data for the Graph convolutional neural network deployment
 * *5 minutes* writing timelog
