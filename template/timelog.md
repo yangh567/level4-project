@@ -425,3 +425,7 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 16 Jan 2020 Saturday
 * *4 hours* still coding on the project 
 * *5 minutes* writing timelog
+
+## 17 Jan 2020 Sunday
+* *5 hours* coding on the project
+* *5 minutes* writing timelog
