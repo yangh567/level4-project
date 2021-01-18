@@ -93,6 +93,11 @@ Week-by-week plan for the whole project. Update this as you go along.
 4.try to get the required mutational signature features extracted.
 
 * **Week 14**
+  
+1.discuss the project with supervisor and figure out the main goal of the project
+2.deploy the method and approaches as well as the algorithms to accomplish the main goal
+3.confirm the idea with the supervisor  
+4.try to code on the project and finish it
 * **Week 15**
 * **Week 16**
 * **Week 17**
