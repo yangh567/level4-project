@@ -441,3 +441,7 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 20 Jan 2020 Wednesday
 * *4 hours* do the research on the articles and summarize the approach
 * *5 minutes* writing timelog
+
+## 21 Jan 2020 Thursday
+* *5 hours* still do the research on the articles and summarize the approach
+* *5 minutes* writing timelog
