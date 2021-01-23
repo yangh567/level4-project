@@ -449,3 +449,7 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 22 Jan 2020 Friday
 * *6 hours* still do the research on the articles and summarize the approach
 * *5 minutes* writing timelog
+
+## 23 Jan 2020 Saturday
+* *6 hours* working on figuring out the sbs generation and the file format for the matrix of gene and sbs
+* *5 minutes* writing timelog
