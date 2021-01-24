@@ -453,3 +453,8 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 23 Jan 2020 Saturday
 * *6 hours* working on figuring out the sbs generation and the file format for the matrix of gene and sbs
 * *5 minutes* writing timelog
+
+## 24 Jan 2020 Sunday
+* *8 hours* writing the code in R to extract the (sample x gene mutation matrix) from the maf file of LAML cancer type and 
+  used the non-negative matrix factorization to extract the (sample x sbs) matrix prepared for classification
+* *5 minutes* writing timelog
