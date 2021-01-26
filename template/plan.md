@@ -97,8 +97,14 @@ Week-by-week plan for the whole project. Update this as you go along.
 1.discuss the project with supervisor and figure out the main goal of the project
 2.deploy the method and approaches as well as the algorithms to accomplish the main goal
 3.confirm the idea with the supervisor  
-4.try to code on the project and finish it
+4.try to code on the project and finish the step above
+
 * **Week 15**
+  
+1.discuss the project with supervisor and figure out the main goal of the project
+2.figured out the main goal and try to get the sample x sbs signature matrix for classification using sigminer 
+3.try to generate the gene-sbs signatures relation matrix for prediction
+4.try to code on the project and finish it
 * **Week 16**
 * **Week 17**
 * **Week 19**

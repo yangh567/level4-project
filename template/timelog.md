@@ -462,3 +462,7 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 25 Jan 2020 Monday
 * *6 hours* discuss with the supervisor and try to generate the sbs file for classification
 * *5 minutes* writing timelog
+
+## 26 Jan 2020 Monday
+* *5 hours* try to get the data done and perform classification on it
+* *5 minutes* writing timelog
