@@ -5,5 +5,13 @@ venv/*
 **/data/**/raw/*.tsv
 **/data/**/raw/*.csv
 **/data/**/raw/*.xlsx
+**/data/**/processed/*.rds
+**/data/**/processed/.Rproj.user
+**/data/**/processed/.RData
+**/data/**/processed/.Rhistory
+**/data/**/processed/*.gz
+**/data/**/processed/*.tsv
+**/data/**/processed/*.muse_snv.csv
+
 .DS_Store
 .idea
