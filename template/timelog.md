@@ -466,3 +466,11 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 26 Jan 2020 Monday
 * *5 hours* try to get the data done and perform classification on it
 * *5 minutes* writing timelog
+
+## 27 Jan 2020 Tuesdays
+* *6 hours* do the research on the method used for classification and prediction and make plan
+* *5 minutes* writing timelog
+
+## 27 Jan 2020 Wednesday
+* *4 hours* discuss the plan with supervisor and implement it
+* *5 minutes* writing timelog
