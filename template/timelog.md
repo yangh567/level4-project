@@ -482,3 +482,8 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 30 Jan 2020 Saturday
 * *4 hours* finished the data generation and understood the formation of the sbs signatures
 * *5 minutes* writing timelog
+
+## 31 Jan 2020 Sunday
+* *5 hours* preparing the presentation for weekly meeting
+* *2 hours* extracting normal sample from the file generated
+* *5 minutes* writing timelog
