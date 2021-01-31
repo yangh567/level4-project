@@ -105,7 +105,14 @@ Week-by-week plan for the whole project. Update this as you go along.
 2.figured out the main goal and try to get the sample x sbs signature matrix for classification using sigminer 
 3.try to generate the gene-sbs signatures relation matrix for prediction
 4.try to code on the project and finish it
-* **Week 16**
+
+* **Week 16*
+
+1.generate the sbs x sample id file using sigminer and make sure the normal sample is extracted and understand how did the process is achieved
+2.discuss the plan i made with my supervisor and obtain feedback
+3.implement the classification of cancers and genes with the plan discussed with supervisor
+4.make adjustment if the supervisor think the plan is inappropriate
+
 * **Week 17**
 * **Week 19**
 * **Week 20**
