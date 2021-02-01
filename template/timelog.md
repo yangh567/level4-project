@@ -487,3 +487,7 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 * *5 hours* preparing the presentation for weekly meeting
 * *2 hours* extracting normal sample from the file generated
 * *5 minutes* writing timelog
+
+## 1 February 2020 Monday
+* *5 hours* conformed the idea with supervisor and then start implementation
+* *5 minutes* writing timelog
