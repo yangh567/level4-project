@@ -12,8 +12,12 @@ venv/*
 **/data/**/processed/*.gz
 **/data/**/processed/*.tsv
 **/data/**/processed/*.muse_snv.csv
+<<<<<<< HEAD
 **/data/**/processed/res.*.csv
 **/data/**/processed/*.organ.csv
 **/data/**/processed/sample_id.sbs.organ.csv
+=======
+
+>>>>>>> f7e569ac313de27410a2a80b01ae7e521013707a
 .DS_Store
 .idea
