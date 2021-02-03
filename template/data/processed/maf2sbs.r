@@ -56,8 +56,8 @@ for(k in path){
   
   matrix<-get_sig_exposure(mt_sig2)
   colnames(matrix)<-c("Sample_ID",apply(a, 1, sim_name))
-  #map<-pheatmap::pheatmap(sim_v3$similarity)
-  #save_pheatmap_pdf(map,paste0("class.",organ_name,".pdf"))
+  map<-pheatmap::pheatmap(sim_v3$similarity)
+  save_pheatmap_pdf(map,paste0("class.",organ_name,".pdf"))
   res<-merge.data.frame(matrix,sampleid_gene,by.x = "Sample_ID")
   res<-res%>%mutate(organ=organ_name)%>%
        mutate(clinic=as.integer(substr(res$Sample_ID,14,15)))%>%
