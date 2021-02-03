@@ -1,11 +1,3 @@
-
-# This is the experiment to figure out how the sigminer work using TCGAmutations BRAC file
-# and genome reference of hg19
-
-
-
-
-
 BiocManager::install("maftools")
 BiocManager::install("sigminer")
 #BiocManager::install("PoisonAlien/TCGAmutations")

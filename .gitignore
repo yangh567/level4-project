@@ -12,6 +12,8 @@ venv/*
 **/data/**/processed/*.gz
 **/data/**/processed/*.tsv
 **/data/**/processed/*.muse_snv.csv
-
+**/data/**/processed/res.*.csv
+**/data/**/processed/*.organ.csv
+**/data/**/processed/sample_id.sbs.organ.csv
 .DS_Store
 .idea

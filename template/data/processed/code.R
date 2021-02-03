@@ -1,8 +1,3 @@
-# this is the file used to manually generate the (sample x sbs signatures matrix),then
-# i have found the tool called sigminer could be used to automatically extract the matrix
-
-
-
 #install.packages("BiocManager")
 options(warn =-1)
 library(BiocManager)
