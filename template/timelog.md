@@ -507,3 +507,7 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 5 February 2020 Friday
 * *6 hours* almost finished classification and prediction of gene mutation status
 * *5 minutes* writing timelog
+
+## 6 February 2020 Saturday
+* *4 hours* try to improve the classification accuracy 
+* *5 minutes* writing timelog
