@@ -515,3 +515,7 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 7 February 2020 Sunday
 * *7 hours* try to improve the classification accuracy and working on method part of dissertation
 * *5 minutes* writing timelog
+
+## 8 February 2020 Monday
+* *3 hours* try to improve the classification strategy and working on method part of dissertation
+* *5 minutes* writing timelog
