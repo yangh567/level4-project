@@ -8,6 +8,7 @@ venv/*
 **/data/**/processed/*.rds
 **/data/**/processed/.Rproj.user
 **/data/**/processed/.RData
+**/data/**/processed/.RDataTmp
 **/data/**/processed/.Rhistory
 **/data/**/processed/*.gz
 **/data/**/processed/*.tsv
