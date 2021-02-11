@@ -527,3 +527,8 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 10 February 2020 Wednesday
 * *5 hours* working on the classification of the gene mutation status
 * *5 minutes* writing timelog
+
+## 11 February 2020 Thursday
+* *6 hours* got the gene mutation status classification done
+* *2 hours* constructed the relationship between cancer types and gene mutation status through sbs 
+* *5 minutes* writing timelog
