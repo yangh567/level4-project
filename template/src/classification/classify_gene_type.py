@@ -26,6 +26,7 @@ import my_model
 
 # reading data
 o_data = pd.read_csv(cfg.DATA_PATH)
+o_data = o_data.fillna(0)
 x = o_data[cfg.SBS_NAMES]
 y = o_data[cfg.GENE_NAMES]
 
