@@ -533,6 +533,10 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 * *2 hours* constructed the relationship between cancer types and gene mutation status through sbs 
 * *5 minutes* writing timelog
 
-## 12 February 2020 Thursday
+## 12 February 2020 Friday
 * *3 hours* writing the data processing part of dissertation
+* *5 minutes* writing timelog
+
+## 13 February 2020 Saturday
+* *2 hours* writing the data processing part of dissertation
 * *5 minutes* writing timelog
