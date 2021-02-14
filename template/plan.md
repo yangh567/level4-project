@@ -121,6 +121,11 @@ Week-by-week plan for the whole project. Update this as you go along.
 4.working on method part of the dissertation
 
 * **Week 19**
+  
+1.discuss the problem of the prediction of the gene mutation status with supervisor
+2.summarize the plan and decide whether to continuing constructing recommender system on gene mutation status for related genes.
+3.working on method part of the dissertation
+
 * **Week 20**
 * **Week 21**
 * **Week 22**
