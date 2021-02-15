@@ -545,3 +545,7 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 * *3 hours* writing the data processing part of dissertation
 * *2 hours* preparing for the presentation notes for weekly meeting
 * *5 minutes* writing timelog
+
+## 15 February 2020 Monday
+* *4 hours* writing the data processing part of dissertation
+* *5 minutes* writing timelog
