@@ -553,3 +553,10 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 16 February 2020 Tuesday
 * *3 hours* did some testing on the different dataset to see the effect
 * *5 minutes* writing timelog
+
+## 17 February 2020 Wednesday
+* *4 hours* doing the research on the evaluation process 
+  and how to represent the relationship between cancer types and gene mutation status
+* *5 minutes* writing timelog
+
+
