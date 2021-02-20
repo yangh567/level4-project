@@ -567,3 +567,7 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 19 February 2020 Friday
 * *1 hours* debug on the evaluation part and the prediction part of the project
 * *5 minutes* writing timelog
+
+## 20 February 2020 Saturday
+* *1 hours* debug on the evaluation part and the prediction part of the project
+* *5 minutes* writing timelog
