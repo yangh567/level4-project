@@ -571,3 +571,11 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 20 February 2020 Saturday
 * *1 hours* debug on the evaluation part and the prediction part of the project
 * *5 minutes* writing timelog
+
+## 21 February 2020 Sunday
+* *2 hours* debug on the evaluation part and the prediction part of the project
+* *5 minutes* writing timelog
+
+## 22 February 2020 Monday
+* *3 hours* deployed the stratified sampling strategy for obtaining cross validation dataset and validation dataset
+* *5 minutes* writing timelog

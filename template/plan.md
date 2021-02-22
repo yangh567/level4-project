@@ -127,6 +127,10 @@ Week-by-week plan for the whole project. Update this as you go along.
 3.working on method part of the dissertation
 
 * **Week 20**
+1.discuss the feasibility of the build model and way of connecting gene mutation status and cancer types with supervisor
+2.finished the evaluation part
+3.collect the reference and working on the dissertation
+  
 * **Week 21**
 * **Week 22**
 * **Week 23 [TERM ENDS]**
