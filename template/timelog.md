@@ -579,3 +579,7 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 22 February 2020 Monday
 * *3 hours* deployed the stratified sampling strategy for obtaining cross validation dataset and validation dataset
 * *5 minutes* writing timelog
+
+## 23 February 2020 Tuesday
+* *30 minutes hours* writing code to display the similarity between sig and sbs signatures
+* *5 minutes* writing timelog
