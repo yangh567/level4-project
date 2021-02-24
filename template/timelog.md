@@ -583,3 +583,7 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 23 February 2020 Tuesday
 * *30 minutes hours* writing code to display the similarity between sig and sbs signatures
 * *5 minutes* writing timelog
+
+## 24 February 2020 Wednesday
+* *1 hour hours* working on the prediction part of project
+* *5 minutes* writing timelog
