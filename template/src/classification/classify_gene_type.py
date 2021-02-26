@@ -1,96 +1,47 @@
-
-
-from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.preprocessing import LabelEncoder
-from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import accuracy_score
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.feature_selection import mutual_info_classif
-from sklearn.metrics import accuracy_score
-from sklearn import metrics
+import seaborn as sns
 
 import os
 import numpy as np
 import pandas as pd
 import torch
 import torch.nn as nn
-from torch.utils.data import DataLoader
+import matplotlib.pyplot as plt
 
 import my_tools as tool
 import my_config as cfg
 import my_model
 
 
-# read the data
-o_data = pd.read_csv(cfg.DATA_PATH)
-o_data = o_data.fillna(0)   # handling the NaN values
-x = o_data[cfg.SBS_NAMES]
-y = o_data[cfg.GENE_NAMES]
-
-y[y >= 1] = 1
-y[y <= 1] = 0
-y = y.values
+import warnings
+warnings.filterwarnings('ignore')
 
 
-# data preprocessing
-
-# # handling NaN values
-
-# y = y.fillna(0).values
-
-
-# x standardization
-
-scaler = StandardScaler()
-x = scaler.fit_transform(x)
-
-
-# feature selection
-
-# x = tool.feature_select(x, y)
-
-# construct one-hot encoding for the gene mutation status
-# we don't need it now as the gene mutation status is shown in one-hot encoding
-# one_encoder = OneHotEncoder()
-# y = one_encoder.fit_transform(y.reshape(y.shape[0], 1))
-
-# constructing the training and testing data
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=100)
-
-# # performing the classification
-
-# model = RandomForestClassifier(n_estimators=10)
-# # model = LogisticRegression(penalty='l2', C=1, multi_class='auto')
-# model.fit(x_train, y_train)
-
-# we setup the model as multi backpropagation network
-model = my_model.MultiBPNet(x.shape[1], y.shape[1])
-
-# we set the criteria as mean square error loss
-criterion = nn.MSELoss()
+def process_data(data, scale=True):
+    x = data[cfg.SBS_NAMES]
+    y = data[cfg.GENE_NAMES]
+    y[y >= 1] = 1
+    y[y <= 1] = 0
+    y = y.values
+    if scale:
+        scaler = StandardScaler()
+        x = scaler.fit_transform(x)
+    return x, y
 
 
-# optimizer = torch.optim.SGD(model.parameters(), lr=cfg.LEARNING_RATE)
-
-# we set the optimizer as Adam
-optimizer = torch.optim.Adam(model.parameters(), lr=cfg.LEARNING_RATE)
-
-
-# transform the dataframe into tensor
-x_train = torch.tensor(x_train, dtype=torch.float32)
-x_test = torch.tensor(x_test, dtype=torch.float32)
-y_train = torch.tensor(y_train, dtype=torch.float32)
-y_test = torch.tensor(y_test, dtype=torch.float32)
-# x_train = torch.autograd.Variable(torch.tensor(x_train, dtype=torch.float32))
-# x_test = torch.autograd.Variable(torch.tensor(x_test, dtype=torch.float32))
-# y_train = torch.autograd.Variable(torch.tensor(y_train, dtype=torch.float32))
-# y_test = torch.autograd.Variable(torch.tensor(y_test, dtype=torch.float32))
-
-
-
+def get_data(o_data, index):
+    train = []
+    test = None
+    for i in range(len(o_data)):
+        if i != index:
+            train.append(o_data[i])
+        else:
+            test = o_data[i]
+    train = pd.concat(train)
+    train_x, train_y = process_data(train)
+    test_x, test_y = process_data(test)
+    return train_x, train_y, test_x, test_y
 
 # for each epoch, the model will separate whole data into training and testing set and start training
 
@@ -104,63 +55,103 @@ y_test = torch.tensor(y_test, dtype=torch.float32)
     # and compare it to the y_test to evaluate overall accuracy of the model
     # and we take greatest accuracy of testing set and corresponding trained parameter as perfectly trained model
 
-save_data = [['epoch', 'loss', 'train accuracy', 'test accuracy', 'best test accuracy']]
-best_acc = -1
-batch_size = 32
-batch_count = int(len(x_train) / batch_size) + 1
-for epoch in range(cfg.EPOCH):
-    # train
-    model.train()
-    epoch_loss = 0
-    acc = 0
-    for i in range(batch_count):
-        inputs = torch.autograd.Variable(x_train[i * batch_size: (i + 1) * batch_size])
-        target = torch.autograd.Variable(y_train[i * batch_size: (i + 1) * batch_size])
-        y_pred = model(inputs)
-        loss = criterion(y_pred, target)
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
-        epoch_loss += loss.item()
 
-        y_pred = y_pred.detach().numpy()
-        y_pred[y_pred > 0.5] = 1
-        y_pred[y_pred <= 0.5] = 0
-        acc += accuracy_score(target.numpy(), y_pred)
-        # acc += metrics.f1_score(target.numpy(), y_pred, average="macro")
+def train(train_x, train_y, test_x, test_y):
+    x_train = torch.tensor(train_x, dtype=torch.float32)
+    y_train = torch.tensor(train_y, dtype=torch.float32)
+    batch_size = cfg.BATCH_SIZE
+    batch_count = int(len(x_train) / batch_size) + 1
 
-    # print("Epoch: {}, Loss: {:.5f}, Accuracy: {:.5f}".format(epoch, epoch_loss / batch_count, acc / batch_count))
+    best_acc = -1.
+    save_data = [['epoch', 'loss', 'train accuracy', 'test accuracy', 'best test accuracy']]
+    for epoch in range(cfg.EPOCH):
+        model.train()
+        epoch_loss = 0
+        acc = 0
+        for i in range(batch_count):
 
-    # test
+            if i * batch_size >= len(x_train):
+                continue
+            inputs = torch.autograd.Variable(x_train[i * batch_size: (i + 1) * batch_size])
+            target = torch.autograd.Variable(y_train[i * batch_size: (i + 1) * batch_size])
+            y_pred = model(inputs)
+            loss = criterion(y_pred, target)
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            epoch_loss += loss.item()
+
+            y_pred = y_pred.detach().numpy()
+            # y_pred = torch.argmax(y_pred, dim=1).detach().numpy()
+            y_pred[y_pred > 0.5] = 1
+            y_pred[y_pred <= 0.5] = 0
+
+            acc += accuracy_score(target, y_pred)
+            # acc += accuracy_score(torch.argmax(target, dim=1), y_pred)
+
+        acc_test = score(test_x, test_y)
+        if best_acc < acc_test:
+            best_acc = acc_test
+        print("Epoch: {}, Loss: {:.5f}, Train Accuracy: {:.5f}, Test Accuracy: {:.5f}, Best Test Accuracy: {:.5f}".
+              format(epoch, epoch_loss / batch_count, acc / batch_count, acc_test, best_acc))
+        save_data.append([epoch, epoch_loss / batch_count, acc / batch_count, acc_test, best_acc])
+    return best_acc
+
+
+def score(test_x, test_y):
     model.eval()
-    y_pred = model(x_test).detach().numpy()
+    x_test = torch.tensor(test_x, dtype=torch.float32)
+    y_test = torch.tensor(test_y, dtype=torch.float32)
+
+    y_pred = model(x_test)
+    # y_pred = torch.argmax(y_pred, dim=1).detach().numpy()
+
+    y_pred = y_pred.detach().numpy()
     y_pred[y_pred > 0.5] = 1
     y_pred[y_pred <= 0.5] = 0
+
     acc_test = accuracy_score(y_test, y_pred)
-    # f1_test = metrics.f1_score(y_test, y_pred, average="macro")
-    if best_acc < acc_test:
-        best_acc = acc_test
-    print("Epoch: {}, Loss: {:.5f}, Train Accuracy: {:.5f}, Test Accuracy: {:.5f}, Best Test Accuracy: {:.5f}".format(
-        epoch, epoch_loss / batch_count, acc / batch_count, acc_test, best_acc))
-    save_data.append([epoch, epoch_loss / batch_count, acc / batch_count, acc_test, best_acc])
+    # acc_test = accuracy_score(torch.argmax(y_test, dim=1), y_pred)
+    return acc_test
 
-# evaluation
-# y_hat = model.predict(x_test)
-# print(metrics.f1_score(y_test, y_hat, average="macro"))
-# print(metrics.f1_score(y_test, y_hat, average="weighted"))
-# print('Accuracy score: %.6f' % accuracy_score(y_hat, y_test))
 
-# save the weight of the sbs in each gene mutation and the bias of the genes calculated by model
-weight = model.layer.weight.detach().numpy()
-bias = model.layer.bias.detach().numpy()
-if not os.path.exists('./result'):
-    os.makedirs('./result')
+if __name__ == '__main__':
+    # read the data
+    o_data = []
+    for i in range(cfg.CROSS_VALIDATION_COUNT - 1):
+        o_data.append(pd.read_csv(os.path.join(cfg.C_V_DATA_PATH, 'cross_validation_%d.csv' % i)))
+    valid_dataset = pd.read_csv(os.path.join(cfg.C_V_DATA_PATH, 'validation_dataset.csv'))
 
-df = pd.DataFrame(save_data)
-df.to_csv("./result/gene-result.csv", index=False, header=False)
+    # handling the NaN
+    o_data = [item.fillna(0) for item in o_data]
+    valid_dataset = valid_dataset.fillna(0)
 
-np.save("./result/gene-x.npy", x)
-np.save("./result/gene-y.npy", y)
-np.save("./result/gene_type-weight.npy", weight)
-np.save("./result/gene_type-bias.npy", bias)
-print('save weight file to ./result')
+    # set the recorder to record the trained model's best testing accuracy in each fold
+    test_acc = []
+    valid_acc = []
+
+    for i in range(cfg.CROSS_VALIDATION_COUNT - 1):
+        train_x, train_y, test_x, test_y = get_data(o_data, i)
+        valid_x, valid_y = process_data(valid_dataset)
+
+        model = my_model.MultiBPNet(train_x.shape[1], train_y.shape[1])
+        criterion = nn.MSELoss()
+        optimizer = torch.optim.Adam(model.parameters(), lr=cfg.LEARNING_RATE)
+
+        test_acc.append(train(train_x, train_y, test_x, test_y))
+        valid_acc.append(score(valid_x, valid_y))
+        print('The %d fold，The best testing accuracy for trained model at this fold is %.4f，the validation accuracy '
+              'for this fold is %.4f' % (i, test_acc[-1], valid_acc[-1]))
+
+        # save the weight of each sbs
+        weight = model.layer.weight.detach().numpy()
+        bias = model.layer.bias.detach().numpy()
+        if not os.path.exists('./result'):
+            os.makedirs('./result')
+
+        np.save("./result/gene_type-weight_%d.npy" % i, weight)
+        np.save("./result/gene_type-bias_%d.npy" % i, bias)
+        print('save weight file to ./result')
+
+    print('The %d fold cross validation has 5 testing result,they are :' % cfg.CROSS_VALIDATION_COUNT, test_acc)
+    print('The validation accuracies for 5 fold cross validation are :', valid_acc)

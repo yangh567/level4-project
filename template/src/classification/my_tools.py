@@ -3,7 +3,6 @@ from sklearn.feature_selection import SelectFromModel
 from sklearn.preprocessing import LabelEncoder
 from sklearn.pipeline import Pipeline
 
-# constructing the ExtraTreeClassifier based feature selection
 def feature_select(x, y):
     """
 
