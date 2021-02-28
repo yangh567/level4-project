@@ -132,6 +132,10 @@ Week-by-week plan for the whole project. Update this as you go along.
 3.collect the reference and working on the dissertation
   
 * **Week 21**
+1.discuss the problems of stripping genes in the predicted top 10 genes for each cancers
+2.finished the evaluation part
+3.collect the reference and working on the dissertation
+  
 * **Week 22**
 * **Week 23 [TERM ENDS]**
 * **Week 24** Dissertation submission deadline and presentations.
