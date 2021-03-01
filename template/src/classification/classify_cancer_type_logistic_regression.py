@@ -1,3 +1,12 @@
+"""
+
+    This file is used to test on the self-build model on the library provided
+    logistic regression classification of cancers
+    based on mutation signature (SBS) using 5 fold cross validation
+
+"""
+
+
 import pandas as pd
 
 import numpy as np

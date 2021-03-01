@@ -1,3 +1,10 @@
+"""
+
+    This file is used to test on the self-build model on the logistic regression classification of cancers
+    based on mutation signature (SBS) without using 5 fold cross validation
+
+"""
+
 import os
 import torch
 import torch.nn as nn
@@ -43,17 +50,18 @@ def get_data(o_data, index):
     test_x, test_y = process_data(test)
     return train_x, train_y, test_x, test_y
 
+
 # for each epoch, the model will separate whole data into training and testing set and start training
 
-    # for all batch in training set:
-        # the input will be the batched samples
-        # the target will be the cancer label of the batched samples
-        # we calculate loss and optimize the model in every batch size until the training data is all used for training
-        # the accuracy of each batch will be accumulated and taking average for the training accuracy
+# for all batch in training set:
+# the input will be the batched samples
+# the target will be the cancer label of the batched samples
+# we calculate loss and optimize the model in every batch size until the training data is all used for training
+# the accuracy of each batch will be accumulated and taking average for the training accuracy
 
-    # we evaluate the model by performing prediction on x_test
-    # and compare it to the y_test to evaluate overall accuracy of the model
-    # and we take greatest accuracy of testing set and corresponding trained parameter as perfectly trained model
+# we evaluate the model by performing prediction on x_test
+# and compare it to the y_test to evaluate overall accuracy of the model
+# and we take greatest accuracy of testing set and corresponding trained parameter as perfectly trained model
 
 
 # we start training the model here using batch Adam optimizer BPnet
@@ -145,5 +153,5 @@ if __name__ == '__main__':
         np.save("./result/cancer_type-bias_%d.npy" % i, bias)
         print('save weight file to ./result')
 
-    print('The %d fold cross validation has 5 testing result,they are :' % cfg.CROSS_VALIDATION_COUNT-1, test_acc)
+    print('The 5 fold cross validation has 5 testing result,they are :', test_acc)
     print('The validation accuracies for 5 fold cross validation are :', valid_acc)

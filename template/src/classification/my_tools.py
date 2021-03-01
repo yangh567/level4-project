@@ -1,3 +1,9 @@
+"""
+
+This is the file provided to do feature extraction
+
+"""
+
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.feature_selection import SelectFromModel
 from sklearn.preprocessing import LabelEncoder

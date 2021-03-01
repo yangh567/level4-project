@@ -1,3 +1,10 @@
+"""
+
+This file is used to draw the heatmap for display the
+weight of sbs signatures in each cancer types or gene types
+
+"""
+
 import numpy as np
 import pandas as pd
 import seaborn as sns

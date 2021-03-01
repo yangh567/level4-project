@@ -1,3 +1,13 @@
+"""
+
+This file is used to provide the BPnet for the model for
+taking weight for all sbs signatures for each cancers
+
+"""
+
+
+
+
 import torch
 from torch import nn
 from torch.nn.functional import softmax

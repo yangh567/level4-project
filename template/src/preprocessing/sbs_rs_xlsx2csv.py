@@ -1,6 +1,6 @@
 """
 This is the preprocessing file to extract the rearrangement signature and sbs signature from the xlsx file and
-insert them into csv file
+insert them into csv file(DEPRECATED)
 """
 from openpyxl import load_workbook
 

@@ -1,5 +1,5 @@
 """
-    This is the place to handle the vcf file,at moment is useless
+    This is the place to handle the vcf file,at moment is useless(DEPRECATED)
 """
 
 vcf_path = './vcf_data/CosmicNonCodingVariants.normal.vcf'

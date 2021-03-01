@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 """
 the classification based on random forest classification
+(The data is used is now discarded)(Part of research)
 """
 
 import pandas as pd

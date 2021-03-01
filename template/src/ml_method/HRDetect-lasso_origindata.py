@@ -1,5 +1,6 @@
 """
     using lasso regression train model on original dataset
+    to study the HRDetect model (the data used is now discarded)(Part of research)
 """
 
 import numpy as np

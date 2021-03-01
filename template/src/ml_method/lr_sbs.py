@@ -1,5 +1,6 @@
 """
     using logistic regression algorithm for classifying the cancer type
+    (The data is used is now discarded)(Part of research)
 """
 import pandas as pd
 from sklearn.model_selection import train_test_split, StratifiedShuffleSplit

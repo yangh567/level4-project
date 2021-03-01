@@ -1,16 +1,3 @@
-rm(list = ls())
-library(data.table)
-library(dplyr)
-data<-fread("sample_id.sbs.organ.csv")
-sbs<-colnames(data)[grep("SBS",colnames(data))]
-gene<-colnames(data)[-grep("SBS",colnames(data))]
-gene<-gene[!gene%in%c("organ","clinic")]
-date1<-data%>%select(Sample_ID,sbs) 
-date2<-data%>%select(gene,organ)
-date<-cbind(date1,date2)
-fwrite(date,"sample_id.sbs.gene.organ.csv",row.names = F)
-
-
-# do the checking here
-datachecking<-fread("sample_id.sbs.gene.organ.csv")
-datachecking
+version https://git-lfs.github.com/spec/v1
+oid sha256:dbbe421724ae2ced42d9bdf155ecf46f0a62dc6301d169119502fd02e163f731
+size 533

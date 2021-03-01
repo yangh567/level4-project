@@ -1,20 +1,3 @@
-BiocManager::install("maftools")
-BiocManager::install("sigminer")
-#BiocManager::install("PoisonAlien/TCGAmutations")
-BiocManager::install("BSgenome.Hsapiens.UCSC.hg38")
-BiocManager::install("BSgenome.Hsapiens.UCSC.hg19")
-BiocManager::install("BSgenome.Hsapiens.NCBI.GRCh38")
-
-
-install.packages("devtools")
-install.packages("reticulate")
-
-library(sigminer)
-library(maftools)
-library(NMF)
-
-data<-readRDS("C:\\Users\\23590\\Desktop\\SBS\\TCGA_MutSig_gene01.rds")
-
-data
-
-write.csv(data,"C:\\Users\\23590\\Desktop\\SBS\\TestResult.csv",row.names = F)
+version https://git-lfs.github.com/spec/v1
+oid sha256:c7c3504c18926ea178b72af70f400a53568598e64f72c0a21112b0fec819ccee
+size 599

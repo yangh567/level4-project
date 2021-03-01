@@ -1,3 +1,12 @@
+"""
+
+    This file is used to test on the self-build model on the classification of genes
+    based on mutation signature (SBS) using 5 fold cross validation
+
+"""
+
+
+
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 import seaborn as sns
@@ -24,10 +33,12 @@ def process_data(data, scale=True):
     y[y >= 1] = 1
     y[y <= 1] = 0
     y = y.values
+
     if scale:
         scaler = StandardScaler()
         x = scaler.fit_transform(x)
     return x, y
+
 
 
 def get_data(o_data, index):
@@ -126,6 +137,8 @@ if __name__ == '__main__':
     o_data = [item.fillna(0) for item in o_data]
     valid_dataset = valid_dataset.fillna(0)
 
+
+
     # set the recorder to record the trained model's best testing accuracy in each fold
     test_acc = []
     valid_acc = []
@@ -153,5 +166,5 @@ if __name__ == '__main__':
         np.save("./result/gene_type-bias_%d.npy" % i, bias)
         print('save weight file to ./result')
 
-    print('The %d fold cross validation has 5 testing result,they are :' % cfg.CROSS_VALIDATION_COUNT, test_acc)
+    print('The 5 fold cross validation has 5 testing result,they are :' , test_acc)
     print('The validation accuracies for 5 fold cross validation are :', valid_acc)

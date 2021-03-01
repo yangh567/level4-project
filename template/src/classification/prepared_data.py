@@ -1,3 +1,12 @@
+"""
+
+This file is used to split the original data into 6 folds
+5 fold used for 5-fold cross validation and one fold for
+validation in each fold
+
+"""
+
+
 import os
 import random
 import numpy as np
@@ -15,6 +24,9 @@ if not os.path.exists(figure_data):
 def plt_figure(data, title):
     plt.title(title)
     plt.bar(x=data.keys(), height=data.values())
+    for a, b in zip(data.keys(), data.values()):
+        plt.text(a, b + 0.05, '%.0f' % b, ha='center', va='bottom', fontsize=7)
+
     plt.xticks(rotation=70)
     plt.savefig(os.path.join(figure_data, '%s.png' % title))
     plt.close('all')
