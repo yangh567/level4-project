@@ -603,3 +603,7 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 28 February 2020 Sunday
 * *1 hour hours* working on the problem in gene mutation prediction part of project
 * *5 minutes* writing timelog
+
+## 1 March 2020 Monday
+* *1 hour hours* working on the problem in gene mutation prediction part of project and formated every file
+* *5 minutes* writing timelog
