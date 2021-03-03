@@ -611,3 +611,7 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 2 March 2020 Tuesday
 * *30 minutes hour hours* finding the way to representing the classification status in each gene
 * *5 minutes* writing timelog
+
+## 3 March 2020 Wednesday
+* *1 hour hours* get the classification accuracy of each gene displayed
+* *5 minutes* writing timelog
