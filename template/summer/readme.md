@@ -1,9 +1,9 @@
 # Summer work
 
-* PROJECT NAME
-* YOUR NAME
-* STUDENT_ID
-* SUPERVISOR NAME
+* The Molecular Recommender system
+* Zhouyang Shen
+* 2359009s
+* Ke Yuan
 
 Use this file to keep a report stating what you completed over the summer. The following is an *template* that you can use as a basis. 
 
