@@ -11,17 +11,19 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # loading the cancer type sbs weight matrix from the running result
-cancer_sbs_weight = np.load("../classification/result/cancer_type_normalized-weight.npy", mmap_mode='r')
+cancer_sbs_weight = np.load("../classification/result/cancer_type_normalized-weight.npy", mmap_mode='r').T
 
 # loading the gene sbs weight matrix from the running result
-gene_sbs_weight = np.load("../classification/result/gene_normalized-weight.npy", mmap_mode='r')
+gene_sbs_weight = np.load("../classification/result/gene_normalized-weight.npy", mmap_mode='r').T
 
 # given the sbs columns
 SBS_NAMES_lst = ['SBS4', 'SBS5', 'SBS1', 'SBS39', 'SBS36', 'SBS2', 'SBS13', 'SBS10b', 'SBS9', 'SBSPON', 'SBS3', 'SBS6',
-                 'SBS30', 'SBSN', 'SBS10a', 'SBS15', 'SBS26', 'SBS29', 'SBS17b', 'SBS87', 'SBS16', 'SBS18', 'SBS52',
-                 'SBS8', 'SBS7b', 'SBS40', 'SBS50', 'SBS24', 'SBS27', 'SBS42', 'SBS86', 'SBS57', 'SBS33', 'SBS90',
-                 'SBS17a', 'SBS55', 'SBS22', 'SBS54', 'SBS48', 'SBS58', 'SBS28', 'SBS7a', 'SBS7d', 'SBS7c', 'SBS38',
-                 'SBS84', 'SBS35', 'SBS14', 'SBS44']
+                 'SBS30',
+                 'SBSN', 'SBS10a', 'SBS15', 'SBS26', 'SBS29', 'SBS17b', 'SBS87', 'SBS16', 'SBS18', 'SBS52', 'SBS8',
+                 'SBS7b', 'SBS40',
+                 'SBS50', 'SBS24', 'SBS27', 'SBS42', 'SBS86', 'SBS57', 'SBS33', 'SBS90', 'SBS17a', 'SBS55', 'SBS22',
+                 'SBS54', 'SBS48',
+                 'SBS58', 'SBS28', 'SBS7a', 'SBS7d', 'SBS7c', 'SBS38', 'SBS84', 'SBS35', 'SBS14', 'SBS44']
 
 # given the cancer labels
 cancer_dict = {0: 'ACC', 1: 'BLCA', 2: 'BRCA', 3: 'CESC', 4: 'CHOL', 5: 'COAD', 6: 'DLBC', 7: 'ESCA', 8: 'GBM',

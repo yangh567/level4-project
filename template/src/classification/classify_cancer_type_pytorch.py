@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
+from my_confusion_matrix import plot_confusion_matrix
 
 import my_tools as tool
 import my_config as cfg
@@ -22,6 +23,11 @@ import my_model
 import warnings
 
 warnings.filterwarnings('ignore')  # "error", "ignore", "always", "default", "module" or "once"
+
+figure_data = './result/cancer_classification_confusion_matrix'
+
+if not os.path.exists(figure_data):
+    os.makedirs(figure_data)
 
 
 # function used to get the x and y and scale them
@@ -102,7 +108,7 @@ def train(train_x, train_y, test_x, test_y):
     return best_acc
 
 
-def score(test_x, test_y, report=False):
+def score(test_x, test_y, title=0, report=False):
     model.eval()
     x_test = torch.tensor(test_x, dtype=torch.float32)
     y_test = torch.tensor(test_y, dtype=torch.float32)
@@ -112,6 +118,7 @@ def score(test_x, test_y, report=False):
 
     acc_test = accuracy_score(torch.argmax(y_test, dim=1), y_pred)
     if report:
+        plot_confusion_matrix(torch.argmax(y_test, dim=1), y_pred, title)
         print(classification_report(torch.argmax(y_test, dim=1), y_pred))
     return acc_test
 
@@ -140,7 +147,7 @@ if __name__ == '__main__':
         train_x, train_y, test_x, test_y = get_data(o_data, i)
         valid_x, valid_y = process_data(valid_dataset)
         test_acc.append(train(train_x, train_y, test_x, test_y))
-        valid_acc.append(score(valid_x, valid_y, True))
+        valid_acc.append(score(valid_x, valid_y, title=i, report=True))
         print('The %d fold，The best testing accuracy for trained model at this fold is %.4f，The validation accuracy '
               'for this fold is %.4f' % (i, test_acc[-1], valid_acc[-1]))
 

@@ -7,8 +7,9 @@ import my_config as cfg
 from sklearn.preprocessing import MinMaxScaler
 
 # load the file first
-gene_path = './result/gene_type-weight_0.npy'
-cancer_type_path = './result/cancer_type-weight_0.npy'
+gene_path = './result/gene_type-weight_3.npy'
+cancer_type_path = './result/cancer_type-weight_2.npy'
+
 
 gene_weight = np.load(gene_path).T  # shape (187, 52)
 cancer_type_weight = np.load(cancer_type_path).T
@@ -17,10 +18,8 @@ cancer_type_weight = np.load(cancer_type_path).T
 gene_scaler = MinMaxScaler()
 cancer_type_scaler = MinMaxScaler()
 
-# gene_nor_weight = gene_scaler.fit_transform(gene_weight).T
-# cancer_type_nor_weight = cancer_type_scaler.fit_transform(cancer_type_weight).T
-gene_nor_weight = gene_weight
-cancer_type_nor_weight = cancer_type_weight
+gene_nor_weight = gene_scaler.fit_transform(gene_weight)
+cancer_type_nor_weight = cancer_type_scaler.fit_transform(cancer_type_weight)
 
 # normalize it to 0 and 1
 cancer_type_zero_one_weight = cancer_type_nor_weight / np.sum(cancer_type_nor_weight, axis=0).reshape(1, 32)

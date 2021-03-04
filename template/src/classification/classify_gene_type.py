@@ -5,8 +5,6 @@
 
 """
 
-
-
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 import seaborn as sns
@@ -22,8 +20,8 @@ import my_tools as tool
 import my_config as cfg
 import my_model
 
-
 import warnings
+
 warnings.filterwarnings('ignore')
 
 
@@ -40,7 +38,6 @@ def process_data(data, scale=True):
     return x, y
 
 
-
 def get_data(o_data, index):
     train = []
     test = None
@@ -54,17 +51,18 @@ def get_data(o_data, index):
     test_x, test_y = process_data(test)
     return train_x, train_y, test_x, test_y
 
+
 # for each epoch, the model will separate whole data into training and testing set and start training
 
-    # for all batch in training set:
-        # the input will be the batched samples
-        # the target will be the cancer label of the batched samples
-        # we calculate loss and optimize the model in every batch size until the training data is all used for training
-        # the accuracy of each batch will be accumulated and taking average for the training accuracy
+# for all batch in training set:
+# the input will be the batched samples
+# the target will be the cancer label of the batched samples
+# we calculate loss and optimize the model in every batch size until the training data is all used for training
+# the accuracy of each batch will be accumulated and taking average for the training accuracy
 
-    # we evaluate the model by performing prediction on x_test
-    # and compare it to the y_test to evaluate overall accuracy of the model
-    # and we take greatest accuracy of testing set and corresponding trained parameter as perfectly trained model
+# we evaluate the model by performing prediction on x_test
+# and compare it to the y_test to evaluate overall accuracy of the model
+# and we take greatest accuracy of testing set and corresponding trained parameter as perfectly trained model
 
 
 def train(train_x, train_y, test_x, test_y):
@@ -109,7 +107,7 @@ def train(train_x, train_y, test_x, test_y):
     return best_acc
 
 
-def score(test_x, test_y):
+def score(test_x, test_y,title=0, final=False):
     model.eval()
     x_test = torch.tensor(test_x, dtype=torch.float32)
     y_test = torch.tensor(test_y, dtype=torch.float32)
@@ -122,7 +120,8 @@ def score(test_x, test_y):
     y_pred[y_pred <= 0.5] = 0
 
     acc_test = accuracy_score(y_test, y_pred)
-    # acc_test = accuracy_score(torch.argmax(y_test, dim=1), y_pred)
+    if final:
+        print(tool.gene_class_report(y_test.detach().numpy(), y_pred,title))
     return acc_test
 
 
@@ -137,8 +136,6 @@ if __name__ == '__main__':
     o_data = [item.fillna(0) for item in o_data]
     valid_dataset = valid_dataset.fillna(0)
 
-
-
     # set the recorder to record the trained model's best testing accuracy in each fold
     test_acc = []
     valid_acc = []
@@ -152,7 +149,7 @@ if __name__ == '__main__':
         optimizer = torch.optim.Adam(model.parameters(), lr=cfg.LEARNING_RATE)
 
         test_acc.append(train(train_x, train_y, test_x, test_y))
-        valid_acc.append(score(valid_x, valid_y))
+        valid_acc.append(score(valid_x, valid_y,title=i,final=True))
         print('The %d fold，The best testing accuracy for trained model at this fold is %.4f，the validation accuracy '
               'for this fold is %.4f' % (i, test_acc[-1], valid_acc[-1]))
 
@@ -166,5 +163,5 @@ if __name__ == '__main__':
         np.save("./result/gene_type-bias_%d.npy" % i, bias)
         print('save weight file to ./result')
 
-    print('The 5 fold cross validation has 5 testing result,they are :' , test_acc)
+    print('The 5 fold cross validation has 5 testing result,they are :', test_acc)
     print('The validation accuracies for 5 fold cross validation are :', valid_acc)
