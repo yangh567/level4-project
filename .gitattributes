@@ -1,8 +1,8 @@
-*.organ.csv filter=lfs diff=lfs merge=lfs -text
-sample_id.sbs.gene.organ.csv filter=lfs diff=lfs merge=lfs -text
-*.pdf filter=lfs diff=lfs merge=lfs -text
-*.csv filter=lfs diff=lfs merge=lfs -text
-*.r filter=lfs diff=lfs merge=lfs -text
-template filter=lfs diff=lfs merge=lfs -text
-venv filter=lfs diff=lfs merge=lfs -text
-out filter=lfs diff=lfs merge=lfs -text
+plan.md filter=lfs diff=lfs merge=lfs -text
+presentation filter=lfs diff=lfs merge=lfs -text
+src filter=lfs diff=lfs merge=lfs -text
+status_report filter=lfs diff=lfs merge=lfs -text
+summer filter=lfs diff=lfs merge=lfs -text
+timelog.md filter=lfs diff=lfs merge=lfs -text
+data filter=lfs diff=lfs merge=lfs -text
+dissertation filter=lfs diff=lfs merge=lfs -text
