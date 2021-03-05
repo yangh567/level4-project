@@ -18,9 +18,8 @@ from sklearn.metrics import roc_auc_score, roc_curve
 
 import warnings
 import sklearn.exceptions
+
 warnings.filterwarnings("ignore", category=sklearn.exceptions.UndefinedMetricWarning)
-
-
 
 # *********config**********
 
@@ -29,7 +28,7 @@ using_columns = ['SV%d' % i for i in range(1, 7)]
 
 # Donor Age,ER status,Gene,isBrcaMonoallelic,isKnownGermline,isNewGermline,
 # IsSomaticMeth,'ins', 'del.mh.prop', 'del.rep.prop',	'del.none.prop', 'hrd'
-using_columns.extend(['ins', 'del.mh.prop', 'del.rep.prop',	'del.none.prop', 'hrd'])
+using_columns.extend(['ins', 'del.mh.prop', 'del.rep.prop', 'del.none.prop', 'hrd'])
 
 # set the y here
 label_column = 'Gene'
@@ -39,7 +38,7 @@ using_columns.extend(sub_columns)
 
 # 'SV5', 'SV6', 'SV2', 'e.8', 'e.2', 'e.17', 'e.1', 'e.18', 'e.13',
 # 'hrd', 'e.20', 'ins', 'e.26', 'SV4', 'SV1', 'e.5', 'e.6', 'e.3', 'SV3'
-normalize_columns = list(set(using_columns) - set(['del.mh.prop', 'del.rep.prop',	'del.none.prop']))
+normalize_columns = list(set(using_columns) - set(['del.mh.prop', 'del.rep.prop', 'del.none.prop']))
 
 path_data = '../../data/raw/b_dataset.csv'
 dataset = pd.read_csv(path_data)
@@ -48,7 +47,6 @@ dataset = pd.read_csv(path_data)
 # process the data
 
 dataset[sub_columns] = np.log(dataset[sub_columns] + 1)
-
 
 # standardization -- fitting in same scale
 ss = StandardScaler()
@@ -66,7 +64,7 @@ kf = KFold(n_splits=10)
 for train_index, test_index in kf.split(x):
     train_x, train_y = x[train_index], y[train_index]
     test_x, test_y = x[test_index], y[test_index]
-    lasso = Lasso(max_iter=10000, alpha=0.9, fit_intercept=True)     # Use the default parameters for now
+    lasso = Lasso(max_iter=10000, alpha=0.9, fit_intercept=True)  # Use the default parameters for now
     lasso.fit(train_x, train_y)
     pred_y = lasso.predict(test_x)
 
@@ -79,4 +77,4 @@ for train_index, test_index in kf.split(x):
     roc_acc_s = roc_auc_score(test_y, pred_y)
     # TODO store the data ，draw the graph
     print(acc)
-    #print(lasso.coef_)
+    # print(lasso.coef_)

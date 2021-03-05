@@ -7,8 +7,8 @@ import my_config as cfg
 from sklearn.preprocessing import MinMaxScaler
 
 # load the file first
-gene_path = './result/gene_type-weight_3.npy'
-cancer_type_path = './result/cancer_type-weight_2.npy'
+gene_path = './result/gene_type-weight_2.npy'
+cancer_type_path = './result/cancer_type-weight_0.npy'
 
 
 gene_weight = np.load(gene_path).T  # shape (187, 52)

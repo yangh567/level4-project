@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 """
-    this is the code used for statics analysis(DEPRECATED)
+    this is the code used for statics analysis(DEPRECATED)(Part of research)
 """
 
 import pandas as pd

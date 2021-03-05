@@ -404,7 +404,7 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 
 ## Semester 2
 
-## week 1
+## week 13
 
 ## 12 Jan 2020 Tuesday
 * *3 hours* doing research on the article Convolutional neural network models for cancer type prediction based on gene expression.BMC Med Genomics.
@@ -429,6 +429,9 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 17 Jan 2020 Sunday
 * *5 hours* coding on the project
 * *5 minutes* writing timelog
+
+
+## week 14
 
 ## 18 Jan 2020 Monday
 * *6 hours* discuss the project with supervisor and design the plan
@@ -459,6 +462,8 @@ Deciphering signatures of mutational processes operative in human cancer to unde
   used the non-negative matrix factorization to extract the (sample x sbs) matrix prepared for classification
 * *5 minutes* writing timelog
 
+## week 15
+
 ## 25 Jan 2020 Monday
 * *6 hours* discuss with the supervisor and try to generate the sbs file for classification
 * *5 minutes* writing timelog
@@ -488,6 +493,8 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 * *2 hours* extracting normal sample from the file generated
 * *5 minutes* writing timelog
 
+## week 16
+
 ## 1 February 2020 Monday
 * *5 hours* conformed the idea with supervisor and then start implementation
 * *5 minutes* writing timelog
@@ -515,6 +522,8 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 7 February 2020 Sunday
 * *7 hours* try to improve the classification accuracy and working on method part of dissertation
 * *5 minutes* writing timelog
+
+## week 17
 
 ## 8 February 2020 Monday
 * *3 hours* try to improve the classification strategy and working on method part of dissertation
@@ -546,6 +555,8 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 * *2 hours* preparing for the presentation notes for weekly meeting
 * *5 minutes* writing timelog
 
+## week 18
+
 ## 15 February 2020 Monday
 * *4 hours* writing the data processing part of dissertation
 * *5 minutes* writing timelog
@@ -576,6 +587,8 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 * *2 hours* debug on the evaluation part and the prediction part of the project
 * *5 minutes* writing timelog
 
+## week 19
+
 ## 22 February 2020 Monday
 * *3 hours* deployed the stratified sampling strategy for obtaining cross validation dataset and validation dataset
 * *5 minutes* writing timelog
@@ -603,6 +616,8 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 28 February 2020 Sunday
 * *1 hour hours* working on the problem in gene mutation prediction part of project
 * *5 minutes* writing timelog
+
+## week 21
 
 ## 1 March 2020 Monday
 * *1 hour hours* working on the problem in gene mutation prediction part of project and formated every file

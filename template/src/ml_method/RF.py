@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 """
 the classification based on random forest classification
-(The data is used is now discarded)(Part of research)
+(The data is used is now discarded)(Part of research)(The cancer used is PAN-cancer)
 """
 
 import pandas as pd
@@ -15,14 +15,15 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
 
-#path_data = '../../data/raw/GDC-PANCAN.muse_snv.tsv'
+# path_data = '../../data/raw/GDC-PANCAN.muse_snv.tsv'
 
 path_data = '../../data/raw/GDC-PANCAN.muse_snv_short.tsv'
 train = pd.read_csv(path_data, sep='\t')
 
 # construct the label
-x = pd.get_dummies(train[set(train.columns) - set(['Sample_ID', 'dna_vaf'])]).join(train['dna_vaf'])    # construct the one-hot-coding
-x = x.values   # find the data
+x = pd.get_dummies(train[set(train.columns) - set(['Sample_ID', 'dna_vaf'])]).join(
+    train['dna_vaf'])  # construct the one-hot-coding
+x = x.values  # find the data
 
 # we seperate the cancer label(whether it is cancer) from tumor id,
 # Those less than or equal to 10 have tumors, and 11-29 have no tumors.
