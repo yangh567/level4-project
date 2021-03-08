@@ -1,7 +1,7 @@
 """
 
     This file is used to test on the self-build model on classification of BLCA and BRCA
-    based on mutation signature (SBS) using 5 fold cross validation
+    based on mutation signature (SBS) using 5 fold cross validation to ensure the possibility of classifying 32 cancers
 
 """
 

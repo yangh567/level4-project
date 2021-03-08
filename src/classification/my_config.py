@@ -19,9 +19,9 @@ top n genes related to cancer : GENE_COUNT
 
 import pandas as pd
 
-EPOCH = 1000
+EPOCH = 100
 LEARNING_RATE = 1e-3
-BATCH_SIZE = 8
+BATCH_SIZE = 16
 
 DATA_PATH = '../../data/processed/sample_id.sbs.organ.csv'
 C_V_DATA_PATH = '../../data/cross_valid'
@@ -29,7 +29,6 @@ C_V_DATA_PATH = '../../data/cross_valid'
 CROSS_VALIDATION_COUNT = 6
 GENE_PROB = 0.
 GENE_COUNT = 10
-
 
 GENE_NAMES = ['CCND1', 'CCND2', 'CCND3', 'CCNE1', 'CDK4', 'CDK6', 'E2F1', 'E2F3', 'YAP1', 'MYC', 'MYCN', 'ARRDC1','KDM5A',
               'NFE2L2', 'AKT1', 'AKT2', 'PIK3CA', 'PIK3CB', 'PIK3R2', 'RHEB', 'RICTOR', 'RPTOR', 'EGFR', 'ERBB2','ERBB3',
@@ -45,6 +44,8 @@ GENE_NAMES = ['CCND1', 'CCND2', 'CCND3', 'CCNE1', 'CDK4', 'CDK6', 'E2F1', 'E2F3'
               'NTRK3', 'PIK3R3', 'PLXNB1', 'PPP2R1A','PTPN11', 'RET', 'RIT1', 'ROS1', 'RPS6KA3', 'RPS6KB1', 'SFRP2', 'SFRP4', 'SFRP5',
               'SOS1', 'SOST', 'SPEN', 'SPRED1','STK3', 'STK4', 'TAOK1', 'TAOK2', 'TAOK3', 'TCF7', 'TCF7L1', 'TEAD2', 'THBS2', 'TLE1',
               'TLE2', 'TLE3', 'TLE4','WIF1', 'WWC1', 'CRB3', 'LRP5', 'NTRK2', 'PDGFRB', 'TEAD3', 'WWTR1']
+
+
 
 
 # SBS_NAMES = ["SBS1", "SBS2", "SBS3", "SBS4", "SBS5", "SBS6","SBS7a","SBS7b","SBS7c","SBS7d","SBS8","SBS9","SBS10a",

@@ -29,7 +29,7 @@ def process_data(data, scale=True):
     x = data[cfg.SBS_NAMES]
     y = data[cfg.GENE_NAMES]
     y[y >= 1] = 1
-    y[y <= 1] = 0
+    y[y < 1] = 0
     y = y.values
 
     if scale:
@@ -92,10 +92,10 @@ def train(train_x, train_y, test_x, test_y):
 
             y_pred = y_pred.detach().numpy()
             # y_pred = torch.argmax(y_pred, dim=1).detach().numpy()
-            y_pred[y_pred > 0.5] = 1
-            y_pred[y_pred <= 0.5] = 0
+            y_pred[y_pred >= 0.5] = 1
+            y_pred[y_pred < 0.5] = 0
 
-            acc += accuracy_score(target, y_pred)
+            acc += np.mean(np.sum((target.detach().numpy() - y_pred) == 0, axis=0) / target.detach().numpy().shape[0])
             # acc += accuracy_score(torch.argmax(target, dim=1), y_pred)
 
         acc_test = score(test_x, test_y)
@@ -116,10 +116,10 @@ def score(test_x, test_y,title=0, final=False):
     # y_pred = torch.argmax(y_pred, dim=1).detach().numpy()
 
     y_pred = y_pred.detach().numpy()
-    y_pred[y_pred > 0.5] = 1
-    y_pred[y_pred <= 0.5] = 0
+    y_pred[y_pred >= 0.5] = 1
+    y_pred[y_pred < 0.5] = 0
 
-    acc_test = accuracy_score(y_test, y_pred)
+    acc_test = np.mean(np.sum((y_test.detach().numpy() - y_pred) == 0, axis=0) / y_test.detach().numpy().shape[0])
     if final:
         print(tool.gene_class_report(y_test.detach().numpy(), y_pred,title))
     return acc_test
