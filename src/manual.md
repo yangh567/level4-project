@@ -20,8 +20,8 @@ to see the result:
 
    (note: However,if you want to run maf2sbs_change.fixID.r, you will need to obtain TCGA maf format files for
    different cancers from https://portal.gdc.cancer.gov/repository and put them at data/processed folder
-   then, run "sudo apt install r-base-core" to install Rscript and run "Rscript maf2sbs_change.fixID.r" to 
-   generate the "sample_id.sbs.organ.csv" file.
+   then, run "sudo apt install r-base-core" to install Rscript and run "requirement.r" to install necessary packages 
+   and "Rscript maf2sbs_change.fixID.r" to generate the "sample_id.sbs.organ.csv" file.
    (you will need to install devtools,remotes,BiocManager,sigminer,BSgenome.Hsapiens.UCSC.hg38,maftools and PoisonAlien/TCGAmutations)
    
    also,to generate the cross_validation data set and validation data set for validation, you will need to run the

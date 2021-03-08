@@ -114,7 +114,7 @@ for i, item in enumerate(sorted_cancer_gene):
         # if (cancer_prob[ACC][gene1].values[0] > 0 and gene[1] > 0)
         # (this is used to solve the problem of non-mutated gene have greater weight by extracting them)
 
-        if cancer_prob[cfg.ORGAN_NAMES[i]][cfg.GENE_NAMES[gene[0]]].values[0] > 0 and gene[1] > 0:
+        if cancer_prob[cfg.ORGAN_NAMES[i]][cfg.GENE_NAMES[gene[0]]].values[0] > 0.02 and gene[1] > 0:
             genes.append(cfg.GENE_NAMES[gene[0]])
         if len(genes) >= cfg.GENE_COUNT:
             break
