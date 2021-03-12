@@ -11,7 +11,7 @@ gene_path = './result/gene_type-weight_0.npy'
 cancer_type_path = './result/cancer_type-weight_2.npy'
 
 
-gene_weight = np.load(gene_path).T  # shape (187, 52)
+gene_weight = np.load(gene_path).T  # shape (187, 49)
 cancer_type_weight = np.load(cancer_type_path).T
 
 # standardize the weight

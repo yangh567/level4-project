@@ -49,15 +49,20 @@ class MultiColumnLabelEncoder:
 
 
 # used to print out the classification result for each genes
-def gene_class_report(y, y_hat, title):
+def gene_class_report(y, y_hat,cancer__type, title,gene_list,gene_list_mutation_prob):
     gene_accuracy_dict = {}
-    gene_list = cfg.GENE_NAMES
+    gene_list = gene_list
     gene_accuracy_list = list(np.sum((y - y_hat) == 0, axis=0) / y.shape[0])
 
     for i in range(len(gene_list)):
         gene_accuracy_dict[gene_list[i]] = gene_accuracy_list[i]
-
-    df = pd.DataFrame(list(gene_accuracy_dict.items()), columns=['gene_name', 'accuracy'])
-    df.to_csv('./result/gene_classification_accuracy/The_classification_across_gene_fold_%d.csv' % title)
+    data = {
+        'gene_name': gene_list,
+        'Accuracy': gene_accuracy_list,
+        'Mutation_frequency': gene_list_mutation_prob
+    }
+    # df = pd.DataFrame(list(gene_accuracy_dict.items()), columns=['gene_name', 'accuracy,mutation-frequency'])
+    df = pd.DataFrame(data)
+    df.to_csv('./result/gene_classification_accuracy/The_classification_across_gene_fold_%d_for_cancer_%s.csv' % (title,cancer__type))
     return gene_accuracy_dict
     pass

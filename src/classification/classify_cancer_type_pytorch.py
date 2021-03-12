@@ -16,6 +16,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
 from my_confusion_matrix import plot_confusion_matrix
+from sklearn.metrics import roc_curve, auc
 
 import my_tools as tool
 import my_config as cfg
@@ -76,7 +77,7 @@ def train(train_x, train_y, test_x, test_y):
     y_train = torch.tensor(train_y, dtype=torch.float32)
 
     # The training set will be separated into mini batches for improving calculation
-    batch_size = 16
+    batch_size = 12
     batch_count = int(len(x_train) / batch_size) + 1
 
     best_acc = -1.
@@ -114,12 +115,41 @@ def score(test_x, test_y, title=0, report=False):
     y_test = torch.tensor(test_y, dtype=torch.float32)
 
     y_pred = model(x_test)
+
+    y_p = y_pred.detach().numpy()
+    y_t = y_test.detach().numpy()
+
     y_pred = torch.argmax(y_pred, dim=1).detach().numpy()
 
-    acc_test = accuracy_score(torch.argmax(y_test, dim=1), y_pred)
+    acc_test = accuracy_score(torch.argmax(y_test, dim=1).detach().numpy(), y_pred)
     if report:
-        plot_confusion_matrix(torch.argmax(y_test, dim=1), y_pred, title)
-        print(classification_report(torch.argmax(y_test, dim=1), y_pred))
+        n_classes = len(y_test[1])
+        plot_confusion_matrix(torch.argmax(y_test, dim=1).detach().numpy(), y_pred, title)
+        print(classification_report(torch.argmax(y_test, dim=1).detach().numpy(), y_pred))
+
+        fpr = dict()
+        tpr = dict()
+        roc_auc = dict()
+        for i in range(n_classes):
+            fpr[i], tpr[i], _ = roc_curve(y_t[:, i], y_p[:, i])
+            roc_auc[i] = auc(fpr[i], tpr[i])
+
+        # Plot of a ROC curve for a specific class
+        for j in range(n_classes):
+            plt.figure()
+            plt.plot(fpr[j], tpr[j], label='ROC curve (area = %0.2f)' % roc_auc[j])
+            plt.plot([0, 1], [0, 1], 'k--')
+            plt.xlim([0.0, 1.0])
+            plt.ylim([0.0, 1.05])
+            plt.xlabel('False Positive Rate')
+            plt.ylabel('True Positive Rate')
+            plt.title('Receiver operating characteristic example')
+            plt.legend(loc="lower right")
+            if not os.path.exists('./result/cancer_classification_roc_auc'):
+                os.makedirs('./result/cancer_classification_roc_auc')
+            plt.savefig(
+                './result/cancer_classification_roc_auc/The_roc_auc_for_validation_in_fold_{0}_for_class_{1}.png'.format(title,j))
+
     return acc_test
 
 
@@ -146,6 +176,7 @@ if __name__ == '__main__':
 
         train_x, train_y, test_x, test_y = get_data(o_data, i)
         valid_x, valid_y = process_data(valid_dataset)
+
         test_acc.append(train(train_x, train_y, test_x, test_y))
         valid_acc.append(score(valid_x, valid_y, title=i, report=True))
         print('The %d fold，The best testing accuracy for trained model at this fold is %.4f，The validation accuracy '

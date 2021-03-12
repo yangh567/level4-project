@@ -19,9 +19,9 @@ top n genes related to cancer : GENE_COUNT
 
 import pandas as pd
 
-EPOCH = 100
-LEARNING_RATE = 1e-3
-BATCH_SIZE = 16
+EPOCH = 200
+LEARNING_RATE = 1e-2
+BATCH_SIZE = 5
 
 DATA_PATH = '../../data/processed/sample_id.sbs.organ.csv'
 C_V_DATA_PATH = '../../data/cross_valid'
@@ -69,7 +69,7 @@ GENE_NAMES = ['CCND1', 'CCND2', 'CCND3', 'CCNE1', 'CDK4', 'CDK6', 'E2F1', 'E2F3'
 CANCER_TYPES_NAMES = "Cancer.Types"
 
 ORGAN_NAMES = ['ACC', 'BLCA', 'BRCA', 'CESC', 'CHOL', 'COAD', 'DLBC', 'ESCA', 'GBM', 'HNSC', 'KICH', 'KIRC', 'KIRP', 'LAML',
-               'LGG', 'LIHC', 'LUAD', 'LUSC', 'MESO', 'OV', 'PAAD', 'PCPG', 'PRAD', 'READ', 'SKCM', 'STAD', 'TGCT', 'THCA',
+               'LGG', 'LIHC', 'LUAD', 'LUSC', 'MESO', 'OV', 'PAAD', 'PCPG', 'PRAD', 'READ', 'SARC', 'SKCM', 'TGCT', 'THCA',
                'THYM', 'UCEC', 'UCS', 'UVM']
 
 SBS_NAMES = ['SBS4','SBS5','SBS1','SBS39','SBS36','SBS2','SBS13','SBS10b','SBS9','SBSPON','SBS3','SBS6','SBS30','SBSN','SBS10a','SBS15','SBS26','SBS29','SBS17b','SBS87','SBS16','SBS18','SBS52','SBS8','SBS7b','SBS40','SBS50','SBS24','SBS27','SBS42','SBS86','SBS57','SBS33','SBS90','SBS17a','SBS55','SBS22','SBS54','SBS48','SBS58','SBS28','SBS7a','SBS7d','SBS7c','SBS38','SBS84','SBS35','SBS14','SBS44']

@@ -114,8 +114,10 @@ def score(test_x, test_y, title=0, report=False):
     y_test = torch.tensor(test_y, dtype=torch.float32)
 
     y_pred = model(x_test)
+    print(y_pred.detach().numpy().shape)
     y_pred = torch.argmax(y_pred, dim=1).detach().numpy()
 
+    print(y_test.detach().numpy())
     acc_test = accuracy_score(torch.argmax(y_test, dim=1), y_pred)
     if report:
         plot_confusion_matrix(torch.argmax(y_test, dim=1), y_pred, title)

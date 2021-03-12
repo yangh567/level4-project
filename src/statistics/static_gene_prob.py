@@ -51,7 +51,7 @@ def plt_figure(data, title):
 
 
 # read the data
-o_data = pd.read_csv("small_data/small_data.csv")
+o_data = pd.read_csv("small_data/small_data1.csv")
 result = {}
 data = []
 
