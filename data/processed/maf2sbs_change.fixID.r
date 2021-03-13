@@ -69,7 +69,7 @@ for(k in path){
                         cores = 4
   )
   
-  # we don't draw teh graph here
+  # we don't draw the graph here
   if(F){
     pdf(file=paste0("consensus.",organ_name,".pdf"))
     show_sig_consensusmap(mt_sig)

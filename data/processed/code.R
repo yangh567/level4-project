@@ -100,7 +100,7 @@ sum_sbs<-function(x){
   type_5<-c("T>C","A>G")
   type_6<-c("T>G","A>C")
   
-  ## figure out  which type gene SNV belongs to
+  ## figures out  which type gene SNV belongs to
   if (type%in%type_1){
     type="C>A"
   } else if(type%in%type_2){
