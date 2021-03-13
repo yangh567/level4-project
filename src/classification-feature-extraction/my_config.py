@@ -19,7 +19,7 @@ top n genes related to cancer : GENE_COUNT
 
 import pandas as pd
 
-EPOCH = 200
+EPOCH = 500
 LEARNING_RATE = 1e-2
 BATCH_SIZE = 8
 

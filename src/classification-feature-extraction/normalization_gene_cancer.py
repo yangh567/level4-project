@@ -10,7 +10,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 # The loading of cancer's sbs weights start from here
 
-cancer_type_path = './result/cancer_type-weight_0.npy'
+cancer_type_path = './result/cancer_type-weight_3.npy'
 cancer_type_weight = np.load(cancer_type_path).T  # shape (49,32)
 cancer_type_scaler = MinMaxScaler()
 cancer_type_nor_weight = cancer_type_scaler.fit_transform(cancer_type_weight)

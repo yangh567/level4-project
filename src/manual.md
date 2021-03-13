@@ -32,7 +32,7 @@ to see the result:
    (you will need to install devtools,remotes,BiocManager,sigminer,BSgenome.Hsapiens.UCSC.hg38,maftools and PoisonAlien/TCGAmutations)
    
    also,to generate the cross_validation data set and validation data set for validation, you will need to run the
-   prepared_data.py under "src/classification/" to generate the stratified sampled files for performing 
+   prepared_data.py under "src/classification-feature-extraction/" to generate the stratified sampled files for performing 
    5-fold cross validation for evaluation (5 validation data set and 1 validation dataset)
    using command "python prepared_data.py".)
    
@@ -43,17 +43,17 @@ to see the result:
    "python statistic_gene_prob.py" to get the mutation frequency of each gene 
    in each cancer to help with extracting the type of gene that are not mutated in specific cancer. 
    
-4. run classify_cancer_type_pytorch.py under "src/classification/" to performing the training of classifier on 
+4. run classify_cancer_type_pytorch.py under "src/classification-feature-extraction/" to performing the training of classifier on 
    the cancer and evaluate on the model using "python classify_cancer_type_pytorch.py".
    
-5. run classify_gene_type.py under "src/classification/" to performing the training of classifier on 
+5. run classify_gene_type.py under "src/classification-feature-extraction/" to performing the training of classifier on 
    the gene and evaluate on the model using "python classify_gene_type.py".
    
-6. run analysis.py under "src/classification/" to performing finding top 10 gene for each cancer types
-   using "python analysis.py".
+6. run analysis.py under "src/classification-feature-extraction/" to performing finding top 10 gene for each cancer types
+   using "python normalization_gene_cancer.py".
 
 7. run read_npy.py to generate the heatmap of the sbs signature weights in each cancer and each gene
-   using "python read_npy.py".
+   using "python heatmap_ploter.py".
    
 
 to perform the transfer learning :

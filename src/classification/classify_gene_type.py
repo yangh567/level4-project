@@ -65,7 +65,7 @@ def get_data(o_data, index, cancer_type, gene_list):
 # and we take greatest accuracy of testing set and corresponding trained parameter as perfectly trained model
 
 
-def train(train_x, train_y, test_x, test_y):
+def train(train_x, train_y, test_x, test_y,fold):
     x_train = torch.tensor(train_x, dtype=torch.float32)
     y_train = torch.tensor(train_y, dtype=torch.float32)
     batch_size = cfg.BATCH_SIZE
@@ -98,13 +98,12 @@ def train(train_x, train_y, test_x, test_y):
             acc += np.mean(np.sum((target.detach().numpy() - y_pred) == 0, axis=0) / target.detach().numpy().shape[0])
             # acc += accuracy_score(torch.argmax(target, dim=1), y_pred)
 
-        acc_test = score(test_x, test_y)
-        if best_acc < acc_test:
-            best_acc = acc_test
-        print("Epoch: {}, Loss: {:.5f}, Train Accuracy: {:.5f}, Test Accuracy: {:.5f}, Best Test Accuracy: {:.5f}".
-              format(epoch, epoch_loss / batch_count, acc / batch_count, acc_test, best_acc))
-        save_data.append([epoch, epoch_loss / batch_count, acc / batch_count, acc_test, best_acc])
-    return best_acc
+        print("Epoch: {}, Loss: {:.5f}, Train Accuracy: {:.5f}".
+              format(epoch, epoch_loss / batch_count, acc / batch_count))
+        save_data.append([epoch, epoch_loss / batch_count, acc / batch_count])
+    acc_test = score(test_x, test_y)
+    print("The cross-validation test accuracy on fold " + str(fold) + " is :", acc_test)
+    return acc_test
 
 
 def score(test_x, test_y, title=0, cancer__type="", gene_list=None,gene_list_mutation_prob=None,final=False):
@@ -147,7 +146,7 @@ if __name__ == '__main__':
     for name, item in gene_prob.groupby('cancer type'):
         cancer_prob[name] = item
 
-    for i in range(cfg.CROSS_VALIDATION_COUNT - 1):
+    for fold in range(cfg.CROSS_VALIDATION_COUNT - 1):
 
         for cancer_type in cfg.ORGAN_NAMES:
             # gene_list = []
@@ -175,7 +174,7 @@ if __name__ == '__main__':
                 gene_list_final_for_cancer.append(a)
                 gene_freq_list_final_for_cancer.append(b)
 
-            train_x, train_y, test_x, test_y = get_data(o_data, i, cancer_type, gene_list_final_for_cancer)
+            train_x, train_y, test_x, test_y = get_data(o_data, fold, cancer_type, gene_list_final_for_cancer)
 
             valid_x, valid_y = process_data(valid_dataset, cancer_type, gene_list_final_for_cancer)
 
@@ -184,12 +183,12 @@ if __name__ == '__main__':
             criterion = nn.MultiLabelSoftMarginLoss()
             optimizer = torch.optim.Adam(model.parameters(), lr=cfg.LEARNING_RATE)
 
-            test_acc.append(train(train_x, train_y, test_x, test_y))
-            valid_acc.append(score(valid_x, valid_y, title=i, cancer__type=cancer_type, gene_list=gene_list_final_for_cancer,
+            test_acc.append(train(train_x, train_y, test_x, test_y,fold))
+            valid_acc.append(score(valid_x, valid_y, title=fold, cancer__type=cancer_type, gene_list=gene_list_final_for_cancer,
                                    gene_list_mutation_prob=gene_freq_list_final_for_cancer,final=True))
             print('The %d fold，The best testing accuracy for trained model for %s at this fold is %.4f，the validation '
                   'accuracy '
-                  'for this fold is %.4f' % (i, cancer_type, test_acc[-1], valid_acc[-1]))
+                  'for this fold is %.4f' % (fold, cancer_type, test_acc[-1], valid_acc[-1]))
 
             # save the weight of each sbs for each highly frequented gene in that cancer
             weight = model.layer.weight.detach().numpy()
@@ -197,8 +196,8 @@ if __name__ == '__main__':
             if not os.path.exists('./result'):
                 os.makedirs('./result')
 
-            np.save("./result/gene_sbs_weights/gene_type-weight_in_fold%d_for_%s.npy" % (i,cancer_type), weight)
-            np.save("./result/gene_sbs_weights/gene_type-bias_in_fold%d_for_%s.npy" % (i,cancer_type), bias)
+            np.save("./result/gene_sbs_weights/gene_type-weight_in_fold%d_for_%s.npy" % (fold,cancer_type), weight)
+            np.save("./result/gene_sbs_weights/gene_type-bias_in_fold%d_for_%s.npy" % (fold,cancer_type), bias)
             print('save weight file to ./result')
         test_acc_fold.append(np.mean(test_acc))
         valid_acc_fold.append(np.mean(valid_acc))

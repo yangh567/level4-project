@@ -72,7 +72,7 @@ def get_data(o_data, index):
 
 
 # we start training the model here using batch Adam optimizer BPnet
-def train(train_x, train_y, test_x, test_y):
+def train_and_test(train_x, train_y, test_x, test_y,fold):
     x_train = torch.tensor(train_x, dtype=torch.float32)
     y_train = torch.tensor(train_y, dtype=torch.float32)
 
@@ -100,13 +100,13 @@ def train(train_x, train_y, test_x, test_y):
 
             y_pred = torch.argmax(y_pred, dim=1).detach().numpy()
             acc += accuracy_score(torch.argmax(target, dim=1), y_pred)
-        acc_test = score(test_x, test_y)
-        if best_acc < acc_test:
-            best_acc = acc_test
-        print("Epoch: {}, Loss: {:.5f}, Train Accuracy: {:.5f}, Test Accuracy: {:.5f}, Best Test Accuracy: {:.5f}".
-              format(epoch, epoch_loss / batch_count, acc / batch_count, acc_test, best_acc))
-        save_data.append([epoch, epoch_loss / batch_count, acc / batch_count, acc_test, best_acc])
-    return best_acc
+        print("Epoch: {}, Loss: {:.5f}, Train Accuracy: {:.5f}".
+              format(epoch, epoch_loss / batch_count, acc / batch_count))
+        save_data.append([epoch, epoch_loss / batch_count, acc / batch_count])
+    acc_test = score(test_x, test_y)
+    print("The cross-validation test accuracy on fold "+str(fold)+" is :",acc_test)
+
+    return acc_test
 
 
 def score(test_x, test_y, title=0, report=False):
@@ -177,7 +177,7 @@ if __name__ == '__main__':
         train_x, train_y, test_x, test_y = get_data(o_data, i)
         valid_x, valid_y = process_data(valid_dataset)
 
-        test_acc.append(train(train_x, train_y, test_x, test_y))
+        test_acc.append(train_and_test(train_x, train_y, test_x, test_y,i))
         valid_acc.append(score(valid_x, valid_y, title=i, report=True))
         print('The %d fold，The best testing accuracy for trained model at this fold is %.4f，The validation accuracy '
               'for this fold is %.4f' % (i, test_acc[-1], valid_acc[-1]))

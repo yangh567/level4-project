@@ -65,7 +65,7 @@ def get_data(o_data, index, cancer_type, gene_list, sbs_names):
 # and we take greatest accuracy of testing set and corresponding trained parameter as perfectly trained model
 
 
-def train(train_x, train_y, test_x, test_y):
+def train_and_test(train_x, train_y, test_x, test_y,fold):
     x_train = torch.tensor(train_x, dtype=torch.float32)
     y_train = torch.tensor(train_y, dtype=torch.float32)
     batch_size = cfg.BATCH_SIZE
@@ -98,13 +98,14 @@ def train(train_x, train_y, test_x, test_y):
             acc += np.mean(np.sum((target.detach().numpy() - y_pred) == 0, axis=0) / target.detach().numpy().shape[0])
             # acc += accuracy_score(torch.argmax(target, dim=1), y_pred)
 
-        acc_test = score(test_x, test_y)
-        if best_acc < acc_test:
-            best_acc = acc_test
-        print("Epoch: {}, Loss: {:.5f}, Train Accuracy: {:.5f}, Test Accuracy: {:.5f}, Best Test Accuracy: {:.5f}".
-              format(epoch, epoch_loss / batch_count, acc / batch_count, acc_test, best_acc))
-        save_data.append([epoch, epoch_loss / batch_count, acc / batch_count, acc_test, best_acc])
-    return best_acc
+        print("Epoch: {}, Loss: {:.5f}, Train Accuracy: {:.5f}".
+              format(epoch, epoch_loss / batch_count, acc / batch_count))
+        save_data.append([epoch, epoch_loss / batch_count, acc / batch_count])
+
+    acc_test = score(test_x, test_y)
+    print("The cross-validation test accuracy on fold " + str(fold) + " is :", acc_test)
+
+    return acc_test
 
 
 def score(test_x, test_y, title=0, cancer__type="", gene_list=None, gene_list_mutation_prob=None, final=False):
@@ -208,7 +209,7 @@ if __name__ == '__main__':
             criterion = nn.MultiLabelSoftMarginLoss()
             optimizer = torch.optim.Adam(model.parameters(), lr=cfg.LEARNING_RATE)
 
-            test_acc.append(train(train_x, train_y, test_x, test_y))
+            test_acc.append(train_and_test(train_x, train_y, test_x, test_y,fold))
             valid_acc.append(score(valid_x, valid_y, title=fold, cancer__type=cfg.ORGAN_NAMES[cancer_type],
                                    gene_list=gene_list_final_for_cancer,
                                    gene_list_mutation_prob=gene_freq_list_final_for_cancer, final=True))
