@@ -24,7 +24,7 @@ cancer_list = cfg.ORGAN_NAMES
 
 
 result = [['cancer type', 'genes']]
-
+# here we only investigate on 0 fold
 for cancer_type in cancer_list:
     # used for constructing and saving result data frame later
     gene_path = './result/gene_sbs_weights/gene_type-weight_in_fold0_for_' + cancer_type + '.npy'

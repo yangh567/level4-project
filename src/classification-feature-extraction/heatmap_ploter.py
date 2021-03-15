@@ -106,6 +106,7 @@ for cancer_type in range(len(cancer_list)):
         gene_dict[i] = gene_list_final_for_cancer[i]
 
     # find the most weighted sbs names in that fold used as features for gene classification
+    # here we only investigate on 0 fold
     cancer_type_path = './result/cancer_type-weight_0.npy'
     cancer_type_weight = np.load(cancer_type_path).T  # shape (10,32)
     cancer_type_scaler = MinMaxScaler()
@@ -115,7 +116,7 @@ for cancer_type in range(len(cancer_list)):
 
     cancer_type_zero_one_weight_c = list(cancer_type_zero_one_weight[:, cancer_type])
 
-    # we find the top 20 weighted sbs signatures comes handy in identify this cancer
+    # we find the top 10 weighted sbs signatures comes handy in identify this cancer
 
     top_10_cancer_sbs_index = list(reversed(
         sorted(range(len(cancer_type_zero_one_weight_c)), key=lambda k: cancer_type_zero_one_weight_c[k])[
