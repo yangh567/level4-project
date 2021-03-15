@@ -39,9 +39,11 @@ to see the result:
 2. run heatmap_similarity.py under "data/similarity" to visualize the similarity of mutational signatures
    in "processed/class_graphs" folder using command "python heatmap_similarity.py".  
    
+3. run generate small data to obtain the matrix only contains the gene mutation status of the driver gene we need to investigate on
+   
 3. run the static_gene_prob.py under "src/statistics" directory using 
    "python statistic_gene_prob.py" to get the mutation frequency of each gene 
-   in each cancer to help with extracting the type of gene that are not mutated in specific cancer. 
+   in each cancer to help with extracting the top 5 frequently mutated driver gene in each cancer. 
    
 4. run classify_cancer_type_pytorch.py under "src/classification-feature-extraction/" to performing the training of classifier on 
    the cancer and evaluate on the model using "python classify_cancer_type_pytorch.py".
@@ -49,27 +51,20 @@ to see the result:
 5. run classify_gene_type.py under "src/classification-feature-extraction/" to performing the training of classifier on 
    the gene and evaluate on the model using "python classify_gene_type.py".
    
-6. run analysis.py under "src/classification-feature-extraction/" to performing finding top 10 gene for each cancer types
+6. run normalization_gene_cancer.py under "src/classification-feature-extraction/" to performing finding top 10 gene for each cancer types
    using "python normalization_gene_cancer.py".
 
-7. run read_npy.py to generate the heatmap of the sbs signature weights in each cancer and each gene
+7. run heatmap_ploter.py to generate the heatmap of the sbs signature weights in each cancer and each gene
    using "python heatmap_ploter.py".
    
 
-to perform the transfer learning :
+(this is just instruction of running the research file of using 
+top 10 weighted sbs signature in the cancer to classifiy on the 
+top 5 frequently mutated driver gene in that cancer)
 
-1. run classify_gene_type.py under "src/Transfer_learning/" to performing the training of classifier on 
-   the gene and evaluate on the model using "python classify_gene_type.py".
-   
+(other files are just the file to investigate on the performance of classify gene and cancers in different ways)
 
-2. run classify_cancer_type_pytorch.py under "src/Transfer_learning/" to performing the training of classifier on 
-   the cancer and evaluate on the model using "python classify_cancer_type_pytorch.py".
-   
-3. run analysis.py under "src/Transfer_learning/" to performing finding top 10 gene for each cancer types
-   using "python analysis.py".
 
-4. run read_npy.py to generate the heatmap of the sbs signature weights in each cancer and each gene
-   using "python read_npy.py".
    
    
 
