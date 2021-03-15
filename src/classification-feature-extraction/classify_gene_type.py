@@ -6,7 +6,7 @@
 """
 
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, roc_curve, auc
 import seaborn as sns
 
 import os
@@ -23,6 +23,40 @@ from sklearn.preprocessing import MinMaxScaler
 import warnings
 
 warnings.filterwarnings('ignore')
+
+
+def roc_draw(y_t, y_p, title, cancer___type, gene_lst):
+    fpr = dict()
+    tpr = dict()
+    roc_auc = dict()
+
+    n_classes = y_t.shape[1]
+    for i in range(n_classes):
+        fpr[i], tpr[i], _ = roc_curve(y_t[:, i], y_p[:, i])
+        roc_auc[i] = auc(fpr[i], tpr[i])
+
+    lg = 0
+    # Plot of a ROC curve for a specific class
+    plt.figure()
+    for j in range(n_classes):
+        plt.plot(fpr[j], tpr[j], label='ROC curve ' + gene_lst[j] + ' (area = %0.2f)' % roc_auc[j])
+        lg = plt.legend(bbox_to_anchor=(0.5, 0.5), loc='upper left', prop={'size': 6})
+        plt.tight_layout()
+    plt.plot([0, 1], [0, 1], 'k--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver operating characteristic example')
+    plt.legend(loc="lower right", prop={'size': 6})
+    if not os.path.exists('./result/gene_classification_roc_auc'):
+        os.makedirs('./result/gene_classification_roc_auc')
+    plt.savefig(
+        './result/gene_classification_roc_auc/The_roc_auc_for_validation_in_fold_{0}_for_class_{1}.png'.format(
+            title, cancer___type), dpi=300,
+        format='png',
+        bbox_extra_artists=(lg,),
+        bbox_inches='tight')
 
 
 def process_data(data, cancer_type, gene_list, sbs_names, scale=True):
@@ -65,7 +99,7 @@ def get_data(o_data, index, cancer_type, gene_list, sbs_names):
 # and we take greatest accuracy of testing set and corresponding trained parameter as perfectly trained model
 
 
-def train_and_test(train_x, train_y, test_x, test_y,fold):
+def train_and_test(train_x, train_y, test_x, test_y, fold):
     x_train = torch.tensor(train_x, dtype=torch.float32)
     y_train = torch.tensor(train_y, dtype=torch.float32)
     batch_size = cfg.BATCH_SIZE
@@ -115,6 +149,8 @@ def score(test_x, test_y, title=0, cancer__type="", gene_list=None, gene_list_mu
 
     y_pred = model(x_test)
     # y_pred = torch.argmax(y_pred, dim=1).detach().numpy()
+    y_pred_for_roc = y_pred.detach().numpy()
+
 
     y_pred = y_pred.detach().numpy()
     y_pred[y_pred > 0.5] = 1
@@ -122,6 +158,7 @@ def score(test_x, test_y, title=0, cancer__type="", gene_list=None, gene_list_mu
 
     acc_test = np.mean(np.sum((y_test.detach().numpy() - y_pred) == 0, axis=0) / y_test.detach().numpy().shape[0])
     if final:
+        roc_draw(y_test, y_pred_for_roc, title, cancer__type, gene_list)
         tool.gene_class_report(y_test.detach().numpy(), y_pred, cancer__type, title, gene_list, gene_list_mutation_prob)
     return acc_test
 
@@ -167,11 +204,11 @@ if __name__ == '__main__':
                 gene_freq_list_for_cancer.append(cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0])
 
             # find the top 10 gene's index in pandas frame
-            top_10_index = list(reversed(
-                sorted(range(len(gene_freq_list_for_cancer)), key=lambda i: gene_freq_list_for_cancer[i])[-10:]))
+            top_5_index = list(reversed(
+                sorted(range(len(gene_freq_list_for_cancer)), key=lambda i: gene_freq_list_for_cancer[i])[-5:]))
 
             # find those gene and their freq as (gene,freq)
-            res_list = [gene_list_for_cancer[i] for i in top_10_index]
+            res_list = [gene_list_for_cancer[i] for i in top_5_index]
 
             # append the gene name into gene_list_final_for_cancer list
             # append the gene mutation frequency to gene_freq_list_final_for_cancer list
@@ -193,7 +230,7 @@ if __name__ == '__main__':
 
             top_10_cancer_sbs_index = list(reversed(
                 sorted(range(len(cancer_type_zero_one_weight_c)), key=lambda k: cancer_type_zero_one_weight_c[k])[
-                -15:]))
+                -10:]))
 
             res_cancer_sbs_weight_list = [cfg.SBS_NAMES[s] for s in top_10_cancer_sbs_index]
 
@@ -209,7 +246,7 @@ if __name__ == '__main__':
             criterion = nn.MultiLabelSoftMarginLoss()
             optimizer = torch.optim.Adam(model.parameters(), lr=cfg.LEARNING_RATE)
 
-            test_acc.append(train_and_test(train_x, train_y, test_x, test_y,fold))
+            test_acc.append(train_and_test(train_x, train_y, test_x, test_y, fold))
             valid_acc.append(score(valid_x, valid_y, title=fold, cancer__type=cfg.ORGAN_NAMES[cancer_type],
                                    gene_list=gene_list_final_for_cancer,
                                    gene_list_mutation_prob=gene_freq_list_final_for_cancer, final=True))
@@ -224,7 +261,7 @@ if __name__ == '__main__':
                 os.makedirs('./result')
 
             np.save("./result/gene_sbs_weights/gene_type-weight_in_fold%d_for_%s.npy" % (
-            fold, cfg.ORGAN_NAMES[cancer_type]), weight)
+                fold, cfg.ORGAN_NAMES[cancer_type]), weight)
             np.save(
                 "./result/gene_sbs_weights/gene_type-bias_in_fold%d_for_%s.npy" % (fold, cfg.ORGAN_NAMES[cancer_type]),
                 bias)

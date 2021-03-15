@@ -10,7 +10,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 # The loading of cancer's sbs weights start from here
 
-cancer_type_path = './result/cancer_type-weight_3.npy'
+cancer_type_path = './result/cancer_type-weight_0.npy'
 cancer_type_weight = np.load(cancer_type_path).T  # shape (49,32)
 cancer_type_scaler = MinMaxScaler()
 cancer_type_nor_weight = cancer_type_scaler.fit_transform(cancer_type_weight)
@@ -27,7 +27,7 @@ result = [['cancer type', 'genes']]
 
 for cancer_type in cancer_list:
     # used for constructing and saving result data frame later
-    gene_path = './result/gene_sbs_weights/gene_type-weight_in_fold3_for_' + cancer_type + '.npy'
+    gene_path = './result/gene_sbs_weights/gene_type-weight_in_fold0_for_' + cancer_type + '.npy'
 
     gene_weight = np.load(gene_path).T  # shape (49, 10)
 
@@ -37,7 +37,7 @@ for cancer_type in cancer_list:
     gene_nor_weight = gene_scaler.fit_transform(gene_weight)
 
     # normalize it to 0 and 1
-    gene_zero_one_weight = gene_nor_weight / np.sum(gene_nor_weight, axis=0).reshape(1, 10)
+    gene_zero_one_weight = gene_nor_weight / np.sum(gene_nor_weight, axis=0).reshape(1, 5)
     np.save(
         "./result/gene_sbs_weights/gene_normalized_weights_for_each_cancer/gene_normalized-weight_%s.npy" % cancer_type,
         gene_zero_one_weight)

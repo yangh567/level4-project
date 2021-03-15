@@ -53,7 +53,7 @@ result = [['cancer type', 'genes']]
 
 for cancer_type in cancer_list:
     # used for constructing and saving result data frame later
-    gene_path = './result/gene_sbs_weights/gene_type-weight_in_fold2_for_' + cancer_type + '.npy'
+    gene_path = './result/gene_sbs_weights/gene_type-weight_in_fold0_for_' + cancer_type + '.npy'
 
     gene_weight = np.load(gene_path).T  # shape (49, 10)
 
@@ -63,7 +63,7 @@ for cancer_type in cancer_list:
     gene_nor_weight = gene_scaler.fit_transform(gene_weight)
 
     # normalize it to 0 and 1
-    gene_zero_one_weight = gene_nor_weight / np.sum(gene_nor_weight, axis=0).reshape(1, 10)
+    gene_zero_one_weight = gene_nor_weight / np.sum(gene_nor_weight, axis=0).reshape(1, 5)
     np.save(
         "./result/gene_sbs_weights/gene_normalized_weights_for_each_cancer/gene_normalized-weight_%s.npy" % cancer_type,
         gene_zero_one_weight)
@@ -110,11 +110,11 @@ for cancer_type in cancer_list:
         gene_freq_list_for_cancer.append(cancer_prob[cancer_type][gene].values[0])
 
     # find the top 10 gene's index in pandas frame
-    top_10_index = list(reversed(
-        sorted(range(len(gene_freq_list_for_cancer)), key=lambda i: gene_freq_list_for_cancer[i])[-10:]))
+    top_5_index = list(reversed(
+        sorted(range(len(gene_freq_list_for_cancer)), key=lambda i: gene_freq_list_for_cancer[i])[-5:]))
 
     # find those gene and their freq as (gene,freq)
-    res_list = [gene_list_for_cancer[i] for i in top_10_index]
+    res_list = [gene_list_for_cancer[i] for i in top_5_index]
 
     # append the gene name into gene_list_final_for_cancer list
     # append the gene mutation frequency to gene_freq_list_final_for_cancer list

@@ -135,20 +135,25 @@ def score(test_x, test_y, title=0, report=False):
             roc_auc[i] = auc(fpr[i], tpr[i])
 
         # Plot of a ROC curve for a specific class
+        lg = 0
+        plt.figure()
         for j in range(n_classes):
-            plt.figure()
-            plt.plot(fpr[j], tpr[j], label='ROC curve (area = %0.2f)' % roc_auc[j])
-            plt.plot([0, 1], [0, 1], 'k--')
-            plt.xlim([0.0, 1.0])
-            plt.ylim([0.0, 1.05])
-            plt.xlabel('False Positive Rate')
-            plt.ylabel('True Positive Rate')
-            plt.title('Receiver operating characteristic example')
-            plt.legend(loc="lower right")
-            if not os.path.exists('./result/cancer_classification_roc_auc'):
-                os.makedirs('./result/cancer_classification_roc_auc')
-            plt.savefig(
-                './result/cancer_classification_roc_auc/The_roc_auc_for_validation_in_fold_{0}_for_class_{1}.png'.format(title,j))
+            plt.plot(fpr[j], tpr[j], label='ROC curve ' + cfg.ORGAN_NAMES[j] + ' (area = %0.2f)' % roc_auc[j])
+            lg = plt.legend(bbox_to_anchor=(1.0, 1.0), loc='best', prop={'size': 6})
+            plt.tight_layout()
+        plt.plot([0, 1], [0, 1], 'k--')
+        plt.xlim([0.0, 1.0])
+        plt.ylim([0.0, 1.05])
+        plt.xlabel('False Positive Rate')
+        plt.ylabel('True Positive Rate')
+        plt.title('Receiver operating characteristic example')
+        if not os.path.exists('./result/cancer_classification_roc_auc'):
+            os.makedirs('./result/cancer_classification_roc_auc')
+        plt.savefig(
+            './result/cancer_classification_roc_auc/The_roc_auc_for_validation_in_fold_%d.png' % title, dpi=300,
+            format='png',
+            bbox_extra_artists=(lg,),
+            bbox_inches='tight')
 
     return acc_test
 

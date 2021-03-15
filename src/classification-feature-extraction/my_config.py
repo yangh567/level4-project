@@ -19,9 +19,9 @@ top n genes related to cancer : GENE_COUNT
 
 import pandas as pd
 
-EPOCH = 500
-LEARNING_RATE = 1e-2
-BATCH_SIZE = 8
+EPOCH = 2000
+LEARNING_RATE = 1e-3
+BATCH_SIZE = 64
 
 DATA_PATH = '../../data/processed/sample_id.sbs.organ.csv'
 C_V_DATA_PATH = '../../data/cross_valid'
@@ -30,20 +30,24 @@ CROSS_VALIDATION_COUNT = 6
 GENE_PROB = 0.
 GENE_COUNT = 10
 
-GENE_NAMES = ['CCND1', 'CCND2', 'CCND3', 'CCNE1', 'CDK4', 'CDK6', 'E2F1', 'E2F3', 'YAP1', 'MYC', 'MYCN', 'ARRDC1','KDM5A',
-              'NFE2L2', 'AKT1', 'AKT2', 'PIK3CA', 'PIK3CB', 'PIK3R2', 'RHEB', 'RICTOR', 'RPTOR', 'EGFR', 'ERBB2','ERBB3',
-              'PDGFRA', 'MET', 'FGFR1', 'FGFR2', 'FGFR3', 'FGFR4', 'KIT', 'IGF1R', 'KRAS', 'HRAS', 'BRAF', 'RAF1','RAC1',
-              'MAPK1', 'JAK2', 'MDM2', 'MDM4', 'CDKN1A', 'CDKN1B', 'CDKN2A', 'CDKN2B', 'CDKN2C', 'RB1', 'SAV1', 'LATS1','LATS2',
-              'PTPN14', 'NF2', 'FAT1', 'MGA', 'CNTN6', 'CREBBP', 'EP300', 'HES2', 'HES3', 'HES4', 'HES5', 'HEY1','KAT2B', 'NOTCH1',
-              'NOTCH2', 'NOTCH3', 'NOTCH4', 'NOV', 'PSEN2', 'FBXW7', 'NCOR1', 'NCOR2', 'KEAP1', 'CUL3','INPP4B', 'PIK3R1', 'PTEN',
-              'STK11', 'TSC1', 'TSC2', 'TGFBR1', 'TGFBR2', 'ACVR2A', 'SMAD2', 'SMAD3', 'SMAD4','NF1', 'RASA1', 'CBL', 'ERRFI1',
-              'TP53', 'ATM', 'SFRP1', 'ZNRF3', 'AMER1', 'APC', 'AXIN1', 'DKK1', 'DKK4', 'RNF43','TCF7L2', 'ABL1', 'ACVR1B', 'AKT3',
-              'ALK', 'ARAF', 'AXIN2', 'CDK2', 'CHEK2', 'CRB1', 'CRB2', 'CSNK1D', 'CSNK1E','CTNNB1', 'CUL1', 'DCHS1', 'DCHS2', 'DKK2',
-              'DKK3', 'DNER', 'ERBB4', 'ERF', 'FAT2', 'FAT3', 'FAT4', 'FLT3', 'GRB2','GSK3B', 'HDAC1', 'HES1', 'HEY2', 'HEYL', 'JAG2',
-              'MAML3', 'MAP2K1', 'MAP2K2', 'MAX', 'MLST8', 'MLX', 'MNT','MOB1A', 'MOB1B', 'MTOR', 'MXI1', 'NPRL2', 'NPRL3', 'NRAS', 'NTRK1',
-              'NTRK3', 'PIK3R3', 'PLXNB1', 'PPP2R1A','PTPN11', 'RET', 'RIT1', 'ROS1', 'RPS6KA3', 'RPS6KB1', 'SFRP2', 'SFRP4', 'SFRP5',
-              'SOS1', 'SOST', 'SPEN', 'SPRED1','STK3', 'STK4', 'TAOK1', 'TAOK2', 'TAOK3', 'TCF7', 'TCF7L1', 'TEAD2', 'THBS2', 'TLE1',
-              'TLE2', 'TLE3', 'TLE4','WIF1', 'WWC1', 'CRB3', 'LRP5', 'NTRK2', 'PDGFRB', 'TEAD3', 'WWTR1']
+GENE_NAMES =  ['MEN1', 'ATRX', 'CTNNB1', 'TP53', 'PRKAR1A', 'RXRA', 'CUL1', 'NFE2L2', 'STAG2', 'EP300', 'FAT1', 'FOXA1', 'ATM',
+              'ELF3', 'FOXQ1', 'ARID1A', 'ERBB3', 'PIK3CA', 'ASXL2', 'KRAS', 'TXNIP', 'ZFP36L1', 'HRAS', 'RHOB', 'CREBBP',
+              'NRAS', 'ERBB2', 'KANSL1', 'KDM6A', 'PSIP1', 'FGFR3', 'CDKN2A', 'SF1', 'GNA13', 'ERCC2', 'DIAPH2', 'SF3B1',
+              'PTEN', 'RB1', 'KMT2D', 'CDKN1A', 'RHOA', 'TSC1', 'SPTAN1', 'KLF5', 'RBM10', 'FBXW7', 'KMT2C', 'TBX3', 'CDKN1B',
+              'NF1', 'PTPRD', 'CBFB', 'CHD4', 'PIK3R1', 'GATA3', 'CTCF', 'MAP3K1', 'AKT1', 'MAP2K4', 'CDH1', 'GPS2', 'CASP8',
+              'NCOR1', 'BRCA1', 'RUNX1', 'HLA-B', 'SMAD4', 'NOTCH1', 'POLRMT', 'STK11', 'TGFBR2', 'MAPK1', 'LATS1', 'IDH1', 'EPHA2',
+              'PBRM1', 'BAP1', 'TGIF1', 'APC', 'ACVR2A', 'AMER1', 'PCBP1', 'BRAF', 'SOX9', 'TCF7L2', 'ZFP36L2', 'SMAD2', 'GNAS', 'CARD11',
+              'CD70', 'TNFAIP3', 'TMSB4X', 'BTG2', 'HIST1H1E', 'PIM1', 'CD79B', 'MYD88', 'B2M', 'NSD1', 'PTCH1', 'ZNF750', 'TCF12', 'EGFR',
+              'LZTR1', 'SPTA1', 'KEL', 'PDGFRA', 'GABRA6', 'CYLD', 'MYH9', 'FLNA', 'HUWE1', 'AJUBA', 'KEAP1', 'RAC1', 'ARID2', 'CUL3', 'RASA1',
+              'HLA-A', 'SETD2', 'MTOR', 'VHL', 'KDM5C', 'KIF1A', 'TCEB1', 'SMARCB1', 'MET', 'NF2', 'SMC1A', 'KIT', 'U2AF1', 'PTPDC1', 'NPM1',
+              'DNMT3A', 'PTPN11', 'ASXL1', 'IDH2', 'FLT3', 'WT1', 'CIC', 'ZBTB20', 'FUBP1', 'NIPBL', 'MAX', 'SMARCA4', 'ZCCHC12', 'PLCG1',
+              'NUP133', 'ALB', 'BRD7', 'APOB', 'TSC2', 'AXIN1', 'XPO1', 'WHSC1', 'CREB3L3', 'IL6ST', 'DHX9', 'RPS6KA3', 'EEF1A1', 'MGA',
+              'RIT1', 'FGFR2', 'ARHGAP35', 'LATS2', 'CDK12', 'ZNF133', 'RNF43', 'EEF2', 'RET', 'CSDE1', 'EPAS1', 'MED12', 'ZMYM3', 'SPOP',
+              'DACH1', 'COL5A1', 'PPP6C', 'MAP2K1', 'CDK4', 'RQCD1', 'MECOM', 'DDX3X', 'GNA11', 'PTMA', 'PPM1D', 'EIF1AX', 'NUP93', 'GTF2I',
+              'CHD3', 'MSH6', 'BCOR', 'ARID5B', 'CCND1', 'ACVR1', 'PDS5B', 'DICER1', 'SIN3A', 'MYCN', 'ZFHX3', 'FOXA2', 'ATR', 'KMT2B',
+              'PIK3R2', 'TAF1', 'RPL22', 'PPP2R1A', 'ZMYM2', 'SCAF4', 'INPPL1', 'CTNND1', 'SOS1', 'RRAS2', 'SOX17', 'ATF7IP', 'RFC1',
+              'BCL2L11', 'MAP3K4', 'ZBTB7B', 'PLCB4', 'GNAQ', 'SRSF2', 'CYSLTR2']
+
 
 
 
