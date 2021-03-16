@@ -105,7 +105,6 @@ def train(train_x, train_y, test_x, test_y, fold):
     batch_size = cfg.BATCH_SIZE
     batch_count = int(len(x_train) / batch_size) + 1
 
-    best_acc = -1.
     save_data = [['epoch', 'loss', 'train accuracy', 'test accuracy', 'best test accuracy']]
     for epoch in range(cfg.EPOCH):
         model.train()
