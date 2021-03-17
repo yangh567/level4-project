@@ -25,7 +25,7 @@ def plt_figure(data, title):
     plt.title(title)
     plt.bar(x=data.keys(), height=data.values())
     for a, b in zip(data.keys(), data.values()):
-        plt.text(a, b + 0.05, '%.0f' % b, ha='center', va='bottom', fontsize=7)
+        plt.text(a, b + 0.05, '%.0f' % b, ha='center', va='bottom', fontsize=5)
 
     plt.xticks(rotation=70)
     plt.savefig(os.path.join(figure_data, '%s.png' % title))
