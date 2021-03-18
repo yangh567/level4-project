@@ -29,6 +29,7 @@
       you will need to run the prepared_data.py under "src/statistics/" to generate the stratified sampled files for performing 
       5-fold cross validation for evaluation (5 validation data set and 1 validation dataset)using command "python prepared_data.py".)
 
+
 * *2. Run heatmap_similarity.py under "data/similarity_heatmap" to visualize the similarity of mutational signatures and store the file at "processed/class_graphs" folder using command "python heatmap_similarity.py".*
 
    
@@ -63,7 +64,7 @@
    
 ### Part 3 : Experiment 2 : To see the classification result of gene using the feature extraction of sbs sig weights obtained from cancer classification
 
-- **(This is instruction of running the research file of using top 10 weighted sbs signature in each cancer to classifiy on the top 5 frequently mutated driver gene in that cancer)**
+- **(This is instruction of running the research file of using top 10 weighted sbs signature in each cancer to classify on the top 5 frequently mutated driver gene in that cancer)**
 
 * *1. Run "python classify_gene_type.py" under "src/classification-gene-feature-extraction" to performing the training of classifier on 
    the gene mutation status and evaluate on the model as well as extracting signature's weights".*
@@ -85,6 +86,6 @@
 
 
 * *1. Run "python classify_gene_type.py" under "src/single_top_driver_gene_prediction" to performing the training of classifier on 
-   the single top driver gene's mutation status and evaluate on the model as well as extracting sigature weights.*
+   the single top driver gene's mutation status and evaluate on the model as well as extracting signature weights.*
    
 
