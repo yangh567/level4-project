@@ -1,0 +1,98 @@
+# 9 oct 2020 Friday
+
+we discussed the primary goal of the project
+and we have discussed the papers to look at
+to understand the works that have been done
+by the formal peoples.
+
+we discussed the communication channels and
+the Version control tools to use.
+
+
+# 23 oct 2020 Friday
+
+we discussed the paper i have looked and.
+we discussed about the algorithm that is
+appropriate to use.
+
+
+# 6 Nov 2020 Friday
+
+we discussed what are the features to use
+to classify on the cancer types and what
+are the platform that we need to attend to.
+
+
+# 20 Nov 2020 Friday
+
+we discussed about the data that we need to use.
+we discussed where to obtain the data.
+
+
+# 4 Dec 2020 Friday
+
+we discussed the way of extracting the feature.
+we needed from the data we have and supervisor has
+explained to me how to perform the NMF.
+
+
+# 18 Dec 2020 Friday
+
+i displayed the first outcome of classifying cancer
+based on sbs signatures and rearrangement signatures
+without using the data from TCGA platform.
+
+we discussed the reasonably great accuracy.
+
+
+# 18 Jan 2020 Monday
+
+we discussed the next level is to validate the idea of using
+those mutational signatures to predict on the gene to see
+if we could build recommender system on recommending gene mutation status
+of patients.
+
+i proposed the way of deploying the graph convolutional neural network
+to help with the gene prediction and it is complex and not suitable for
+implementing on our current study.
+
+
+# 25 Jan 2020 Monday
+
+we discussed the problem of not having gene mutation status in the current data that
+is not downloaded from TCGA platform and we discussed how to address the issue.
+
+
+# 1 February 2020 Monday
+
+i find the way to extract the sbs signature from the maf files downloaded from TCGA platform
+by exploiting R language and the tool called sigminer and extracted teh gene mutation status
+from each sample in the data.
+
+i reported the approach to the supervisor and confirmed that i can work on this basis
+
+
+# 22 February 2020 Monday
+
+we discussed the different validation approach to validate on the cancer classification
+and gene classification.
+
+i introduced the model that i have built and the strategies that i have deployed to validate on the
+classification and introduced the stratified sampling
+
+
+# 1 March 2020 Monday
+
+we duscussed the possible fake high accuracy on classifying gene mutation status and
+supervisor has suggested that instead of classifying it all,we classify frequently mutated
+gene's mutation status within each cancer
+
+
+# 15 March 2020 Monday
+
+we discuessed the final result of classification of gene mutation status and cancers
+and we discussed the possible reason for negative result on the roc graph and auc.
+we aggreed on forging the dissertation at this time.
+
+
+
