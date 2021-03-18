@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 """
-the classification based on random forest classification
+the classification_cancer_gene_analysis based on random forest classification_cancer_gene_analysis
 (The data is used is now discarded)(Part of research)(The cancer used is PAN-cancer)
 """
 

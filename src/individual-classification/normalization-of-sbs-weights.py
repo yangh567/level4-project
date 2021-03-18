@@ -3,7 +3,13 @@ The normalization of sbs weights in BLCA and BRCA
 """
 import numpy as np
 import pandas as pd
-import my_config as cfg
+import os,sys
+
+from sklearn.preprocessing import LabelEncoder
+sys.path.append(os.path.abspath(os.path.join('..')))
+sys.path.append(os.path.abspath(os.path.join('..','my_utilities')))
+
+from my_utilities import my_config as cfg
 from sklearn.preprocessing import MinMaxScaler
 
 # load the file first

@@ -1,6 +1,6 @@
 """
 
-    This file is used to test on the self-build model on the classification of genes
+    This file is used to test on the self-build model on the classification_cancer_gene_analysis of genes
     based on mutation signature (SBS) using 5 fold cross validation
 
 """
@@ -8,17 +8,17 @@
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, roc_curve, auc
 import seaborn as sns
-
-import os
+import os,sys
 import numpy as np
 import pandas as pd
 import torch
 import torch.nn as nn
 import matplotlib.pyplot as plt
-
-import my_tools as tool
-import my_config as cfg
-import my_model
+sys.path.append(os.path.abspath(os.path.join('..')))
+sys.path.append(os.path.abspath(os.path.join('..','my_utilities')))
+from my_utilities import my_config as cfg
+from my_utilities import my_model as my_model
+from my_utilities import my_tools as tool
 from sklearn.preprocessing import MinMaxScaler
 import warnings
 
@@ -180,7 +180,7 @@ if __name__ == '__main__':
     valid_acc = []
     valid_acc_fold = []
 
-    gene_prob = pd.read_csv('./result/gene_prob.csv')
+    gene_prob = pd.read_csv('../statistics/gene_distribution/gene_prob.csv')
     cancer_prob = {}
     for name, item in gene_prob.groupby('cancer type'):
         cancer_prob[name] = item
@@ -199,12 +199,12 @@ if __name__ == '__main__':
             gene_list_final_for_cancer = []
             gene_freq_list_final_for_cancer = []
 
-            for gene in cfg.GENE_NAMES[cfg.ORGAN_NAMES[cancer_type]]:
+            for gene in cfg.GENE_NAMES_DICT[cfg.ORGAN_NAMES[cancer_type]]:
 
                 gene_list_for_cancer.append((gene, cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0]))
                 gene_freq_list_for_cancer.append(cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0])
 
-            # find the top 10 gene's index in pandas frame
+            # find the top 5 gene's index in pandas frame
             top_1_index = list(reversed(
                 sorted(range(len(gene_freq_list_for_cancer)), key=lambda i: gene_freq_list_for_cancer[i])[-1:]))
 
@@ -220,7 +220,7 @@ if __name__ == '__main__':
             print(gene_freq_list_final_for_cancer)
 
             # we load the weight of sbs in that cancer in that fold
-            cancer_type_path = './result/cancer_type-weight_' + str(fold) + '.npy'
+            cancer_type_path = '../classification_cancer_gene_analysis/result/cancer_type-weight_' + str(fold) + '.npy'
             cancer_type_weight = np.load(cancer_type_path).T  # shape (49,32)
             cancer_type_scaler = MinMaxScaler()
             cancer_type_nor_weight = cancer_type_scaler.fit_transform(cancer_type_weight)

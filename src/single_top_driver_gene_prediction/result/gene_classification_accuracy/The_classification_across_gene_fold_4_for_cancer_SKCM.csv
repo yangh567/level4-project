@@ -1,2 +1,2 @@
 ,gene_name,Accuracy,Mutation_frequency
-0,BRAF,0.525,0.4875
+0,NRAS,0.65,0.375

@@ -1,0 +1,6 @@
+,gene_name,Accuracy,Mutation_frequency
+0,IDH2,0.9,0.1
+1,CHD3,0.95,0.05
+2,DDX3X,0.95,0.05
+3,ASXL1,0.9,0.05
+4,DNMT3A,0.95,0.05

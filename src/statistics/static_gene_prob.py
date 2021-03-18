@@ -72,7 +72,7 @@ for name, item in o_data.groupby('organ'):
         data[-1].append(result[name][gene])
 df = pd.DataFrame(data)
 df.columns = ['cancer type'] + GENE_NAMES
-df.to_csv('../classification-feature-extraction/result/gene_prob.csv', index=False)
+df.to_csv('gene_distribution/gene_prob.csv', index=False)
 print("The gene probability distribution is generated !")
 
 # Draw the gene distribution in each cancer(DEPLICATED)

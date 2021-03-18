@@ -1,11 +1,21 @@
 """
 
-    This file is used to test on the self-build model on classification of BLCA and BRCA
+    This file is used to test on the self-build model on classification_cancer_gene_analysis of BLCA and BRCA
     based on mutation signature (SBS) using 5 fold cross validation to ensure the possibility of classifying 32 cancers
 
 """
 
-import os
+import os,sys
+
+from sklearn.preprocessing import LabelEncoder
+sys.path.append(os.path.abspath(os.path.join('..')))
+sys.path.append(os.path.abspath(os.path.join('..','my_utilities')))
+
+from my_utilities import my_config as cfg
+from my_utilities import my_model as my_model
+from my_utilities import my_confusion_matrix as m_c_m
+
+
 import torch
 import torch.nn as nn
 import numpy as np
@@ -15,9 +25,6 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
-from my_confusion_matrix import plot_confusion_matrix
-import my_config as cfg
-import my_model
 import warnings
 
 warnings.filterwarnings('ignore')  # "error", "ignore", "always", "default", "module" or "once"
@@ -116,7 +123,7 @@ def score(test_x, test_y, title=0, report=False):
 
     acc_test = accuracy_score(torch.argmax(y_test, dim=1), y_pred)
     if report:
-        plot_confusion_matrix(torch.argmax(y_test, dim=1), y_pred, title)
+        m_c_m.plot_confusion_matrix(torch.argmax(y_test, dim=1), y_pred, title)
         print(classification_report(torch.argmax(y_test, dim=1), y_pred))
     return acc_test
 
