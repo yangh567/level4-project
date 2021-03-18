@@ -52,7 +52,7 @@
    the gene mutation status and evaluate on the model.*
   
    
-* *3. Run "python analysis.py" under "src/classification_cancer_gene_analysis" to normalize the selected weights and performing ranking top 5 frequently mutated gene for each cancer types.*
+* *3. Run "python analysis.py" under "src/classification_cancer_gene_analysis" to normalize the selected weights and performing ranking top 5 frequently mutated gene for each cancer types.
    by finding intersections.*
   
 

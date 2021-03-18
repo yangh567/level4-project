@@ -1,52 +1,48 @@
 # Readme
 
-The whole template contains : "data"(store processed file and the R files to generate the processed file as well as the files for visualizations)
-                            : "dissertation"(the file folder to store the dissertation related files)
-                            : "presentation"(contains the presentation video url and related files)
-                            : "src"(implementation of all of the experiment)
-                            : "status_report"(contains the status_report related files)
-                            : ".gitattributes"(listed the large files for uploaded to github)
-                            : ".gitignore"(listed the series of files to not upload to github)
-                            : "plan.md"(used to display the plan for every week)
-                            : "timelog.md"(used to record the timelog for everyday working status)
+### This project is used to investigate on the feasibility of building a gene mutation status recommender system 
+
+#### The experiment is done by first test on the feasibility of using mutational signatures to identify various cancers and then try to identify the gene mutation status
+
+The whole repository contains: 
+
+*  "data" -- store processed file and the R files to generate the processed file as well as the files for signature similarity visualizations
+
+*  "dissertation" -- the file folder to store the dissertation related files 
+
+*  "meeting-records" -- the meeting records
+
+*  "presentation" -- contains the presentation video url and related files
+
+*  "src" -- implementation of all of the experiment
+
+*  "status_report" -- contains the status_report related files
+
+*  ".gitattributes" -- listed the large files for uploaded to github
+
+*  ".gitignore" -- listed the series of files to not upload to github
+
+*  "manual.md" -- the user manual to run the experiments
+
+*  "plan.md" -- used to display the plan for every week
+
+*  "requirement.txt" -- used to store the required dependencies and libraries
+
+*  "timelog.md" -- used to record the timelog for everyday working status
 
 
-Put a brief description of your code here. This should at least describe the file structure.
 
 ## Build instructions
 
-**You must** include the instructions necessary to build and deploy this project successfully. If appropriate, also include 
-instructions to run automated tests. 
-
 ### Requirements
 
-List the all of the pre-requisites software required to set up your project (e.g. compilers, packages, libraries, OS, hardware)
-
-For example:
-
-* Python 3.7
 * Packages: listed in `requirements.txt` 
 * Tested on Windows 10
 
-or another example:
+### Build and evaluation steps
 
-* Requires Raspberry Pi 3 
-* a Linux host machine with the `arm-none-eabi` toolchain (at least version `x.xx`) installed
-* a working LuaJIT installation > 2.1.0
+* Step1 : pip install -r requirements.txt
+* Step2 : run the instructions in manual.md
 
-### Build steps
 
-List the steps required to build software. 
-
-Hopefully something simple like `pip install -e .` or `make` or `cd build; cmake ..`. In
-some cases you may have much more involved setup required.
-
-### Test steps
-
-List steps needed to show your software works. This might be running a test suite, or just starting the program; but something that could be used to verify your code is working correctly.
-
-Examples:
-
-* Run automated tests by running `pytest`
-* Start the software by running `bin/editor.exe` and opening the file `examples/example_01.bin`
 
