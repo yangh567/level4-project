@@ -5,7 +5,7 @@
 
 """
 
-import os,sys
+import os, sys
 import torch
 import torch.nn as nn
 import numpy as np
@@ -18,7 +18,7 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import roc_curve, auc
 
 sys.path.append(os.path.abspath(os.path.join('..')))
-sys.path.append(os.path.abspath(os.path.join('..','my_utilities')))
+sys.path.append(os.path.abspath(os.path.join('..', 'my_utilities')))
 from my_utilities import my_config as cfg
 from my_utilities import my_model as my_model
 from my_utilities import my_confusion_matrix as m_c_m
@@ -30,6 +30,37 @@ figure_data = './result/cancer_classification_confusion_matrix'
 
 if not os.path.exists(figure_data):
     os.makedirs(figure_data)
+
+
+def plot_roc_auc(n_classes, y_t, y_p,title):
+    fpr = dict()
+    tpr = dict()
+    roc_auc = dict()
+    for i in range(n_classes):
+        fpr[i], tpr[i], _ = roc_curve(y_t[:, i], y_p[:, i])
+        roc_auc[i] = auc(fpr[i], tpr[i])
+
+    # Plot of a ROC curve for a specific class
+    lg = 0
+    plt.figure()
+    for j in range(n_classes):
+        plt.plot(fpr[j], tpr[j], label='ROC curve ' + cfg.ORGAN_NAMES[j] + ' (area = %0.2f)' % roc_auc[j])
+        lg = plt.legend(bbox_to_anchor=(1.0, 1.0), loc='best', prop={'size': 6})
+        plt.tight_layout()
+    plt.plot([0, 1], [0, 1], 'k--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver operating characteristic example')
+    if not os.path.exists('./result/cancer_classification_roc_auc'):
+        os.makedirs('./result/cancer_classification_roc_auc')
+    plt.savefig(
+        './result/cancer_classification_roc_auc/The_roc_auc_for_validation_in_fold_%d.png' % title, dpi=300,
+        format='png',
+        bbox_extra_artists=(lg,),
+        bbox_inches='tight')
+    plt.close()
 
 
 # function used to get the x and y and scale them
@@ -73,7 +104,7 @@ def get_data(o_data, index):
 
 
 # we start training the model here using batch Adam optimizer BPnet
-def train_and_test(train_x, train_y, test_x, test_y,fold):
+def train_and_test(train_x, train_y, test_x, test_y, fold):
     x_train = torch.tensor(train_x, dtype=torch.float32)
     y_train = torch.tensor(train_y, dtype=torch.float32)
 
@@ -104,7 +135,7 @@ def train_and_test(train_x, train_y, test_x, test_y,fold):
               format(epoch, epoch_loss / batch_count, acc / batch_count))
         save_data.append([epoch, epoch_loss / batch_count, acc / batch_count])
     acc_test = score(test_x, test_y)
-    print("The cross-validation test accuracy on fold "+str(fold)+" is :",acc_test)
+    print("The cross-validation test accuracy on fold " + str(fold) + " is :", acc_test)
 
     return acc_test
 
@@ -124,36 +155,22 @@ def score(test_x, test_y, title=0, report=False):
     acc_test = accuracy_score(torch.argmax(y_test, dim=1).detach().numpy(), y_pred)
     if report:
         n_classes = len(y_test[1])
-        m_c_m.plot_confusion_matrix(torch.argmax(y_test, dim=1).detach().numpy(), y_pred, title)
-        print(classification_report(torch.argmax(y_test, dim=1).detach().numpy(), y_pred))
+        m_c_m.plot_confusion_matrix(torch.argmax(y_test, dim=1).detach().numpy(), y_pred, title,title="The confusion matrix for fold"+str(title),organ_list=cfg.ORGAN_NAMES)
 
-        fpr = dict()
-        tpr = dict()
-        roc_auc = dict()
-        for i in range(n_classes):
-            fpr[i], tpr[i], _ = roc_curve(y_t[:, i], y_p[:, i])
-            roc_auc[i] = auc(fpr[i], tpr[i])
-
-        # Plot of a ROC curve for a specific class
-        lg = 0
-        plt.figure()
-        for j in range(n_classes):
-            plt.plot(fpr[j], tpr[j], label='ROC curve '+cfg.ORGAN_NAMES[j]+' (area = %0.2f)' % roc_auc[j])
-            lg = plt.legend(bbox_to_anchor=(1.0, 1.0), loc='best',prop={'size': 6})
-            plt.tight_layout()
-        plt.plot([0, 1], [0, 1], 'k--')
-        plt.xlim([0.0, 1.0])
-        plt.ylim([0.0, 1.05])
-        plt.xlabel('False Positive Rate')
-        plt.ylabel('True Positive Rate')
-        plt.title('Receiver operating characteristic example')
-        if not os.path.exists('./result/cancer_classification_roc_auc'):
-            os.makedirs('./result/cancer_classification_roc_auc')
-        plt.savefig(
-            './result/cancer_classification_roc_auc/The_roc_auc_for_validation_in_fold_%d.png' % title,dpi=300,
+        # plot the classification report
+        clf_report = pd.DataFrame(classification_report(torch.argmax(y_test, dim=1).detach().numpy(),
+                                                        y_pred, digits=2, target_names=cfg.ORGAN_NAMES,
+                                                        output_dict=True))
+        plt.figure(figsize=(16, 9))
+        sns_plot = sns.heatmap(clf_report.iloc[:-1, :].T, vmin=0, vmax=1, annot=True)
+        sns_plot.figure.savefig(
+            './result/cancer_classification_report/The_classification_report_for_validation_in_fold_%d.png' % title,
+            dpi=300,
             format='png',
-            bbox_extra_artists=(lg,),
             bbox_inches='tight')
+
+        # plot the roc graph
+        plot_roc_auc(n_classes, y_t, y_p, title)
 
     return acc_test
 
@@ -182,7 +199,7 @@ if __name__ == '__main__':
         train_x, train_y, test_x, test_y = get_data(o_data, i)
         valid_x, valid_y = process_data(valid_dataset)
 
-        test_acc.append(train_and_test(train_x, train_y, test_x, test_y,i))
+        test_acc.append(train_and_test(train_x, train_y, test_x, test_y, i))
         valid_acc.append(score(valid_x, valid_y, title=i, report=True))
         print('The %d fold，The best testing accuracy for trained model at this fold is %.4f，The validation accuracy '
               'for this fold is %.4f' % (i, test_acc[-1], valid_acc[-1]))
@@ -195,6 +212,15 @@ if __name__ == '__main__':
         np.save("./result/cancer_type-weight_%d.npy" % i, weight)
         np.save("./result/cancer_type-bias_%d.npy" % i, bias)
         print('save weight file to ./result')
+
+    # save the accuracy in each fold to txt file
+    with open('./result/cancer_classification_accuracy/5_fold_accuracy_for_test_data.txt', 'w') as f:
+        for item_i in range(len(test_acc)):
+            f.write("The fold %d accuracy : %s\n" % (item_i + 1, test_acc[item_i]))
+
+    with open('./result/cancer_classification_accuracy/5_fold_accuracy_for_validation_data.txt', 'w') as f:
+        for item_j in range(len(valid_acc)):
+            f.write("The fold %d accuracy : %s\n" % (item_j + 1, valid_acc[item_j]))
 
     print('The 5 fold cross validation has 5 testing result,they are :', test_acc)
     print('The validation accuracies for 5 fold cross validation are :', valid_acc)

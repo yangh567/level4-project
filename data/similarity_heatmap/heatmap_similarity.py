@@ -41,3 +41,4 @@ for cancer in ORGAN_NAMES:
     plt.subplots(figsize=(20, 15))
     sns.heatmap(cancer_df, annot=True, annot_kws={"size": 4}, cmap="RdYlGn")
     plt.savefig('../processed/class_graphs/class.'+cancer+'.png')
+    plt.close()

@@ -133,3 +133,4 @@ for cancer_type in range(len(cancer_list)):
     plt.subplots(figsize=(20, 15))
     sns.heatmap(gene_df, annot=True, annot_kws={"size": 4}, cmap="Reds")
     plt.savefig('./result/figures/gene_sbs_heatmaps_for_each_cancer/gene_sbs_heatmap_%s.png' % cancer_list[cancer_type])
+    plt.close()

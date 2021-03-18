@@ -2,6 +2,10 @@
 
 ### The project is research type.It examined the classification performance of cancers and gene mutation status using single-based-substitution signatures.
 
+
+
+# (Note here, The automation for experiments is made , simply run "python automation_run.py" to finish all the steps below, or you can do it separately according to steps below, it takes some times to finish all experiments, so, please wait)
+
 ### Part 1 : To obtain data:
 
 * *1. you can skip this part as the data is separated and stored under "data/cross_valid"*
@@ -32,11 +36,14 @@
 
 * *2. Run heatmap_similarity.py under "data/similarity_heatmap" to visualize the similarity of mutational signatures and store the file at "processed/class_graphs" folder using command "python heatmap_similarity.py".*
 
+
+* *3. Run "python prepared_data.py" under "data/statistics" to implement stratified sampling for getting the cross validation and validation folds with random samples*
+
    
-* *3. Run "python generate_small_data.py" under "src/statistics" to obtain the matrix only contains the gene mutation status of the driver gene we need to investigate on*
+* *4. Run "python generate_small_data.py" under "src/statistics" to obtain the matrix only contains the gene mutation status of the driver gene we need to investigate on*
 
 
-* *4. Run the static_gene_prob.py under "src/statistics" directory using "python statistic_gene_prob.py" to get the mutation frequency of each gene in each cancer to help with extracting the frequently mutated driver gene in each cancer for future experiments.* 
+* *5. Run the static_gene_prob.py under "src/statistics" directory using "python statistic_gene_prob.py" to get the mutation frequency of each gene in each cancer to help with extracting the frequently mutated driver gene in each cancer for future experiments.* 
 
 
 

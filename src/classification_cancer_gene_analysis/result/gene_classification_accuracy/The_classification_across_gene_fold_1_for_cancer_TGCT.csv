@@ -1,6 +1,6 @@
 ,gene_name,Accuracy,Mutation_frequency
-0,KIT,0.84,0.08
-1,GNAQ,0.96,0.04
-2,MSH6,0.96,0.04
-3,PPM1D,0.96,0.04
-4,CUL3,0.96,0.04
+0,KIT,0.88,0.12
+1,MYCN,0.96,0.04
+2,MYH9,0.96,0.04
+3,NRAS,0.96,0.04
+4,KRAS,0.96,0.04

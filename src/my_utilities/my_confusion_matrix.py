@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def plot_confusion_matrix(y_true, y_pred, file_title, title=None,
+def plot_confusion_matrix(y_true, y_pred, file_title, title=None,organ_list=None,
                           normalize=False,
                           cmap=plt.cm.PuRd):
     """
@@ -45,6 +45,8 @@ def plot_confusion_matrix(y_true, y_pred, file_title, title=None,
            title=title,
            ylabel='True label',
            xlabel='Predicted label')
+    plt.xticks(np.arange(cm.shape[1]), organ_list, rotation=45)
+    plt.yticks(np.arange(cm.shape[1]), organ_list, rotation=45)
 
     # Rotate the tick labels and set their alignment.
     plt.setp(ax.get_xticklabels(), rotation=45, ha="right",

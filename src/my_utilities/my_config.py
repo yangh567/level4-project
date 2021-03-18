@@ -20,8 +20,8 @@ top n genes related to cancer : GENE_COUNT
 
 import pandas as pd
 
-EPOCH = 2000
-LEARNING_RATE = 1e-2
+EPOCH = 1000
+LEARNING_RATE = 1e-3
 BATCH_SIZE = 64
 
 DATA_PATH = '../../data/processed/sample_id.sbs.organ.csv'

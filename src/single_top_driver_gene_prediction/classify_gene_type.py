@@ -8,14 +8,15 @@
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, roc_curve, auc
 import seaborn as sns
-import os,sys
+import os, sys
 import numpy as np
 import pandas as pd
 import torch
 import torch.nn as nn
 import matplotlib.pyplot as plt
+
 sys.path.append(os.path.abspath(os.path.join('..')))
-sys.path.append(os.path.abspath(os.path.join('..','my_utilities')))
+sys.path.append(os.path.abspath(os.path.join('..', 'my_utilities')))
 from my_utilities import my_config as cfg
 from my_utilities import my_model as my_model
 from my_utilities import my_tools as tool
@@ -57,6 +58,8 @@ def roc_draw(y_t, y_p, title, cancer___type, gene_lst):
         format='png',
         bbox_extra_artists=(lg,),
         bbox_inches='tight')
+
+    plt.close()
 
 
 def process_data(data, cancer_type, gene_list, sbs_names, scale=True):
@@ -151,7 +154,6 @@ def score(test_x, test_y, title=0, cancer__type="", gene_list=None, gene_list_mu
     # y_pred = torch.argmax(y_pred, dim=1).detach().numpy()
     y_pred_for_roc = y_pred.detach().numpy()
 
-
     y_pred = y_pred.detach().numpy()
     y_pred[y_pred > 0.5] = 1
     y_pred[y_pred <= 0.5] = 0
@@ -200,7 +202,6 @@ if __name__ == '__main__':
             gene_freq_list_final_for_cancer = []
 
             for gene in cfg.GENE_NAMES_DICT[cfg.ORGAN_NAMES[cancer_type]]:
-
                 gene_list_for_cancer.append((gene, cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0]))
                 gene_freq_list_for_cancer.append(cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0])
 
@@ -272,6 +273,15 @@ if __name__ == '__main__':
 
         test_acc_fold.append(np.mean(test_acc))
         valid_acc_fold.append(np.mean(valid_acc))
+
+    with open('./result/gene_generalized_accuracy/5_fold_accuracy_for_test_data.txt', 'w') as f:
+        for item_i in range(len(test_acc_fold)):
+            f.write("The fold %d accuracy : %s\n" % (item_i + 1, test_acc_fold[item_i]))
+
+    with open('./result/gene_generalized_accuracy/5_fold_accuracy_for_validation_data.txt', 'w') as f:
+        for item_j in range(len(valid_acc_fold)):
+            f.write("The fold %d accuracy : %s\n" % (item_j + 1, valid_acc_fold[item_j]))
+
     print('The 5 fold cross validation has 5 testing across all 32 cancers result,they are :', test_acc_fold)
     print('The validation accuracies for 5 fold cross validation across all 32 cancers result,they are :',
           valid_acc_fold)
