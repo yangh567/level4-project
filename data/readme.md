@@ -17,6 +17,6 @@ Keep your data (e.g. from evaluations here)
   (the processed data is processed with maftool and sigminer signature extrcator in R language with the TCGA data downloaded from TCGA platform)
 
 * Write scripts that process these into results, visualisations, tables that you include in your project.
-  (all of the result is shown under out directory in rar package)
+  (all the results are shown in the specific directory in each experiment folder)
 
 
