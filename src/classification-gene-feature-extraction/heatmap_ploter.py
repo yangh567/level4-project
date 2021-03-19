@@ -13,7 +13,6 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
-import my_config as cfg
 
 # given the cancer lists
 cancer_list = ['ACC', 'BLCA', 'BRCA', 'CESC', 'CHOL', 'COAD', 'DLBC', 'ESCA', 'GBM', 'HNSC', 'KICH', 'KIRC', 'KIRP',
@@ -110,7 +109,7 @@ for cancer_type in range(len(cancer_list)):
 
     # find the most weighted sbs names in that fold used as features for gene classification_cancer_gene_analysis
     # here we only investigate on 0 fold
-    cancer_type_path = '../classification_cancer_gene_analysis/result/cancer_type-weight_0.npy'
+    cancer_type_path = '../classification_cancer_gene_analysis/result/cancer_type-weight_4.npy'
     cancer_type_weight = np.load(cancer_type_path).T  # shape (10,32)
     cancer_type_scaler = MinMaxScaler()
     cancer_type_nor_weight = cancer_type_scaler.fit_transform(cancer_type_weight)
