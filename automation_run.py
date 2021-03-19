@@ -20,7 +20,8 @@ os.chdir("..")
 
 # preparing data
 os.chdir("src/statistics")
-execute_prepare_data = subprocess.run(["python", "prepared_data.py"])
+# commented until you downloaded the sample_id.sbs.organ.csv processed file from link provided in manual,md
+# execute_prepare_data = subprocess.run(["python", "prepared_data.py"])
 execute_generate_small_data = subprocess.run(["python", "generate_small_data.py"])
 execute_static_gene_prob = subprocess.run(["python", "static_gene_prob.py"])
 

@@ -2,28 +2,28 @@
 
 The whole repository contains: 
 
-*  "data" -- store processed file and the R files to generate the processed file as well as the files for signature similarity visualizations
-
-*  "dissertation" -- the file folder to store the dissertation related files 
-
-*  "meeting-records" -- the meeting records
-
-*  "presentation" -- contains the presentation video url and related files
-
-*  "src" -- implementation of all of the experiment
-
-*  "status_report" -- contains the status_report related files
-
-*  ".gitattributes" -- listed the large files for uploaded to github
-
-*  ".gitignore" -- listed the series of files to not upload to github
-
-*  "manual.md" -- the user manual to run the experiments
-
-*  "plan.md" -- used to display the plan for every week
-
-*  "requirement.txt" -- used to store the required dependencies and libraries
-
-*  "timelog.md" -- used to record the timelog for everyday working status
+*  `cancer-classify-gene` -- The validation experiment of using cancer type to classify on gene mutation status
 
 
+*  `classification-gene-feature-extraction` -- The validation experiment of classifying cancer types using sbs signatures and classify gene as well as analyse on ranking
+
+   
+*  `classification_cancer_gene_analysis` -- The validation experiment of classifying gene using the feature extracted from cancer classification
+
+
+*  `individual-classification` -- Validate the idea that sbs signatures can be used to identify two cancers
+
+
+*  `ml_method` -- The research on the HRDetect model 
+
+
+*  `my_utilities` -- Contains the models,configurations,tools and tools for visualization
+
+
+*  `preprocessing` -- The preprocessing of the data from HRDetect model
+
+
+*  `single_top_driver_gene_prediction` -- The validation experiment of classifying to frequently mutated driver gene using the feature extracted from cancer classification
+
+
+*  `statistics` -- Provides the preprocessing and stratified sampling of the raw data as well as doing statistic analysis on the gene mutation in each cancer
