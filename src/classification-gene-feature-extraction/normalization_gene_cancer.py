@@ -41,6 +41,7 @@ for cancer_type in cancer_list:
 
     # normalize it to 0 and 1
     gene_zero_one_weight = gene_nor_weight / np.sum(gene_nor_weight, axis=0).reshape(1, 5)
+    # save the normalized weights
     np.save(
         "./result/gene_sbs_weights/gene_normalized_weights_for_each_cancer/gene_normalized-weight_%s.npy" % cancer_type,
         gene_zero_one_weight)

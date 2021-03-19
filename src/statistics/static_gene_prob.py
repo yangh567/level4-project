@@ -74,13 +74,3 @@ df = pd.DataFrame(data)
 df.columns = ['cancer type'] + GENE_NAMES
 df.to_csv('gene_distribution/gene_prob.csv', index=False)
 print("The gene probability distribution is generated !")
-
-# Draw the gene distribution in each cancer(DEPLICATED)
-
-# for i in data:
-#   title = i[0]
-#  list_gene = i[1:]
-# gene_dict = {}
-# for j in range(len(list_gene)):
-#   gene_dict[GENE_NAMES[j]] = j
-# plt_figure(gene_dict,title)

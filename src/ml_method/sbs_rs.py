@@ -60,7 +60,6 @@ x = scaler.fit_transform(x)
 # Separate the labels from the id.
 # Those less than or equal to 10 have tumors, and 11-29 have no tumor
 
-# y = pd.get_dummies(train['organ'])
 le = LabelEncoder()
 y = le.fit_transform(train['organ'])
 
@@ -77,6 +76,7 @@ report = classification_report(y_test, y_pred)
 print('The classification_cancer_gene_analysis report')
 print(report)
 
+# try different classifiers
 if model == 'lr' or model == 'lasso':
     print('The classification_cancer_gene_analysis intercept ：')
     print(clf.intercept_)
@@ -90,4 +90,3 @@ elif model == 'rf':
                            list(set(train.columns) - set(['Sample_ID', 'organ']))), reverse=True):
         print(item)
     print(feature_set)
-    # print(eli5.format_as_text(eli5.explain_weights(clf,feature_names=feature_set,target_names = train['organ'] )))

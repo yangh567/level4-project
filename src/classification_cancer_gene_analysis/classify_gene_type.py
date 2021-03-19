@@ -9,16 +9,15 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, roc_curve, auc
 import seaborn as sns
 
-import os,sys
+import os, sys
 import numpy as np
 import pandas as pd
 import torch
 import torch.nn as nn
 import matplotlib.pyplot as plt
 
-
 sys.path.append(os.path.abspath(os.path.join('..')))
-sys.path.append(os.path.abspath(os.path.join('..','my_utilities')))
+sys.path.append(os.path.abspath(os.path.join('..', 'my_utilities')))
 from my_utilities import my_config as cfg
 from my_utilities import my_model as my_model
 from my_utilities import my_tools as tool
@@ -28,11 +27,13 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
+# implement the function of drawing the roc and auc graph
 def roc_draw(y_t, y_p, title, cancer___type, gene_lst):
     fpr = dict()
     tpr = dict()
     roc_auc = dict()
 
+    # draw it for all of the label
     n_classes = y_t.shape[1]
     for i in range(n_classes):
         fpr[i], tpr[i], _ = roc_curve(y_t[:, i], y_p[:, i])
@@ -63,6 +64,7 @@ def roc_draw(y_t, y_p, title, cancer___type, gene_lst):
     plt.close()
 
 
+# process the data for specific cancer class
 def process_data(data, cancer_type, gene_list, scale=True):
     x = data[data["organ"] == cancer_type][cfg.SBS_NAMES]
     y = data[data["organ"] == cancer_type][gene_list]
@@ -76,6 +78,7 @@ def process_data(data, cancer_type, gene_list, scale=True):
     return x, y
 
 
+# the function to obtain the training_x,testing_x,training_y and testing_y
 def get_data(o_data, index, cancer_type, gene_list):
     train = []
     test = None
@@ -143,13 +146,13 @@ def train(train_x, train_y, test_x, test_y, fold):
     return acc_test
 
 
+# score the classification accuracy for each gene in each cancer and draw the roc graph
 def score(test_x, test_y, title=0, cancer__type="", gene_list=None, gene_list_mutation_prob=None, final=False):
     model.eval()
     x_test = torch.tensor(test_x, dtype=torch.float32)
     y_test = torch.tensor(test_y, dtype=torch.float32)
 
     y_pred = model(x_test)
-    # y_pred = torch.argmax(y_pred, dim=1).detach().numpy()
 
     y_pred_for_roc = y_pred.detach().numpy()
 
@@ -181,11 +184,13 @@ if __name__ == '__main__':
     valid_acc = []
     valid_acc_fold = []
 
+    # load the gene occurrence probability in each cancer
     gene_prob = pd.read_csv('../statistics/gene_distribution/gene_prob.csv')
     cancer_prob = {}
     for name, item in gene_prob.groupby('cancer type'):
         cancer_prob[name] = item
 
+    # performing the 5 fold cross validation
     for fold in range(cfg.CROSS_VALIDATION_COUNT - 1):
 
         for cancer_type in cfg.ORGAN_NAMES:
@@ -242,6 +247,7 @@ if __name__ == '__main__':
         test_acc_fold.append(np.mean(test_acc))
         valid_acc_fold.append(np.mean(valid_acc))
 
+    # save the classification result in each fold to log file for observation
     with open('./result/gene_generalized_accuracy/5_fold_accuracy_for_test_data.txt', 'w') as f:
         for item_i in range(len(test_acc_fold)):
             f.write("The fold %d accuracy : %s\n" % (item_i + 1, test_acc_fold[item_i]))

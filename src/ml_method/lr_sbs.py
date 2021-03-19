@@ -28,7 +28,7 @@ def get_clf(name='lr', cls_num=10):
     if name == 'lr':
         return LogisticRegression(max_iter=1000, multi_class='multinomial')
     elif name == 'svm':
-        return SVC(kernel='rbf', C=0.4)     # Use radial basis functions
+        return SVC(kernel='rbf', C=0.4)  # Use radial basis functions
 
 
 def start():
@@ -41,15 +41,10 @@ def start():
     y = train['Cancer Types']
 
     # pre-process data
-    # mm = MinMaxScaler()
-    # x = mm.fit_transform(x)
 
     # build numerical label from type
-    # le = MultiLabelBinarizer()
     le = LabelEncoder()
     y = le.fit_transform(y)
-    # oh = OneHotEncoder()
-    # y = oh.fit_transform(y.reshape(-1, 1))
 
     # TODO Stratified sampling
     # ss = StratifiedShuffleSplit(test_size=0.2, random_state=100)
@@ -57,7 +52,7 @@ def start():
     # Split the training set into the test set
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.33, random_state=100)
 
-    # clf = get_clf('svm')
+    # try different classifiers
     clf = get_clf()
     clf.fit(x_train, y_train)
     y_pred = clf.predict(x_test)

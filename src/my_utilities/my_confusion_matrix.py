@@ -45,6 +45,7 @@ def plot_confusion_matrix(y_true, y_pred, file_title, title=None,organ_list=None
            title=title,
            ylabel='True label',
            xlabel='Predicted label')
+    # set the ticks as organ names
     plt.xticks(np.arange(cm.shape[1]), organ_list, rotation=45)
     plt.yticks(np.arange(cm.shape[1]), organ_list, rotation=45)
 

@@ -70,8 +70,6 @@ for name, item in gene_prob.groupby('cancer type'):
 # ---------------------------------------------------------------------------------------------------------------------
 # loading the cancer type sbs weight matrix from the running result
 for cancer_type in cancer_list:
-    # gene_list = []
-    # gene_list_mutation_prob = []
 
     gene_sbs_weight_for_cancer = np.load(
         "./result/gene_sbs_weights/gene_normalized_weights_for_each_cancer"

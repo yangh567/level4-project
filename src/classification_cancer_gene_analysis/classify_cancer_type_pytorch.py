@@ -32,7 +32,8 @@ if not os.path.exists(figure_data):
     os.makedirs(figure_data)
 
 
-def plot_roc_auc(n_classes, y_t, y_p,title):
+#  draw the roc graph
+def plot_roc_auc(n_classes, y_t, y_p, title):
     fpr = dict()
     tpr = dict()
     roc_auc = dict()
@@ -140,6 +141,7 @@ def train_and_test(train_x, train_y, test_x, test_y, fold):
     return acc_test
 
 
+# score the classification accuracy for each cancer and draw the roc graph
 def score(test_x, test_y, title=0, report=False):
     model.eval()
     x_test = torch.tensor(test_x, dtype=torch.float32)
@@ -155,7 +157,8 @@ def score(test_x, test_y, title=0, report=False):
     acc_test = accuracy_score(torch.argmax(y_test, dim=1).detach().numpy(), y_pred)
     if report:
         n_classes = len(y_test[1])
-        m_c_m.plot_confusion_matrix(torch.argmax(y_test, dim=1).detach().numpy(), y_pred, title,title="The confusion matrix for fold"+str(title),organ_list=cfg.ORGAN_NAMES)
+        m_c_m.plot_confusion_matrix(torch.argmax(y_test, dim=1).detach().numpy(), y_pred, title,
+                                    title="The confusion matrix for fold" + str(title), organ_list=cfg.ORGAN_NAMES)
 
         # plot the classification report
         clf_report = pd.DataFrame(classification_report(torch.argmax(y_test, dim=1).detach().numpy(),

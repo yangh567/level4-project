@@ -6,34 +6,35 @@
 """
 
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score, roc_curve, auc
-import seaborn as sns
-
-import os,sys
+from sklearn.metrics import roc_curve, auc
+import os, sys
 import numpy as np
 import pandas as pd
 import torch
 import torch.nn as nn
 import matplotlib.pyplot as plt
 
-
 sys.path.append(os.path.abspath(os.path.join('..')))
-sys.path.append(os.path.abspath(os.path.join('..','my_utilities')))
+sys.path.append(os.path.abspath(os.path.join('..', 'my_utilities')))
 from my_utilities import my_config as cfg
 from my_utilities import my_model as my_model
 from my_utilities import my_tools as tool
 
 from sklearn.preprocessing import MinMaxScaler
+
+# smooth the warnings
 import warnings
 
 warnings.filterwarnings('ignore')
 
 
+# implement the function of drawing the roc and auc graph
 def roc_draw(y_t, y_p, title, cancer___type, gene_lst):
     fpr = dict()
     tpr = dict()
     roc_auc = dict()
 
+    # draw it for all of the label
     n_classes = y_t.shape[1]
     for i in range(n_classes):
         fpr[i], tpr[i], _ = roc_curve(y_t[:, i], y_p[:, i])
@@ -64,6 +65,7 @@ def roc_draw(y_t, y_p, title, cancer___type, gene_lst):
     plt.close()
 
 
+# process the data for specific cancer class
 def process_data(data, cancer_type, gene_list, sbs_names, scale=True):
     x = data[data["organ"] == cancer_type][sbs_names]
     y = data[data["organ"] == cancer_type][gene_list]
@@ -77,6 +79,7 @@ def process_data(data, cancer_type, gene_list, sbs_names, scale=True):
     return x, y
 
 
+# the function to obtain the training_x,testing_x,training_y and testing_y
 def get_data(o_data, index, cancer_type, gene_list, sbs_names):
     train = []
     test = None
@@ -110,7 +113,6 @@ def train_and_test(train_x, train_y, test_x, test_y, fold):
     batch_size = cfg.BATCH_SIZE
     batch_count = int(len(x_train) / batch_size) + 1
 
-    best_acc = -1.
     save_data = [['epoch', 'loss', 'train accuracy', 'test accuracy', 'best test accuracy']]
     for epoch in range(cfg.EPOCH):
         model.train()
@@ -130,12 +132,10 @@ def train_and_test(train_x, train_y, test_x, test_y, fold):
             epoch_loss += loss.item()
 
             y_pred = y_pred.detach().numpy()
-            # y_pred = torch.argmax(y_pred, dim=1).detach().numpy()
             y_pred[y_pred > 0.5] = 1
             y_pred[y_pred <= 0.5] = 0
 
             acc += np.mean(np.sum((target.detach().numpy() - y_pred) == 0, axis=0) / target.detach().numpy().shape[0])
-            # acc += accuracy_score(torch.argmax(target, dim=1), y_pred)
 
         print("Epoch: {}, Loss: {:.5f}, Train Accuracy: {:.5f}".
               format(epoch, epoch_loss / batch_count, acc / batch_count))
@@ -147,20 +147,20 @@ def train_and_test(train_x, train_y, test_x, test_y, fold):
     return acc_test
 
 
+# score the classification accuracy for each gene in each cancer and draw the roc graph
 def score(test_x, test_y, title=0, cancer__type="", gene_list=None, gene_list_mutation_prob=None, final=False):
     model.eval()
     x_test = torch.tensor(test_x, dtype=torch.float32)
     y_test = torch.tensor(test_y, dtype=torch.float32)
 
     y_pred = model(x_test)
-    # y_pred = torch.argmax(y_pred, dim=1).detach().numpy()
     y_pred_for_roc = y_pred.detach().numpy()
-
 
     y_pred = y_pred.detach().numpy()
     y_pred[y_pred > 0.5] = 1
     y_pred[y_pred <= 0.5] = 0
 
+    # general classification result calculated for the top 5 gene within each 32 cancer classes
     acc_test = np.mean(np.sum((y_test.detach().numpy() - y_pred) == 0, axis=0) / y_test.detach().numpy().shape[0])
     if final:
         roc_draw(y_test, y_pred_for_roc, title, cancer__type, gene_list)
@@ -185,19 +185,18 @@ if __name__ == '__main__':
     valid_acc = []
     valid_acc_fold = []
 
+    # load the probability occurrence of each gene in each cancer
     gene_prob = pd.read_csv('../statistics/gene_distribution/gene_prob.csv')
     cancer_prob = {}
     for name, item in gene_prob.groupby('cancer type'):
         cancer_prob[name] = item
 
+    # performing the 5 fold cross validation
     for fold in range(cfg.CROSS_VALIDATION_COUNT - 1):
 
         # we load the weight of each sbs in that cancer
         for cancer_type in range(len(cfg.ORGAN_NAMES)):
 
-            # set up the cancer tpe encode here
-            # gene_list = []
-            # gene_list_mutation_prob = []
             gene_list_for_cancer = []
             gene_freq_list_for_cancer = []
 
@@ -205,6 +204,7 @@ if __name__ == '__main__':
             gene_freq_list_final_for_cancer = []
 
             for gene in cfg.GENE_NAMES:
+                # append the frequency and the gene name
                 gene_list_for_cancer.append((gene, cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0]))
                 gene_freq_list_for_cancer.append(cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0])
 
@@ -228,7 +228,6 @@ if __name__ == '__main__':
             cancer_type_nor_weight = cancer_type_scaler.fit_transform(cancer_type_weight)
             # normalize it to 0 and 1
             cancer_type_zero_one_weight = cancer_type_nor_weight / np.sum(cancer_type_nor_weight, axis=0).reshape(1, 32)
-
             cancer_type_zero_one_weight_c = list(cancer_type_zero_one_weight[:, cancer_type])
 
             # we find the top 10 weighted sbs signatures comes handy in identify this cancer
@@ -236,10 +235,11 @@ if __name__ == '__main__':
             top_10_cancer_sbs_index = list(reversed(
                 sorted(range(len(cancer_type_zero_one_weight_c)), key=lambda k: cancer_type_zero_one_weight_c[k])[
                 -10:]))
-
+            # find the column name of the top 10 sbs signatures in each cancer classification in each fold
             res_cancer_sbs_weight_list = [cfg.SBS_NAMES[s] for s in top_10_cancer_sbs_index]
 
-            # we only set the feature as top 10 sbs signatures
+            # we only set the feature as top 10 sbs signatures and the gene colmn name as 5 top frequently mutated
+            # gene in that cancer
             train_x, train_y, test_x, test_y = get_data(o_data, fold, cfg.ORGAN_NAMES[cancer_type],
                                                         gene_list_final_for_cancer, res_cancer_sbs_weight_list)
 
@@ -275,6 +275,7 @@ if __name__ == '__main__':
         test_acc_fold.append(np.mean(test_acc))
         valid_acc_fold.append(np.mean(valid_acc))
 
+    # save the classification result in each fold to log file for observation
     with open('./result/gene_generalized_accuracy/5_fold_accuracy_for_test_data.txt', 'w') as f:
         for item_i in range(len(test_acc_fold)):
             f.write("The fold %d accuracy : %s\n" % (item_i + 1, test_acc_fold[item_i]))

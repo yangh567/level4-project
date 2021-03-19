@@ -15,12 +15,14 @@ ORGAN_NAMES = ['ACC', 'BLCA', 'BRCA', 'CESC', 'CHOL', 'COADREAD', 'DLBC', 'ESCA'
 
 data = pd.read_csv("driver-gene-in-cancers.csv")
 
+# collect the driver gene in each cancer
 cancer_driver_gene_dict = {}
 for cancer in ORGAN_NAMES:
     cancer_driver_gene_dict[cancer] = list(data[data["Cancer type"] == cancer]["Gene"].values)
 
 print(cancer_driver_gene_dict)
 
+# concatenate them to one list
 driver_gene_list = []
 for cancer in ORGAN_NAMES:
     for gene in cancer_driver_gene_dict[cancer]:

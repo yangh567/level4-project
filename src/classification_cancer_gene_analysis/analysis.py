@@ -4,7 +4,6 @@ The Analysis of cancer types and gene types
 import sys,os
 sys.path.append(os.path.abspath(os.path.join('..')))
 sys.path.append(os.path.abspath(os.path.join('..','my_utilities')))
-#import my_utilities as my_u
 from my_utilities import my_config as cfg
 import numpy as np
 import pandas as pd

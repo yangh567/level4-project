@@ -5,12 +5,10 @@ taking weight for all sbs signatures for each cancers and gene
 
 """
 
-
-
-
 import torch
 from torch import nn
 from torch.nn.functional import softmax
+
 
 # constructing the Backpropagation network for classification_cancer_gene_analysis
 class BPNet(nn.Module):
@@ -24,9 +22,8 @@ class BPNet(nn.Module):
     def forward(self, x):
         x = self.layer(x)
         x = torch.softmax(x, dim=1)
-        # x = torch.sigmoid(x)
-        # x = nn.functional.softmax(x)
         return x
+
 
 # constructing the multiple label element based Backpropagation network for classification_cancer_gene_analysis
 class MultiBPNet(nn.Module):

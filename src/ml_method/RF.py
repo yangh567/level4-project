@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 """
 the classification_cancer_gene_analysis based on random forest classification_cancer_gene_analysis
-(The data is used is now discarded)(Part of research)(The cancer used is PAN-cancer)
+(The data is used is now discarded)(Part of research)(The cancer used is PAN-cancer)(DEPRECATED)
 """
 
 import pandas as pd
@@ -15,7 +15,6 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
 
-# path_data = '../../data/raw/GDC-PANCAN.muse_snv.tsv'
 
 path_data = '../../data/raw/GDC-PANCAN.muse_snv_short.tsv'
 train = pd.read_csv(path_data, sep='\t')
@@ -25,14 +24,15 @@ x = pd.get_dummies(train[set(train.columns) - set(['Sample_ID', 'dna_vaf'])]).jo
     train['dna_vaf'])  # construct the one-hot-coding
 x = x.values  # find the data
 
-# we seperate the cancer label(whether it is cancer) from tumor id,
+# we separate the cancer label(whether it is cancer) from tumor id,
 # Those less than or equal to 10 have tumors, and 11-29 have no tumors.
 y = list(map(lambda x: 1 if int(x.strip()[13:15]) <= 10 else 0, train['Sample_ID']))
 
-# seperate the training data into training and testing data for validation
+# separate the training data into training and testing data for validation
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.33, random_state=100)
 
+# try the random forest classifier
 clf = RandomForestClassifier()
 clf.fit(x_train, y_train)
 

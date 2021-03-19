@@ -21,7 +21,6 @@ def feature_select(x, y):
     """
     clf = ExtraTreesClassifier()
     clf.fit(x, y)
-    # print(clf.feature_importances_)
     model = SelectFromModel(clf, prefit=True)
     x_new = model.transform(x)
     return x_new
@@ -59,6 +58,7 @@ def gene_class_report(y, y_hat,cancer__type, title,gene_list,gene_list_mutation_
     gene_list = gene_list
     gene_accuracy_list = list(np.sum((y - y_hat) == 0, axis=0) / y.shape[0])
 
+    # record the classification results for each gene in each cancer
     for i in range(len(gene_list)):
         gene_accuracy_dict[gene_list[i]] = gene_accuracy_list[i]
     data = {
@@ -66,7 +66,6 @@ def gene_class_report(y, y_hat,cancer__type, title,gene_list,gene_list_mutation_
         'Accuracy': gene_accuracy_list,
         'Mutation_frequency': gene_list_mutation_prob
     }
-    # df = pd.DataFrame(list(gene_accuracy_dict.items()), columns=['gene_name', 'accuracy,mutation-frequency'])
     df = pd.DataFrame(data)
     df.to_csv('./result/gene_classification_accuracy/The_classification_across_gene_fold_%d_for_cancer_%s.csv' % (title,cancer__type))
     return gene_accuracy_dict
