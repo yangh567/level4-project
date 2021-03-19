@@ -4,7 +4,12 @@ Keep your data (e.g. from evaluations here)
 
 * All data used in experiment is free from ethical check
 
-* Keep a written description of the data, what is contained, and how it was captured in `data/readme.md`
+* Description of the data, and what is contained:
+
+  * *`cross_valid`* -- Storing the cross validation and validation data extracted from `sample_id.sbs.organ.csv`
+  * *`similarity_heatmap`* -- Generate the similarity comparison graph for signature we extracted and the sbs signatures from cosmic website
+  * *`processed`*  -- Storing the R files to extract the matrix we needed from the TCGA maf files which can be downloaded below,Storing the R files to summarize graphs for the maf files,Storing the requirement.r to install the required library for doing Bayesian NMF  for gaining the sample_sbs.organ.csv from TCGA maf files
+  
 * The raw data is too large to fit into repository,However,the link to download could be find here:
   
   * *For dowmloading maf files : 
@@ -12,11 +17,6 @@ Keep your data (e.g. from evaluations here)
 
   * *For downloading processed sbs x sample_id x gene mutation status matrix:
   https://drive.google.com/file/d/1kk0PercSGP2-vewuwpFat-9zs5fixhzm/view?usp=sharing*
-
-* Write scripts to produced processed data from these (e.g. tidy dataframes, excel sheets, csv files, HDF5 files, sqlite databases)
-  (the processed data is processed with maftool and sigminer signature extrcator in R language with the TCGA data downloaded from TCGA platform)
-
-* Write scripts that process these into results, visualisations, tables that you include in your project.
-  (all the results are shown in the specific directory in each experiment folder)
+    
 
 
