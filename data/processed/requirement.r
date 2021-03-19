@@ -7,11 +7,10 @@ if(T){
   library("devtools")
   #chooseBioCmirror()
   BiocManager::install("sigminer")
-  #BiocManager::install("BSgenome.Hsapiens.UCSC.hg19")
   BiocManager::install("BSgenome.Hsapiens.UCSC.hg38")
   BiocManager::install("maftools")
   install.packages("data.table",repos = url)
   install.packages("dplyr",repos = url)
   install.packages("ggplot2",repos = url)
-  #BiocManager::install("PoisonAlien/TCGAmutations")
+  BiocManager::install("PoisonAlien/TCGAmutations")
 }

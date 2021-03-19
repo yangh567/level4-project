@@ -1,4 +1,4 @@
-# used for practices
+# used for practices for the samples with genome reference set as hg19 (DEPRECATED)
 rm(list = ls())
 install.packages("devtools")
 install.packages("remotes")
@@ -18,6 +18,8 @@ library(maftools)
 library(dplyr)
 library(data.table)
 library(plyr)
+
+# function to save heatmap
 save_pheatmap_pdf <- function(x, filename, width=7, height=7) {
   stopifnot(!missing(x))
   stopifnot(!missing(filename))
@@ -26,19 +28,22 @@ save_pheatmap_pdf <- function(x, filename, width=7, height=7) {
   grid::grid.draw(x$gtable)
   dev.off()
 }
+
+#
 sim_name<-function(x){
   sbs_name<-colnames(t(x[x==max(x)]))
   return(sbs_name)
 }
 
-
+# read the files just for taking name and download the remote data from other's repository
 path<-dir()[grep("gz",dir())]
 result<-data.table()
 for(k in path){
   organ_name<-unlist(strsplit(k,"[.]"))[2]
   print(organ_name)
   organ19<-tcga_load(organ_name)
-  
+
+  # see the clinic data here
   organ_clinic_data <- organ19@clinical.data
   
   organ_clinic_data $organ_name<-organ_name
@@ -56,9 +61,10 @@ for(k in path){
                               strategy = "stable"
   )
   
-  
+  # find the signature similarities
   sim_v3 <- get_sig_similarity(mt_sig2, sig_db = "SBS")
   a<-sim_v3$similarity
+  # obtain sbs signature exposure
   matrix<-get_sig_exposure(mt_sig2)
   colnames(matrix)<-c("Sample_ID",apply(a, 1, sim_name))
   map<-pheatmap::pheatmap(sim_v3$similarity)
@@ -66,6 +72,6 @@ for(k in path){
   res<-matrix%>%mutate(organ=organ_name)
   result<-rbind.fill(result,res)
 }
-
+# sav ethe result
 write.csv(result,"sample_id.sbs.organ19.csv",row.names = F)
 

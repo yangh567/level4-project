@@ -2,11 +2,11 @@
 # used for generating the sample_id vs mutation type matrix
 options(warn =-1)
 library(BiocManager)
-#chooseBioCmirror() ## pick mirror where you are
+#chooseBioCmirror() ## pick mirror at your position
 
 ### install some useful packages
 if(F){
-BiocManager::install("BSgenome.Hsapiens.UCSC.hg37")
+BiocManager::install("BSgenome.Hsapiens.UCSC.hg38")
 BiocManager::install("GenomeInfoDbData")
 BiocManager::install("data.table")
 BiocManager::install("future.apply")
@@ -23,7 +23,7 @@ genome <- BSgenome.Hsapiens.UCSC.hg38
 head(seqlengths(genome))
 
 ## load demo date
-
+# read the tsv files
 path<-dir()[grep("tsv",dir())]
 
 for(k in path){
@@ -45,8 +45,11 @@ before<-as.character(genome[[a]][(b-1)])
 end<-as.character(genome[[a]][(c+1)])
 ref<-as.character(data[i,6])
 alt<-as.character(data[i,7])
+
+# read the refenece information here and recognize the type of transition
 type<-paste0(ref,">",alt)
 type
+
 type_1<-c("C>A","G>T")
 type_2<-c("C>G","G>C")
 type_3<-c("C>T","G>A")
@@ -120,7 +123,6 @@ sum_sbs<-function(x){
   return(out)
 }
 
-#plan(multisession)
 res<-apply(data[1:5000,], 1, sum_sbs) ## statistic SBS with gene 
 print("finish sum!!")
 res2<-as.data.frame.matrix(table(rbindlist(res)))

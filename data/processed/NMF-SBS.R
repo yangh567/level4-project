@@ -1,11 +1,13 @@
-# the research first trying to do the NMF on provided library of hg19 somatic mutation file(used for research and testing)
+# the research first trying to do the NMF on provided library of hg19 somatic mutation file(used for research and testing)(DEPRECATED)
+
+# load data
 BiocManager::install("maftools")
 BiocManager::install("sigminer")
-#BiocManager::install("PoisonAlien/TCGAmutations")
 BiocManager::install("BSgenome.Hsapiens.UCSC.hg38")
 BiocManager::install("BSgenome.Hsapiens.UCSC.hg19")
 library(sigminer)
 
+# read the laml maf data
 library(TCGAmutations)
 laml.maf<-system.file("C:/Users/23590/Desktop/SBS","TCGA.LAML.muse.0cdf3c70-ad58-462d-b6ba-5004b26c618e.DR-10.0.somatic.maf.gz",package = "maftools",mustWork = T)
 library(maftools)
@@ -18,6 +20,7 @@ head(test@data)
 mt_tally$nmf_matrix[1:5,1:5]
 
 set.seed(1234)
+# load the data stored by others
 brca <- tcga_load("BRCA")
 brca <- maftools::subsetMaf(brca,
                             tsb = as.character(sample(brca@variants.per.sample$Tumor_Sample_Barcode, 100))
@@ -43,11 +46,10 @@ mt_tally_ALL <- sig_tally(
 )
 
 
-#str(mt_tally_ALL$all_matrices,max.level = 1) look into the structure
 
 library(NMF)
 
-
+# run the process to manually determine the number of signatures to extract
 mt_est <- sig_estimate(mt_tally$nmf_matrix,
                        range = 2:6,
                        nrun = 10, # increase this value if you wana a more stable estimation
@@ -58,8 +60,3 @@ mt_est <- sig_estimate(mt_tally$nmf_matrix,
 )
 
 show_sig_number_survey2(mt_est$survey)
-#library(dplyr)
-#res3<-data.table(t(res2))
-#res4<-res3%>%mutate(organ="brca")
-#head(res3)
-#rbind(res,res2)

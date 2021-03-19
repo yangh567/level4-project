@@ -25,10 +25,11 @@ for cancer in ORGAN_NAMES:
 
     sbs_list = list(cancer_sbs_sim[first_column])
 
-    # Delete first
+    # Delete first which is sample id
     df = cancer_sbs_sim.drop([first_column], axis=1)
     df.columns = [''] * len(df.columns)
 
+    # construct the dict to form the dataframe for visualization
     sbs_dict = {}
     for i, sig in enumerate(sbs_list):
         sbs_dict[i] = sig
@@ -38,7 +39,8 @@ for cancer in ORGAN_NAMES:
     cancer_df = pd.DataFrame(np.array(df), columns=sig_list)
     cancer_df.rename(index=sbs_dict, inplace=True)
 
+    # draw the similarity graph and store it
     plt.subplots(figsize=(20, 15))
-    sns.heatmap(cancer_df, annot=True, annot_kws={"size": 4}, cmap="RdYlGn")
+    sns.heatmap(cancer_df, annot=True, annot_kws={"size": 4}, cmap="Reds")
     plt.savefig('../processed/class_graphs/class.'+cancer+'.png')
     plt.close()

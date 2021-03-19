@@ -83,3 +83,11 @@ end = time.time()
 hours, rem = divmod(end-start, 3600)
 minutes, seconds = divmod(rem, 60)
 print("The total to run the experiments is : {:0>2}hr:{:0>2}min:{:05.2f}s".format(int(hours),int(minutes),seconds))
+
+# reminding here to tell you where to look for results
+print("Here is the reminding")
+print("please check the result and visualizations under 'data/processed/class_graphs'")
+print("please check the result and visualizations under 'src/statistics/cross_valid_static'")
+print("please check the result and visualizations under 'src/classification_cancer_gene_analysis/result'")
+print("please check the result and visualizations under 'src/classification-gene-feature-extraction/result'")
+print("please check the result and visualizations under 'src/single_top_driver_gene_prediction/result'")

@@ -53,16 +53,17 @@ for(k in path){
     ref_genome = "BSgenome.Hsapiens.UCSC.hg38",
     useSyn = TRUE
   )
-  
+  # tally the 96 components
   mt_sig2 <- sig_auto_extract(mt_tally$nmf_matrix,
                               K0 = 10, nrun = 10,
                               strategy = "stable"
   )
-  
-  
+
+  # obtain the signature similarities between extracted signatures and cosmic signatures
   sim_v3 <- get_sig_similarity(mt_sig2, sig_db = "SBS")
   a<-sim_v3$similarity
-  
+
+  # extract the signatures with bayesian NMF
   mt_sig <- sig_extract(mt_tally$nmf_matrix,
                         n_sig = nrow(a),
                         nrun = 10,
@@ -82,16 +83,18 @@ for(k in path){
     save_pheatmap_pdf(map3,paste0("class.",organ_name,".pdf"))
   }
 
+  # obtain the similarity
   freq<-mt_sig$Signature.norm
   write.csv(freq,paste0("freq.",organ_name,".csv"),row.names = T)
   
   sim<-t(sim_v3$similarity)
   write.csv(sim,paste0("sim.",organ_name,".csv"),row.names = T)
-  
+
+  # get signature exposure
   matrix<-get_sig_exposure(mt_sig2)
   id<-apply(a, 1, sim_name)
   
-  # eliminating the dupicates
+  # eliminating the dupicates and concatenate the sample id column
   if(length(id[duplicated(id)])!=0){
   
   test<-sim[,id==id[duplicated(id)]]
@@ -111,15 +114,16 @@ for(k in path){
     matrix3<-matrix
     colnames(matrix3)<-c("Sample_ID",apply(a, 1, sim_name))
   }
-  
+  # merge the gene mutation status
   res<-merge.data.frame(matrix3,sampleid_gene,by.x = "Sample_ID",all = F)
   res<-res%>%mutate(organ=organ_name)%>%
        mutate(clinic=as.integer(substr(res$Sample_ID,14,15)))%>%
+    # filter out the non-patient samples
     filter(clinic<10)
   fwrite(res,paste0("res.",organ_name,".csv"),row.names = F)
   result<-rbind.fill(result,res)
 }
-
+# swap the column position here
 sbs_name<-colnames(result)[grep("SBS",colnames(result))]
 sample.sbs<-c("Sample_ID",sbs_name)
 sampleid<-result%>%select("Sample_ID")
@@ -129,5 +133,6 @@ gene<-result%>%select(-sample.sbs)
 final.data<-data.table(sampleid,SBS,gene)
 colnames(final.data)
 
+# obtain the final file
 fwrite(final.data,"sample_id.sbs.organ.csv",row.names = F)
 

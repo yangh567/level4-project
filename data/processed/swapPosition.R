@@ -1,4 +1,4 @@
-# this is the file used to swap the columns
+# this is the file used to swap the columns(deprecated)
 rm(list = ls())
 library(data.table)
 library(dplyr)
