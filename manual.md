@@ -5,7 +5,7 @@
 
 
 # (Note here, The automation for experiments is made , simply run `python automation_run.py` to finish all the steps below, or you can do it separately according to steps below, it takes some times to finish all experiments, so, please wait)
-
+# (Also, note that the line to perform stratified sampling is commented unless you have got the sample_id.sbs.organ.csv file)
 ### Part 1 : To obtain data:
 
 * *1. you can skip this part as the data is separated and stored under `data/cross_valid`*

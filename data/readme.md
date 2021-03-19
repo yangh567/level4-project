@@ -10,7 +10,7 @@ Keep your data (e.g. from evaluations here)
   * *`similarity_heatmap`* -- Generate the similarity comparison graph for signature we extracted and the sbs signatures from cosmic website
   * *`processed`*  -- Storing the R files to extract the matrix we needed from the TCGA maf files which can be downloaded below,Storing the R files to summarize graphs for the maf files,Storing the requirement.r to install the required library for doing Bayesian NMF  for gaining the sample_sbs.organ.csv from TCGA maf files
   
-* The raw data is too large to fit into repository,However,the link to download could be find here:
+* The raw data is too large to fit into repository,However,the link to download could be found here:
   
   * *For dowmloading maf files : 
   https://drive.google.com/drive/folders/1oDvK3zpNO8zhLv4k9I1woT0xthrKGdAW?usp=sharing*
