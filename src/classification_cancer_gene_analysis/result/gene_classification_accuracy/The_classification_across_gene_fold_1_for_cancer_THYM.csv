@@ -1,6 +1,6 @@
 ,gene_name,Accuracy,Mutation_frequency
 0,GTF2I,0.65,0.4
-1,BCOR,0.9,0.05
-2,CHD3,0.9,0.05
+1,BCOR,0.95,0.05
+2,CHD3,0.95,0.05
 3,MECOM,0.9,0.05
-4,MGA,0.9,0.05
+4,MGA,0.95,0.05

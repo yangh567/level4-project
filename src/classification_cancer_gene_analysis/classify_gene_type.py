@@ -51,7 +51,7 @@ def roc_draw(y_t, y_p, title, cancer___type, gene_lst):
     plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
-    plt.title('Receiver operating characteristic example')
+    plt.title('Receiver operating characteristic for gene in cancer %s' % cancer___type)
     plt.legend(loc="lower right", prop={'size': 6})
     if not os.path.exists('./result/gene_classification_roc_auc'):
         os.makedirs('./result/gene_classification_roc_auc')
@@ -112,8 +112,8 @@ def train(train_x, train_y, test_x, test_y, fold):
     batch_size = cfg.BATCH_SIZE
     batch_count = int(len(x_train) / batch_size) + 1
 
-    save_data = [['epoch', 'loss', 'train accuracy', 'test accuracy', 'best test accuracy']]
-    for epoch in range(cfg.EPOCH):
+    save_data = [['epoch', 'loss', 'train accuracy']]
+    for epoch in range(cfg.GENE_EPOCH):
         model.train()
         epoch_loss = 0
         acc = 0
@@ -136,7 +136,6 @@ def train(train_x, train_y, test_x, test_y, fold):
             y_pred[y_pred <= 0.5] = 0
 
             acc += np.mean(np.sum((target.detach().numpy() - y_pred) == 0, axis=0) / target.detach().numpy().shape[0])
-            # acc += accuracy_score(torch.argmax(target, dim=1), y_pred)
 
         print("Epoch: {}, Loss: {:.5f}, Train Accuracy: {:.5f}".
               format(epoch, epoch_loss / batch_count, acc / batch_count))

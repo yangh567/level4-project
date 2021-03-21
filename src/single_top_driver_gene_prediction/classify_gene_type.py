@@ -50,7 +50,7 @@ def roc_draw(y_t, y_p, title, cancer___type, gene_lst):
     plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
-    plt.title('Receiver operating characteristic example')
+    plt.title('Receiver operating characteristic for gene in cancer %s' % cancer___type)
     plt.legend(loc="lower right", prop={'size': 6})
     if not os.path.exists('./result/gene_classification_roc_auc'):
         os.makedirs('./result/gene_classification_roc_auc')
@@ -112,9 +112,8 @@ def train_and_test(train_x, train_y, test_x, test_y, fold):
     batch_size = cfg.BATCH_SIZE
     batch_count = int(len(x_train) / batch_size) + 1
 
-    best_acc = -1.
-    save_data = [['epoch', 'loss', 'train accuracy', 'test accuracy', 'best test accuracy']]
-    for epoch in range(cfg.EPOCH):
+    save_data = [['epoch', 'loss', 'train accuracy']]
+    for epoch in range(cfg.GENE_EPOCH):
         model.train()
         epoch_loss = 0
         acc = 0
@@ -132,12 +131,10 @@ def train_and_test(train_x, train_y, test_x, test_y, fold):
             epoch_loss += loss.item()
 
             y_pred = y_pred.detach().numpy()
-            # y_pred = torch.argmax(y_pred, dim=1).detach().numpy()
             y_pred[y_pred > 0.5] = 1
             y_pred[y_pred <= 0.5] = 0
 
             acc += np.mean(np.sum((target.detach().numpy() - y_pred) == 0, axis=0) / target.detach().numpy().shape[0])
-            # acc += accuracy_score(torch.argmax(target, dim=1), y_pred)
 
         print("Epoch: {}, Loss: {:.5f}, Train Accuracy: {:.5f}".
               format(epoch, epoch_loss / batch_count, acc / batch_count))
@@ -208,6 +205,7 @@ if __name__ == '__main__':
             gene_freq_list_final_for_cancer = []
 
             for gene in cfg.GENE_NAMES_DICT[cfg.ORGAN_NAMES[cancer_type]]:
+                # adding threshold to keep the mutation status balanced in the gene of each class
                 if cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0] <= 0.5:
                     gene_list_for_cancer.append((gene, cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0]))
                     gene_freq_list_for_cancer.append(cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0])

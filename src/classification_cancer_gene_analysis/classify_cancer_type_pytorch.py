@@ -32,6 +32,24 @@ if not os.path.exists(figure_data):
     os.makedirs(figure_data)
 
 
+def draw_converge_graph(loss_lst, acc_lst, title):
+    fig, axs = plt.subplots(2)
+    fig.suptitle('The convergence of accuracy and loss for cancer classification in fold %d' % title)
+
+    axs[0].plot(loss_lst, label="loss",color="red")
+
+    axs[1].plot(acc_lst,label="accuracy")
+
+    axs[0].legend(bbox_to_anchor=(1.0, 1.0), loc='upper left', prop={'size': 6})
+    axs[1].legend(bbox_to_anchor=(1.0, 1.0), loc='upper left', prop={'size': 6})
+
+    plt.savefig(
+        './result/cancer_classification_converge/The_convergence_graph_in_fold_%d.png' % title, dpi=300,
+        format='png',
+        bbox_inches='tight')
+    plt.close()
+
+
 #  draw the roc graph
 def plot_roc_auc(n_classes, y_t, y_p, title):
     fpr = dict()
@@ -53,7 +71,7 @@ def plot_roc_auc(n_classes, y_t, y_p, title):
     plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
-    plt.title('Receiver operating characteristic example')
+    plt.title('Receiver operating characteristic for 32 cancers')
     if not os.path.exists('./result/cancer_classification_roc_auc'):
         os.makedirs('./result/cancer_classification_roc_auc')
     plt.savefig(
@@ -113,8 +131,9 @@ def train_and_test(train_x, train_y, test_x, test_y, fold):
     batch_size = 16
     batch_count = int(len(x_train) / batch_size) + 1
 
-    save_data = [['epoch', 'loss', 'train accuracy', 'test accuracy', 'best test accuracy']]
-    for epoch in range(cfg.EPOCH):
+    save_data_loss = []
+    save_data_accuracy = []
+    for epoch in range(cfg.CANCER_EPOCH):
         model.train()
         epoch_loss = 0
         acc = 0
@@ -134,8 +153,12 @@ def train_and_test(train_x, train_y, test_x, test_y, fold):
             acc += accuracy_score(torch.argmax(target, dim=1), y_pred)
         print("Epoch: {}, Loss: {:.5f}, Train Accuracy: {:.5f}".
               format(epoch, epoch_loss / batch_count, acc / batch_count))
-        save_data.append([epoch, epoch_loss / batch_count, acc / batch_count])
+        save_data_loss.append(epoch_loss / batch_count)
+        save_data_accuracy.append(acc / batch_count)
+        # save_data.append([epoch, epoch_loss / batch_count, acc / batch_count])
+    draw_converge_graph(save_data_loss, save_data_accuracy,fold)
     acc_test = score(test_x, test_y)
+
     print("The cross-validation test accuracy on fold " + str(fold) + " is :", acc_test)
 
     return acc_test

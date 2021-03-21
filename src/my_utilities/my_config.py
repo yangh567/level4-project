@@ -2,7 +2,8 @@
 
 This file is used to provide the hyper parameters needed
 
-training episodes : EPOCH
+training episodes for cancer : CANCER_EPOCH
+training episodes for gene :  GENE_EPOCH
 learning rate : LEARNING_RATE
 mini_batch size : BATCH_SIZE
 gene names : GENE_NAMES
@@ -20,9 +21,10 @@ top n genes related to cancer : GENE_COUNT
 
 import pandas as pd
 
-EPOCH = 1000
+CANCER_EPOCH = 1000
+GENE_EPOCH = 500
 LEARNING_RATE = 1e-3
-BATCH_SIZE = 64
+BATCH_SIZE = 32
 
 DATA_PATH = '../../data/processed/sample_id.sbs.organ.csv'
 C_V_DATA_PATH = '../../data/cross_valid'
