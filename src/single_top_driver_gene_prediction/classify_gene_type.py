@@ -208,8 +208,9 @@ if __name__ == '__main__':
             gene_freq_list_final_for_cancer = []
 
             for gene in cfg.GENE_NAMES_DICT[cfg.ORGAN_NAMES[cancer_type]]:
-                gene_list_for_cancer.append((gene, cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0]))
-                gene_freq_list_for_cancer.append(cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0])
+                if cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0] <= 0.5:
+                    gene_list_for_cancer.append((gene, cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0]))
+                    gene_freq_list_for_cancer.append(cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0])
 
             # find the top 5 gene's index in pandas frame
             top_1_index = list(reversed(
