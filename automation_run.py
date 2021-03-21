@@ -39,6 +39,7 @@ execute_classify_cancer = subprocess.run(["python", "classify_cancer_type_pytorc
 execute_classify_gene = subprocess.run(["python", "classify_gene_type.py"])
 execute_analysis = subprocess.run(["python", "analysis.py"])
 execute_heatmap_generator = subprocess.run(["python", "heatmap_generator.py"])
+execute_cancer_cancer_similarity = subprocess.run(["python", "sbs_similarity_between_cancers.py"])
 
 print("\n")
 print("Experiment 1 finished")
