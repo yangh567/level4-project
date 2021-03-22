@@ -712,5 +712,9 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 * *1 minute* writing timelog
 
 ## 21 March 2020 Sunday
-* *30 minutes* find and solved teh bug of gene mutation frequency 
+* *30 minutes* find and solved the bug of gene mutation frequency 
+* *1 minute* writing timelog
+
+## 22 March 2020 Monday
+* *1 hour* working on the dissertation
 * *1 minute* writing timelog
