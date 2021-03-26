@@ -6,7 +6,6 @@
 """
 import os
 import sys
-
 import keras.backend as K
 import matplotlib.pyplot as plt
 import numpy as np
@@ -18,7 +17,7 @@ from keras.optimizers import SGD
 from sklearn.metrics import roc_curve, auc
 from copy import deepcopy
 from sklearn.preprocessing import StandardScaler
-
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 sys.path.append(os.path.abspath(os.path.join('..')))
 sys.path.append(os.path.abspath(os.path.join('..', 'my_utilities')))
 from my_utilities import my_config as cfg
@@ -67,6 +66,7 @@ def plot_epoch_acc_loss(all_model_history, title, epochs):
     axs[1].set_title('model loss')
     axs[1].set_ylabel('loss')
     axs[1].set_xlabel('epoch')
+    axs[1].legend(bbox_to_anchor=(1.0, 1.0), loc='upper left', prop={'size': 6})
 
     plt.tight_layout()
 
@@ -109,7 +109,7 @@ def roc_draw(y_t, y_p, title, cancer_driver_gene_list):
     plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
-    plt.title('Receiver operating characteristic for gene in all cancers %s in fold' % title)
+    plt.title('Receiver operating characteristic for gene in all cancers')
     if not os.path.exists('./result/gene_classification_roc_auc'):
         os.makedirs('./result/gene_classification_roc_auc')
     plt.savefig(

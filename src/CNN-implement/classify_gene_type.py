@@ -6,7 +6,6 @@
 """
 import os
 import sys
-
 import keras.backend as K
 import matplotlib.pyplot as plt
 import numpy as np
@@ -20,7 +19,7 @@ from copy import deepcopy
 from keras.utils.vis_utils import plot_model
 from sklearn.metrics import roc_curve, auc
 from sklearn.preprocessing import StandardScaler
-
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 sys.path.append(os.path.abspath(os.path.join('..')))
 sys.path.append(os.path.abspath(os.path.join('..', 'my_utilities')))
 from my_utilities import my_config as cfg
@@ -32,8 +31,7 @@ warnings.filterwarnings('ignore')
 
 # the weight of each class in averaging the classification accuracy
 weight_lst = [168, 98, 89, 86, 85, 85, 82, 80, 80, 73, 71, 69, 65, 62, 56, 51, 48, 41, 33, 31, 30, 26, 25, 20,
-              20,
-              17, 15, 13, 12, 11, 9, 7]
+              20, 17, 15, 13, 12, 11, 9, 7]
 
 
 # this function is used to plot the total summary loss and total summary accuracy in each fold
@@ -68,6 +66,7 @@ def plot_epoch_acc_loss(all_model_history, title, epochs):
     axs[1].set_title('model loss')
     axs[1].set_ylabel('loss')
     axs[1].set_xlabel('epoch')
+    axs[1].legend(bbox_to_anchor=(1.0, 1.0), loc='upper left', prop={'size': 6})
 
     plt.tight_layout()
 
@@ -110,7 +109,7 @@ def roc_draw(y_t, y_p, title, cancer_driver_gene_list):
     plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
-    plt.title('Receiver operating characteristic for gene in all cancers %s in fold' % title)
+    plt.title('Receiver operating characteristic for gene in all cancers')
     if not os.path.exists('./result/gene_classification_roc_auc'):
         os.makedirs('./result/gene_classification_roc_auc')
     plt.savefig(
@@ -303,7 +302,7 @@ if __name__ == '__main__':
             x_valid = np.expand_dims(valid_x, -1)
 
             # train the model
-            history = model.fit(x_train, train_y, epochs=200, batch_size=1500)
+            history = model.fit(x_train, train_y, epochs=200, batch_size=1000)
 
             # append the history and the gene
             total_gene_history.append((history, gene_list_final_for_cancer[0]))
@@ -345,8 +344,9 @@ if __name__ == '__main__':
         # now,we can finally draw the roc for every gene classification in each cancer in this fold
         roc_draw(all_gene_valid_y, all_gene_valid_pred, fold, cancer_driver_gene)
         # we do the weighted averaging calculation here for testing overall classification accuracy
-        test_acc_fold.append(sum([acc * (weight/sum(weight_lst)) for acc, weight in zip(test_acc, weight_lst)]))
-        valid_acc_fold.append(sum([acc_1 * (weight_1/sum(weight_lst)) for acc_1, weight_1 in zip(valid_acc, weight_lst)]))
+        test_acc_fold.append(sum([acc * (weight / sum(weight_lst)) for acc, weight in zip(test_acc, weight_lst)]))
+        valid_acc_fold.append(
+            sum([acc_1 * (weight_1 / sum(weight_lst)) for acc_1, weight_1 in zip(valid_acc, weight_lst)]))
 
     # save the classification result in each fold to log file for observation
     with open('./result/gene_generalized_accuracy/5_fold_accuracy_for_test_data.txt', 'w') as f:
