@@ -34,46 +34,45 @@ os.chdir("..")
 os.chdir("..")
 
 # Experiment 1
-os.chdir("src/classification_cancer_gene_analysis")
+os.chdir("src/classification_cancer_analysis")
 execute_classify_cancer = subprocess.run(["python", "classify_cancer_type_pytorch.py"])
-execute_classify_gene = subprocess.run(["python", "classify_gene_type.py"])
-execute_analysis = subprocess.run(["python", "analysis.py"])
+execute_analysis = subprocess.run(["python", "Normalize_cancer_sbs_weight.py"])
 execute_heatmap_generator = subprocess.run(["python", "heatmap_generator.py"])
 execute_cancer_cancer_similarity = subprocess.run(["python", "sbs_similarity_between_cancers.py"])
 
 print("\n")
 print("Experiment 1 finished")
-print("please see the result graph under 'src/classification_cancer_gene_analysis/result'")
+print("please see the result graph under 'src/classification_cancer_analysis/result'")
 print(5*'\n')
 
 os.chdir("..")
 os.chdir("..")
 
+
 # Experiment 2
-os.chdir("src/classification-gene-feature-extraction")
-execute_classify_gene_2 = subprocess.run(["python", "classify_gene_type.py"])
-execute_normalization_2 = subprocess.run(["python", "normalization_gene_cancer.py"])
-execute_heatmap_ploter_2 = subprocess.run(["python", "heatmap_ploter.py"])
+os.chdir("src/Simple-CNN-implement")
+execute_classify_gene_1 = subprocess.run(["python", "classify_gene_type.py"])
 
 print("\n")
 print("Experiment 2 finished")
-print("please see the result graph under 'src/classification-gene-feature-extraction/result'")
+print("please see the result graph under 'src/Simple-CNN-implement/result'")
 print(5*'\n')
 
 os.chdir("..")
 os.chdir("..")
 
 # Experiment 3
-os.chdir("src/single_top_driver_gene_prediction")
-execute_classify_gene_3 = subprocess.run(["python", "classify_gene_type.py"])
+os.chdir("src/CNN-implement")
+execute_classify_gene_2 = subprocess.run(["python", "classify_gene_type.py"])
 
 print("\n")
 print("Experiment 3 finished")
-print("please see the result graph under 'src/single_top_driver_gene_prediction/result'")
+print("please see the result graph under 'src/CNN-implement/result'")
 print(5*'\n')
 
 os.chdir("..")
 os.chdir("..")
+
 
 # finished
 print("The automation run finished")
@@ -89,6 +88,6 @@ print("The total to run the experiments is : {:0>2}hr:{:0>2}min:{:05.2f}s".forma
 print("Here is the reminding")
 print("please check the result and visualizations under 'data/processed/class_graphs'")
 print("please check the result and visualizations under 'src/statistics/cross_valid_static'")
-print("please check the result and visualizations under 'src/classification_cancer_gene_analysis/result'")
-print("please check the result and visualizations under 'src/classification-gene-feature-extraction/result'")
-print("please check the result and visualizations under 'src/single_top_driver_gene_prediction/result'")
+print("please check the result and visualizations under 'src/classification_cancer_analysis/result'")
+print("please check the result and visualizations under 'src/Simple-CNN-implement/result'")
+print("please check the result and visualizations under 'src/CNN-implement/result'")

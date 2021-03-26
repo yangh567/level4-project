@@ -1,6 +1,6 @@
 """
 
-    This file is used to test on the self-build model on the classification_cancer_gene_analysis of genes
+    This file is used to test on the self-build model on the classification_cancer_analysis of genes
     based on mutation signature (SBS) using 5 fold cross validation
 
 """

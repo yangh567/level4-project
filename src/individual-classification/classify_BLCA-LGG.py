@@ -1,13 +1,13 @@
 """
 
-    This file is used to test on the self-build model on classification_cancer_gene_analysis of BLCA and BRCA
+    This file is used to test on the self-build model on classification_cancer_analysis of BLCA and BRCA
     based on mutation signature (SBS) using 5 fold cross validation to ensure the possibility of classifying 32 cancers
 
 """
 
-import os,sys
+import os
+import sys
 
-from sklearn.preprocessing import LabelEncoder
 sys.path.append(os.path.abspath(os.path.join('..')))
 sys.path.append(os.path.abspath(os.path.join('..','my_utilities')))
 
@@ -20,8 +20,6 @@ import torch
 import torch.nn as nn
 import numpy as np
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report

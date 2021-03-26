@@ -3,15 +3,11 @@ This file provides the tools to analyse on the gene distribution in specific can
 
 """
 
+import numpy as np
+import pandas as pd
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.feature_selection import SelectFromModel
 from sklearn.preprocessing import LabelEncoder
-from sklearn.pipeline import Pipeline
-import my_config as cfg
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import os
 
 
 def feature_select(x, y):
@@ -52,7 +48,7 @@ class MultiColumnLabelEncoder:
         return self.fit(X, y).transform(X)
 
 
-# used to print out the classification_cancer_gene_analysis result for each genes
+# used to print out the classification_cancer_analysis result for each genes
 def gene_class_report(y, y_hat,cancer__type, title,gene_list,gene_list_mutation_prob):
     gene_accuracy_dict = {}
     gene_list = gene_list

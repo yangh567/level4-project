@@ -19,12 +19,10 @@ top n genes related to cancer : GENE_COUNT
 """
 # train the hyper parameters
 
-import pandas as pd
-
 CANCER_EPOCH = 1000
 GENE_EPOCH = 500
 LEARNING_RATE = 1e-3
-BATCH_SIZE = 32
+BATCH_SIZE = 512
 
 DATA_PATH = '../../data/processed/sample_id.sbs.organ.csv'
 C_V_DATA_PATH = '../../data/cross_valid'

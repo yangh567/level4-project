@@ -1,7 +1,7 @@
 """
 
 This file is used to generate the
-confusion matrix for the multiclass classification_cancer_gene_analysis
+confusion matrix for the multiclass classification_cancer_analysis
 
 """
 

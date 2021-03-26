@@ -1,7 +1,7 @@
 """
 
 This file is used to draw the heatmap for display the
-weight of sbs signatures in each cancer types or gene types
+weight of sbs signatures in each cancer types or gene types(RESEARCH)
 
 """
 import os, sys
@@ -108,11 +108,11 @@ for cancer_type in range(len(cancer_list)):
         gene_freq_list_for_cancer.append(cancer_prob[cancer_list[cancer_type]][gene].values[0])
 
     # find the top 5 gene's index in pandas frame
-    top_10_index = list(reversed(
+    top_5_index = list(reversed(
         sorted(range(len(gene_freq_list_for_cancer)), key=lambda i: gene_freq_list_for_cancer[i])[-5:]))
 
     # find those gene and their freq as (gene,freq)
-    res_list = [gene_list_for_cancer[i] for i in top_10_index]
+    res_list = [gene_list_for_cancer[i] for i in top_5_index]
 
     # append the gene name into gene_list_final_for_cancer list
     # append the gene mutation frequency to gene_freq_list_final_for_cancer list
@@ -124,12 +124,12 @@ for cancer_type in range(len(cancer_list)):
     for i in range(len(gene_list_final_for_cancer)):
         gene_dict[i] = gene_list_final_for_cancer[i]
 
-    # find the most weighted sbs names in that fold used as features for gene classification_cancer_gene_analysis
+    # find the most weighted sbs names in that fold used as features for gene classification_cancer_analysis
     # here we only investigate on 0 fold
-    cancer_type_path = '../classification_cancer_gene_analysis/result/cancer_type-weight_4.npy'
+    cancer_type_path = '../classification_cancer_analysis/result/cancer_type-weight_0.npy'
     cancer_type_weight = np.load(cancer_type_path).T  # shape (10,32)
     cancer_type_scaler = MinMaxScaler()
-    cancer_type_nor_weight = cancer_type_scaler.fit_transform(cancer_type_weight)
+    cancer_type_nor_weight = cancer_type_scaler.fit_transform(abs(cancer_type_weight))
     # normalize it to 0 and 1
     cancer_type_zero_one_weight = cancer_type_nor_weight / np.sum(cancer_type_nor_weight, axis=0).reshape(1, 32)
 

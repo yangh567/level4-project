@@ -147,6 +147,9 @@ Week-by-week plan for the whole project. Update this as you go along.
   * Discuss the inferior predictability of sbs on gene with supervisor
   * finished the evaluation part
   * collect the reference and working on the dissertation
-
+  
 * **Week 24** Dissertation submission deadline and presentations.
   
+  * Discuss the improved predictability of sbs on gene with supervisor
+  * ask if I need to remove the deprecated research files
+  * collect the reference and working on the dissertation

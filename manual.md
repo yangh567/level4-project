@@ -4,7 +4,7 @@
 
 
 
-# (Note here, The automation for experiments is made , simply run `python automation_run.py` to finish all the steps below, or you can do it separately according to steps below, it takes some times to finish all experiments, so, please wait)
+# (Note here, The automation for experiments is made , simply run `python automation_run.py` to finish all the steps below, or you can do it separately according to steps below, it takes some times to finish all experiments as the complexity of CNN and there are 5 fold for 32 cancers,which means 32 models in each fold, so, please wait)
 # (Also, note that the line to perform stratified sampling is commented unless you have got the sample_id.sbs.organ.csv file)
 ### Part 1 : To obtain data:
 
@@ -44,52 +44,39 @@
 
 
 
-### Part 2 : Experiment 1 : To see the classification result of gene without using feature extraction
+### Part 2 : Experiment 1 : To see the classification result of cancer 
 
-- **(This is just instruction of running the research files to investigate on the analysis of cancer classification and gene mutation status classification as well as the ranking of gene in each cancer)**
+- **(This is just instruction of running the research files to investigate on the analysis of cancer classification)**
  
 * *1. Run `python classify_cancer_type_pytorch.py` under `src/classification_cancer_gene_analysis` to performing the training of classifier on 
    the cancer and evaluate on the model.*
-  
    
-* *2. Run `python classify_gene_type.py` under `src/classification_cancer_gene_analysis` to performing the training of classifier on 
+
+* *3. Run `python Normalize_cancer_sbs_weight.py` under `src/classification_cancer_analysis` to normalize the selected weights*
+
+
+* *4. Run `python heatmap_generator.py` under `src/classification_cancer_analysis` to generate the heatmap of the sbs signature weights in each cancer.*
+   
+   
+
+
+   
+### Part 3 : Experiment 2 : To see the classification result of top 1 frequently mutated driver gene using the feature extraction of sbs sig weights obtained from cancer classification as well as the simple CNN implementation
+
+- **(This is instruction of running the research file of using top 10 weighted sbs signature in each cancer to classify on the top 1 frequently mutated driver gene in that cancer)**
+
+* *1. Run `python classify_gene_type.py` under `src/Simple-CNN-implement` to performing the training of classifier on 
    the gene mutation status and evaluate on the model.*
-  
-   
-* *3. Run `python analysis.py` under `src/classification_cancer_gene_analysis` to normalize the selected weights and performing ranking top 5 frequently mutated gene for each cancer types.
-   by finding intersections.*
+
+
   
 
-* *4. Run `python heatmap_generator.py` under `src/classification_cancer_gene_analysis` to generate the heatmap of the sbs signature weights in each cancer and each gene for this experiment.*
-   
-   
-
-
-   
-### Part 3 : Experiment 2 : To see the classification result of gene using the feature extraction of sbs sig weights obtained from cancer classification
-
-- **(This is instruction of running the research file of using top 10 weighted sbs signature in each cancer to classify on the top 5 frequently mutated driver gene in that cancer)**
-
-* *1. Run `python classify_gene_type.py` under `src/classification-gene-feature-extraction` to performing the training of classifier on 
-   the gene mutation status and evaluate on the model as well as extracting signature's weights`.*
-  
-   
-* *3. Run `python normalization_gene_cancer.py` under `src/classification-gene-feature-extraction` to normalize the selected weights for each gene and each cancer types.*
-
-
-* *4. Run `python heatmap_ploter.py` under `src/classification-gene-feature-extraction` to generate the heatmaps of the sbs signature weights in each cancer and each gene.*
-
-
-
-   
-
-
-### Part 4 : Experiment 3 : To see the classification result of top 1 frequently mutated driver gene in specific cancer using feature extraction of sbs sig weights obtained from cancer classification
+### Part 4 : Experiment 3 : To see the classification result of top 1 frequently mutated driver gene in specific cancer using feature extraction of sbs sig weights obtained from cancer classification as well as using the complex CNN implementation
 
 - **(This is instruction of running the research file of using top 10 weighted sbs signature in the cancer to classify on the top 1 frequently mutated driver gene in that cancer to validate the idea that sbs signatures might be infeasible to predict on the gene mutation status in that cancer)** 
 
 
-* *1. Run `python classify_gene_type.py` under `src/single_top_driver_gene_prediction` to performing the training of classifier on 
+* *1. Run `python classify_gene_type.py` under `src/CNN-implement` to performing the training of classifier on 
    the single top driver gene's mutation status and evaluate on the model as well as extracting signature weights.*
    
 

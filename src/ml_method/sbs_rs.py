@@ -1,6 +1,6 @@
 """
     This is the prototype of the cancer
-    classification_cancer_gene_analysis sbs using different classifiers
+    classification_cancer_analysis sbs using different classifiers
 
 """
 import pandas as pd
@@ -73,14 +73,14 @@ y_pred = np.around(y_pred).astype('int')
 
 report = classification_report(y_test, y_pred)
 
-print('The classification_cancer_gene_analysis report')
+print('The classification_cancer_analysis report')
 print(report)
 
 # try different classifiers
 if model == 'lr' or model == 'lasso':
-    print('The classification_cancer_gene_analysis intercept ：')
+    print('The classification_cancer_analysis intercept ：')
     print(clf.intercept_)
-    print('The classification_cancer_gene_analysis coefficient aka pattern ：')
+    print('The classification_cancer_analysis coefficient aka pattern ：')
     print(clf.coef_)
 
 elif model == 'rf':

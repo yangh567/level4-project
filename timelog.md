@@ -722,3 +722,15 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 23 March 2020 Tuesday
 * *1 hour* working on the dissertation
 * *1 minute* writing timelog
+
+## 24 March 2020 Wednesday
+* *1 hour* constructed CNN
+* *1 minute* writing timelog
+
+## 25 March 2020 Thursday
+* *1 hour* debug on CNN
+* *1 minute* writing timelog
+
+## 26 March 2020 Thursday
+* *3 hour* adding the requirements and ordering the repository and added CNN implementation
+* *1 minute* writing timelog

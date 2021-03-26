@@ -1,19 +1,19 @@
 """
 
-    This file is used to test on the self-build model on the classification_cancer_gene_analysis of genes
-    based on mutation signature (SBS) using 5 fold cross validation
+    This file is used to test on the self-build model on the classification_cancer_analysis of genes
+    based on mutation signature (SBS) using 5 fold cross validation(RESEARCH)
 
 """
 
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score, roc_curve, auc
-import seaborn as sns
-import os, sys
+import os
+import sys
+
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import torch
-import torch.nn as nn
-import matplotlib.pyplot as plt
+from sklearn.metrics import roc_curve, auc
+from sklearn.preprocessing import StandardScaler
 
 sys.path.append(os.path.abspath(os.path.join('..')))
 sys.path.append(os.path.abspath(os.path.join('..', 'my_utilities')))
@@ -147,23 +147,23 @@ def train_and_test(train_x, train_y, test_x, test_y, fold):
 
 
 # score the classification accuracy for each gene in each cancer and draw the roc graph
-def score(test_x, test_y, title=0, cancer__type="", gene_list=None, gene_list_mutation_prob=None, final=False):
+def score(t_x, t_y, title=0, cancer__type="", gene_list=None, gene_list_mutation_prob=None, final=False):
     model.eval()
-    x_test = torch.tensor(test_x, dtype=torch.float32)
-    y_test = torch.tensor(test_y, dtype=torch.float32)
+    x_t = torch.tensor(t_x, dtype=torch.float32)
+    y_t = torch.tensor(t_y, dtype=torch.float32)
 
-    y_pred = model(x_test)
-    # y_pred = torch.argmax(y_pred, dim=1).detach().numpy()
-    y_pred_for_roc = y_pred.detach().numpy()
+    y_pred = model(x_t).detach().numpy()
+    if final:
+        roc_draw(y_t, y_pred, title, cancer__type, gene_list)
+        y_pred[y_pred > 0.5] = 1
+        y_pred[y_pred <= 0.5] = 0
+        tool.gene_class_report(y_t.detach().numpy(), y_pred, cancer__type, title, gene_list, gene_list_mutation_prob)
 
-    y_pred = y_pred.detach().numpy()
     y_pred[y_pred > 0.5] = 1
     y_pred[y_pred <= 0.5] = 0
 
-    acc_test = np.mean(np.sum((y_test.detach().numpy() - y_pred) == 0, axis=0) / y_test.detach().numpy().shape[0])
-    if final:
-        roc_draw(y_test, y_pred_for_roc, title, cancer__type, gene_list)
-        tool.gene_class_report(y_test.detach().numpy(), y_pred, cancer__type, title, gene_list, gene_list_mutation_prob)
+    acc_test = np.mean(np.sum((y_t.detach().numpy() - y_pred) == 0, axis=0) / y_t.detach().numpy().shape[0])
+
     return acc_test
 
 
@@ -206,9 +206,8 @@ if __name__ == '__main__':
 
             for gene in cfg.GENE_NAMES_DICT[cfg.ORGAN_NAMES[cancer_type]]:
                 # adding threshold to keep the mutation status balanced in the gene of each class
-                if cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0] <= 0.5:
-                    gene_list_for_cancer.append((gene, cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0]))
-                    gene_freq_list_for_cancer.append(cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0])
+                gene_list_for_cancer.append((gene, cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0]))
+                gene_freq_list_for_cancer.append(cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0])
 
             # find the top 5 gene's index in pandas frame
             top_1_index = list(reversed(
@@ -226,10 +225,10 @@ if __name__ == '__main__':
             print(gene_freq_list_final_for_cancer)
 
             # we load the weight of sbs in that cancer in that fold
-            cancer_type_path = '../classification_cancer_gene_analysis/result/cancer_type-weight_' + str(fold) + '.npy'
+            cancer_type_path = '../classification_cancer_analysis/result/cancer_type-weight_' + str(fold) + '.npy'
             cancer_type_weight = np.load(cancer_type_path).T  # shape (49,32)
             cancer_type_scaler = MinMaxScaler()
-            cancer_type_nor_weight = cancer_type_scaler.fit_transform(cancer_type_weight)
+            cancer_type_nor_weight = cancer_type_scaler.fit_transform(abs(cancer_type_weight))
             # normalize it to 0 and 1
             cancer_type_zero_one_weight = cancer_type_nor_weight / np.sum(cancer_type_nor_weight, axis=0).reshape(1, 32)
 
@@ -252,13 +251,14 @@ if __name__ == '__main__':
 
             model = my_model.MultiBPNet(train_x.shape[1], train_y.shape[1])
 
-            criterion = nn.MultiLabelSoftMarginLoss()
+            criterion = my_model.FocalLoss()
             optimizer = torch.optim.Adam(model.parameters(), lr=cfg.LEARNING_RATE)
 
             test_acc.append(train_and_test(train_x, train_y, test_x, test_y, fold))
             valid_acc.append(score(valid_x, valid_y, title=fold, cancer__type=cfg.ORGAN_NAMES[cancer_type],
                                    gene_list=gene_list_final_for_cancer,
                                    gene_list_mutation_prob=gene_freq_list_final_for_cancer, final=True))
+
             print('The %d fold，The best testing accuracy for trained model for %s at this fold is %.4f，the validation '
                   'accuracy '
                   'for this fold is %.4f' % (fold, cfg.ORGAN_NAMES[cancer_type], test_acc[-1], valid_acc[-1]))
