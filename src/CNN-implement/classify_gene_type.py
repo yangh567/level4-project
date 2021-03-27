@@ -291,7 +291,7 @@ if __name__ == '__main__':
             # set up optimizer
             sgd = SGD(lr=0.001, decay=1e-9, momentum=0.9, nesterov=True)
 
-            adam = Adam(lr=0.0012, beta_1=0.9, beta_2=0.999, epsilon=1e-09)
+            adam = Adam(lr=0.00098, beta_1=0.9, beta_2=0.999, epsilon=1e-09)
 
             model.compile(loss=focal_loss(gamma=2., alpha=0.1),
                           optimizer=adam,
@@ -302,7 +302,7 @@ if __name__ == '__main__':
             x_valid = np.expand_dims(valid_x, -1)
 
             # train the model
-            history = model.fit(x_train, train_y, epochs=200, batch_size=1680)
+            history = model.fit(x_train, train_y, epochs=200, batch_size=1280)
 
             # append the history and the gene
             total_gene_history.append((history, gene_list_final_for_cancer[0]))
