@@ -218,7 +218,7 @@ if __name__ == '__main__':
 
     for i in range(cfg.CROSS_VALIDATION_COUNT - 1):
         # sbs num : 49,cancer types num : 32
-        model = my_model.BPNet(49, 32)
+        model = my_model.SoftMaxBPNet(49, 32)
         criterion = nn.MSELoss()
         optimizer = torch.optim.Adam(model.parameters(), lr=cfg.LEARNING_RATE)
 

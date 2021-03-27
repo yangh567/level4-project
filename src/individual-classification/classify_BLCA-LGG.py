@@ -84,7 +84,7 @@ def train(train_x, train_y, test_x, test_y):
 
     best_acc = -1.
     save_data = [['epoch', 'loss', 'train accuracy', 'test accuracy', 'best test accuracy']]
-    for epoch in range(cfg.EPOCH):
+    for epoch in range(cfg.CANCER_EPOCH):
         model.train()
         epoch_loss = 0
         acc = 0
@@ -143,7 +143,7 @@ if __name__ == '__main__':
 
     for i in range(cfg.CROSS_VALIDATION_COUNT - 1):
         # sbs num : 49,cancer types num : 2
-        model = my_model.BPNet(49, 2)
+        model = my_model.SoftMaxBPNet(49, 2)
         criterion = nn.MSELoss()
         optimizer = torch.optim.Adam(model.parameters(), lr=cfg.LEARNING_RATE)
 
