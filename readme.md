@@ -1,7 +1,8 @@
 # Readme
 
-### This project is used to investigate on the feasibility of building a gene mutation status recommender system 
+### This project is used to investigate on the feasibility of building a gene mutation status recommender system
 
+**Note: _All the generated results and visualization file will be under specific result folder which is located under specific research folder_**
 * we first tested the feasibility of using mutational signatures such as single based substitution signatures to identify cancers
 
 
