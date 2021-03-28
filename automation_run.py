@@ -1,6 +1,6 @@
 """
 
-This is the file used to automate all experiments as well as generating required data
+This is the file used to automate all experiments as well as generating required data under the result folder
 
 """
 import os
