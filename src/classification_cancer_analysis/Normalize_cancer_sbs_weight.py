@@ -1,5 +1,5 @@
 """
-The Analysis of cancer types and gene types
+The normalization of weights of sbs signatures in cancer types
 """
 import os
 import sys

@@ -38,6 +38,7 @@ os.chdir("src/classification_cancer_analysis")
 execute_classify_cancer = subprocess.run(["python", "classify_cancer_type_pytorch.py"])
 execute_analysis = subprocess.run(["python", "Normalize_cancer_sbs_weight.py"])
 execute_heatmap_generator = subprocess.run(["python", "heatmap_generator.py"])
+execute_top10_sbs_heatmap_generator = subprocess.run(["python", "heatmap_of_top_10_sbs.py"])
 execute_cancer_cancer_similarity = subprocess.run(["python", "sbs_similarity_between_cancers.py"])
 
 print("\n")
