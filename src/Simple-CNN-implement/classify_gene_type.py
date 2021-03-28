@@ -294,6 +294,9 @@ if __name__ == '__main__':
             # train the model
             history = model.fit(x_train, train_y, epochs=200, batch_size=1000)
 
+            # save the model
+            model.save("./result/my_simple_cnn_model.h5")
+
             # appending all of the gene's training process in each cancer types in each fold
             total_gene_history.append((history, gene_list_final_for_cancer[0]))
 

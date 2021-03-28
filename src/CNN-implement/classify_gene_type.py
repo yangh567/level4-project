@@ -302,7 +302,10 @@ if __name__ == '__main__':
             x_valid = np.expand_dims(valid_x, -1)
 
             # train the model
-            history = model.fit(x_train, train_y, epochs=200, batch_size=1280)
+            history = model.fit(x_train, train_y, epochs=200, batch_size=10080)
+
+            # save the model
+            model.save("./result/my_complex_cnn_model.h5")
 
             # append the history and the gene
             total_gene_history.append((history, gene_list_final_for_cancer[0]))
