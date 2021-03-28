@@ -741,3 +741,7 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 27 March 2020 Saturday
 * *1 hour* resolved some package issues
 * *1 minute* writing timelog
+
+## 28 March 2020 Sunday
+* *1 hour* working on dissertation
+* *1 minute* writing timelog

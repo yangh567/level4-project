@@ -9,6 +9,7 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 
+
 # constructing the Backpropagation network for classification_cancer_analysis
 class SoftMaxBPNet(nn.Module):
     def __init__(self, feature_num, class_num):
