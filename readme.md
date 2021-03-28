@@ -1,6 +1,10 @@
 # Readme
 
-### This project is used to investigate on the feasibility of building a gene mutation status recommender system
+
+## 1.Overall 
+
+
+#### 1.1.This project is used to investigate on the feasibility of building a gene mutation status recommender system
 
 **Note: _All the generated results and visualization file will be under specific result folder which is located under specific research folder_**
 * we first tested the feasibility of using mutational signatures such as single based substitution signatures to identify cancers
@@ -18,7 +22,7 @@
 
 
 
-#### The experiment is done by first test on the feasibility of using mutational signatures to identify various cancers and then try to identify the gene mutation status
+#### 1.2.The Overall Repository Structure 
 
 The whole repository contains: 
 
@@ -48,14 +52,14 @@ The whole repository contains:
 
 
 
-## Build instructions
+## 2.Build instructions
 
-### Requirements
+#### 2.1.Requirements
 
 * Packages: listed in `requirements.txt` 
 * Tested on Windows 10
 
-### Build and evaluation steps
+#### 2.2.Build and evaluation steps
 
 * Step1 : pip install -r requirements.txt
 * Step2 : run the instructions in manual.md
