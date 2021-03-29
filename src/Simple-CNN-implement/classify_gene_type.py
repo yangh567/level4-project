@@ -284,8 +284,8 @@ if __name__ == '__main__':
             model.add(Dense(2))
             model.add(Dense(1, kernel_initializer='normal', activation='sigmoid'))
 
-            # plot the model.uncomment until you installed pydot and graphviz
-            # plot_model(model, to_file='./result/simple_cnn_model_plot.png', show_shapes=True, show_layer_names=True)
+            # # plot the model.uncomment until you installed pydot and graphviz
+            # plot_model(model, to_file='./result/simple_cnn_model_plot.pdf', show_shapes=True, show_layer_names=True)
 
             # set up optimizer
             sgd = SGD(lr=0.001, decay=1e-9, momentum=0.9, nesterov=True)
