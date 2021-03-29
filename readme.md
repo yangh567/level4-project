@@ -18,7 +18,7 @@
 
 * we then test the feasibility of using mutational signatures to validate the idea of predicting the gene mutation status for patients
 
-![The example result from cancer classification 2](src/CNN-implement/result/gene_classification_roc_auc/The_roc_auc_for_validation_in_fold_3.png)
+![The example result from cancer classification 2](src/CNN-implement/result/gene_classification_roc_auc/The_roc_auc_for_validation_in_fold_0.png)
 
 
 
