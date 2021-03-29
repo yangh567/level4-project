@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-from keras.layers import Dense, Activation, Flatten, Dropout, Conv1D, BatchNormalization
+from keras.layers import Dense, Activation, Flatten, Dropout, Conv1D, BatchNormalization, MaxPooling1D
 from keras.models import Sequential
 from keras.optimizers import SGD
 from keras.optimizers import Adam
@@ -19,6 +19,7 @@ from copy import deepcopy
 from keras.utils.vis_utils import plot_model
 from sklearn.metrics import roc_curve, auc
 from sklearn.preprocessing import StandardScaler
+
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 sys.path.append(os.path.abspath(os.path.join('..')))
 sys.path.append(os.path.abspath(os.path.join('..', 'my_utilities')))
@@ -124,9 +125,16 @@ def roc_draw(y_t, y_p, title, cancer_driver_gene_list):
 
 # process the data for specific cancer class
 def process_data(data, cancer_type, gene_list, sbs_names, scale=True):
-    print(data)
-    x = data[data["organ"] == cancer_type][sbs_names]
-    y = data[data["organ"] == cancer_type][gene_list]
+
+    # setting the spatial features to help with constructing cnn
+    data_copy = data.copy()
+    for sbs_name in cfg.SBS_NAMES:
+        # set the sbs that are not important to 0
+        if not sbs_name in sbs_names:
+            data_copy[data_copy["organ"] == cancer_type][sbs_name] = 0
+    # feed the matrix
+    x = data_copy[data_copy["organ"] == cancer_type][cfg.SBS_NAMES]
+    y = data_copy[data_copy["organ"] == cancer_type][gene_list]
     y[y >= 1] = 1
     y[y < 1] = 0
     y = y.values
@@ -248,7 +256,7 @@ if __name__ == '__main__':
 
             # normalize the weights and find the powerful signature in that cancer
             cancer_type_scaler = MinMaxScaler()
-            cancer_type_nor_weight = cancer_type_scaler.fit_transform(abs(cancer_type_weight))
+            cancer_type_nor_weight = cancer_type_scaler.fit_transform(cancer_type_weight)
             # # normalize it to 0 and 1
             cancer_type_zero_one_weight = cancer_type_nor_weight / np.sum(cancer_type_nor_weight, axis=0).reshape(1, 32)
 
@@ -289,7 +297,7 @@ if __name__ == '__main__':
             # plot_model(model, to_file='./result/complex_cnn_model_plot.png', show_shapes=True, show_layer_names=True)
 
             # set up optimizer
-            sgd = SGD(lr=0.001, decay=1e-9, momentum=0.9, nesterov=True)
+            sgd = SGD(lr=0.00091, decay=1e-9, momentum=0.9, nesterov=True)
 
             adam = Adam(lr=0.00098, beta_1=0.9, beta_2=0.999, epsilon=1e-09)
 
@@ -302,7 +310,7 @@ if __name__ == '__main__':
             x_valid = np.expand_dims(valid_x, -1)
 
             # train the model
-            history = model.fit(x_train, train_y, epochs=200, batch_size=10080)
+            history = model.fit(x_train, train_y, epochs=200, batch_size=100800)
 
             # save the model
             model.save("./result/my_complex_cnn_model.h5")

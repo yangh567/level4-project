@@ -124,9 +124,15 @@ def roc_draw(y_t, y_p, title, cancer_driver_gene_list):
 
 # process the data for specific cancer class
 def process_data(data, cancer_type, gene_list, sbs_names, scale=True):
-    print(data)
-    x = data[data["organ"] == cancer_type][sbs_names]
-    y = data[data["organ"] == cancer_type][gene_list]
+    # setting the spatial features to help with constructing cnn
+    data_copy = data.copy()
+    for sbs_name in cfg.SBS_NAMES:
+        # set the sbs that are not important to 0
+        if not sbs_name in sbs_names:
+            data_copy[data_copy["organ"] == cancer_type][sbs_name] = 0
+    # feed the matrix
+    x = data_copy[data_copy["organ"] == cancer_type][cfg.SBS_NAMES]
+    y = data_copy[data_copy["organ"] == cancer_type][gene_list]
     y[y >= 1] = 1
     y[y < 1] = 0
     y = y.values
