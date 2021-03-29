@@ -9,12 +9,11 @@ import os
 import sys
 
 sys.path.append(os.path.abspath(os.path.join('..')))
-sys.path.append(os.path.abspath(os.path.join('..','my_utilities')))
+sys.path.append(os.path.abspath(os.path.join('..', 'my_utilities')))
 
 from my_utilities import my_config as cfg
 from my_utilities import my_model as my_model
 from my_utilities import my_confusion_matrix as m_c_m
-
 
 import torch
 import torch.nn as nn
@@ -49,6 +48,7 @@ def get_data(o_data, index):
     # concatenate the data
     train = []
     test = None
+    # at each fold i, we select ith data as the testing data and rest as training data
     for i in range(len(o_data)):
         if i != index:
             train.append(o_data[i])
@@ -111,12 +111,14 @@ def train(train_x, train_y, test_x, test_y):
     return best_acc
 
 
+# we construct the score function here to score and report the classification
 def score(test_x, test_y, title=0, report=False):
     model.eval()
     x_test = torch.tensor(test_x, dtype=torch.float32)
     y_test = torch.tensor(test_y, dtype=torch.float32)
 
     y_pred = model(x_test)
+    # select the label with the maximized probability
     y_pred = torch.argmax(y_pred, dim=1).detach().numpy()
 
     acc_test = accuracy_score(torch.argmax(y_test, dim=1), y_pred)

@@ -10,6 +10,7 @@ from sklearn.feature_selection import SelectFromModel
 from sklearn.preprocessing import LabelEncoder
 
 
+# The function used to extract the features(DEPRECATED)
 def feature_select(x, y):
     """
 
@@ -22,6 +23,7 @@ def feature_select(x, y):
     return x_new
 
 
+# the function to encode the labels into numbers (DEPRECATED)
 class MultiColumnLabelEncoder:
     def __init__(self, columns=None):
         self.columns = columns  # array of column names to encode
@@ -49,9 +51,11 @@ class MultiColumnLabelEncoder:
 
 
 # used to print out the classification_cancer_analysis result for each genes
-def gene_class_report(y, y_hat,cancer__type, title,gene_list,gene_list_mutation_prob):
+def gene_class_report(y, y_hat, cancer__type, title, gene_list, gene_list_mutation_prob):
     gene_accuracy_dict = {}
     gene_list = gene_list
+
+    # calculate the predicting accuracy for the gene in that cancer
     gene_accuracy_list = list(np.sum((y - y_hat) == 0, axis=0) / y.shape[0])
 
     # record the classification results for each gene in each cancer
@@ -62,7 +66,9 @@ def gene_class_report(y, y_hat,cancer__type, title,gene_list,gene_list_mutation_
         'Accuracy': gene_accuracy_list,
         'Mutation_frequency': gene_list_mutation_prob
     }
+    # save as pandas dataframe and save to file
     df = pd.DataFrame(data)
-    df.to_csv('./result/gene_classification_accuracy/The_classification_across_gene_fold_%d_for_cancer_%s.csv' % (title,cancer__type))
+    df.to_csv('./result/gene_classification_accuracy/The_classification_across_gene_fold_%d_for_cancer_%s.csv' % (
+        title, cancer__type))
     return gene_accuracy_dict
     pass

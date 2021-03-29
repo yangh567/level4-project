@@ -125,7 +125,6 @@ def roc_draw(y_t, y_p, title, cancer_driver_gene_list):
 
 # process the data for specific cancer class
 def process_data(data, cancer_type, gene_list, sbs_names, scale=True):
-
     # setting the spatial features to help with constructing cnn
     data_copy = data.copy()
     for sbs_name in cfg.SBS_NAMES:
@@ -204,8 +203,8 @@ if __name__ == '__main__':
     cancer_prob = {}
     for name, item in gene_prob.groupby('cancer type'):
         cancer_prob[name] = item
-    # performing the 5 fold cross validation
 
+    # performing the 5 fold cross validation
     for fold in range(cfg.CROSS_VALIDATION_COUNT - 1):
 
         # used to record the total gene classification history in each cancer
@@ -293,8 +292,8 @@ if __name__ == '__main__':
             model.add(Dropout(0.5))
             model.add(Dense(1, kernel_initializer='normal', activation='sigmoid'))
 
-            # plot the model.uncomment until you installed pydot and graphviz
-            # plot_model(model, to_file='./result/complex_cnn_model_plot.png', show_shapes=True, show_layer_names=True)
+           # plot the model.uncomment until you installed pydot and graphviz
+            plot_model(model, to_file='./result/complex_cnn_model_plot.pdf', show_shapes=True, show_layer_names=True)
 
             # set up optimizer
             sgd = SGD(lr=0.00091, decay=1e-9, momentum=0.9, nesterov=True)
