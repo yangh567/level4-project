@@ -1,7 +1,7 @@
 """
 
 This file is used to draw the heatmap for display the
-weight of sbs signatures in each cancer types or gene types(RESEARCH)
+weight of sbs signatures in each cancer types or gene types(RESEARCH AND DEPRECATED)
 
 """
 import os, sys

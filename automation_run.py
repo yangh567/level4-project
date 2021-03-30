@@ -74,7 +74,6 @@ print(5*'\n')
 os.chdir("..")
 os.chdir("..")
 
-
 # finished
 print("The automation run finished")
 

@@ -6,9 +6,10 @@ Keep your data (e.g. from evaluations here)
 
 * Description of the data, and what is contained:
 
-  * *`cross_valid`* -- Storing the cross validation and validation data extracted from `sample_id.sbs.organ.csv`
+  * *`cross_valid`* -- Storing the cross validation and validation data extracted from `sample_id.sbs.organ.csv`using stratified sampling
   * *`similarity_heatmap`* -- Generate the similarity comparison graph for signature we extracted and the sbs signatures from cosmic website
   * *`processed`*  -- Storing the R files to extract the matrix we needed from the TCGA maf files which can be downloaded below,Storing the R files to summarize graphs for the maf files,Storing the requirement.r to install the required library for doing Bayesian NMF  for gaining the sample_sbs.organ.csv from TCGA maf files
+                   -- Storing the similarity data between extracted sbs signature and Cosmic SBS signatures (class_graphs)
   
 * The raw data is too large to fit into repository,However,the link to download could be found here:
   

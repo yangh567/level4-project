@@ -1,5 +1,5 @@
 """
-The Analysis of cancer types and gene types(RESEARCH)
+The Analysis of cancer types and gene types(RESEARCH AND DEPRECATED)
 """
 import os,sys
 import numpy as np

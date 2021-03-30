@@ -17,6 +17,7 @@ from keras.optimizers import SGD
 from sklearn.metrics import roc_curve, auc
 from copy import deepcopy
 from sklearn.preprocessing import StandardScaler
+
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 sys.path.append(os.path.abspath(os.path.join('..')))
 sys.path.append(os.path.abspath(os.path.join('..', 'my_utilities')))
@@ -69,7 +70,6 @@ def plot_epoch_acc_loss(all_model_history, title, epochs):
     axs[1].legend(bbox_to_anchor=(1.0, 1.0), loc='upper left', prop={'size': 6})
 
     plt.tight_layout()
-
     plt.savefig(
         './result/gene_classification_converge/The_convergence_graph_in_fold_%d.png' % title, dpi=300,
         format='png',
@@ -180,6 +180,83 @@ def focal_loss(gamma, alpha):
     return focal_loss_fixed
 
 
+# the function used to find the top gene in that cancer as well as the top 10 sbs in that cancer
+def find_top_gene_top_10_sbs(fold, cancer_type, caner_probability, driver_gene_in_c):
+    # the list used to contain all of the driver gene in that cancer
+    gene_list_for_cancer = []
+    # the list used to contain all of the driver gene's frequency in that cancer
+    gene_freq_list_for_cancer = []
+    # the list used to contain the top driver gene in that cancer
+    gene_list_final_for_cancer = []
+    # the list used to contain the top driver gene's frequency in that cancer
+    gene_freq_list_final_for_cancer = []
+
+    for gene in cfg.GENE_NAMES_DICT[cfg.ORGAN_NAMES[cancer_type]]:
+        gene_list_for_cancer.append((gene, caner_probability[cfg.ORGAN_NAMES[cancer_type]][gene].values[0]))
+        gene_freq_list_for_cancer.append(caner_probability[cfg.ORGAN_NAMES[cancer_type]][gene].values[0])
+
+    # find the top 1 gene's index in pandas frame
+    top_1_index = list(reversed(
+        sorted(range(len(gene_freq_list_for_cancer)), key=lambda i: gene_freq_list_for_cancer[i])[-1:]))
+
+    # find those gene and their freq as (gene,freq)
+    res_list = [gene_list_for_cancer[i] for i in top_1_index]
+
+    # append the gene name into gene_list_final_for_cancer list
+    # append the gene mutation frequency to gene_freq_list_final_for_cancer list
+    for (a, b) in res_list:
+        gene_list_final_for_cancer.append(a)
+        gene_freq_list_final_for_cancer.append(b)
+
+    # here, we append the driver gene's name and cancer name for future visualization in ROC
+    driver_gene_in_c.append(gene_list_final_for_cancer[0])
+    # see what is the driver gene in that cancer
+    print(gene_list_final_for_cancer, cfg.ORGAN_NAMES[cancer_type])
+    # see the frequency of that driver gene in the cancer
+    print(gene_freq_list_final_for_cancer)
+
+    # we load the weight of sbs in that cancer in that fold ,normalize the weights and find the powerful
+    # signature in that cancer
+    cancer_type_path = '../classification_cancer_analysis/result/cancer_type-weight_' + str(fold) + '.npy'
+    cancer_type_weight = np.load(cancer_type_path).T  # shape (49,32)
+    cancer_type_scaler = MinMaxScaler()
+    cancer_type_nor_weight = cancer_type_scaler.fit_transform(abs(cancer_type_weight))
+    # normalize it to 0 and 1
+    cancer_type_zero_one_weight = cancer_type_nor_weight / np.sum(cancer_type_nor_weight, axis=0).reshape(1, 32)
+
+    cancer_type_zero_one_weight_c = list(cancer_type_zero_one_weight[:, cancer_type])
+
+    # we find the top 10 weighted sbs signatures comes handy in identify this cancer
+
+    top_10_cancer_sbs_index = list(reversed(
+        sorted(range(len(cancer_type_zero_one_weight_c)), key=lambda k: cancer_type_zero_one_weight_c[k])[
+        -10:]))
+
+    # get the top 10 sbs signatures' column name(used for feature extraction)
+    res_cancer_sbs_weight_list = [cfg.SBS_NAMES[s] for s in top_10_cancer_sbs_index]
+
+    return gene_list_final_for_cancer, gene_freq_list_final_for_cancer, res_cancer_sbs_weight_list, driver_gene_in_c
+
+
+# the function used to return the model built
+def gene_model(num_features):
+
+    simple_model = Sequential()
+    simple_model.add(Conv1D(filters=8, kernel_size=3, padding='SAME', input_shape=(num_features, 1)))
+    simple_model.add(Activation('tanh'))
+    simple_model.add(Conv1D(16, kernel_size=3, strides=1, padding='same'))
+    simple_model.add(Flatten())
+    simple_model.add(Activation('tanh'))
+    simple_model.add(Dropout(rate=0.5))
+    simple_model.add(Dense(2))
+    simple_model.add(Dense(1, kernel_initializer='normal', activation='sigmoid'))
+
+    # # plot the model.uncomment until you installed pydot and graphviz
+    # plot_model(model, to_file='./result/simple_cnn_model_plot.pdf', show_shapes=True, show_layer_names=True)
+
+    return simple_model
+
+
 if __name__ == '__main__':
     # read the data
     o_data = []
@@ -216,77 +293,19 @@ if __name__ == '__main__':
         # we load the weight of each sbs in that cancer
         for cancer_type in range(len(cfg.ORGAN_NAMES)):
 
-            gene_list_for_cancer = []
-            gene_freq_list_for_cancer = []
-
-            gene_list_final_for_cancer = []
-            gene_freq_list_final_for_cancer = []
-
-            for gene in cfg.GENE_NAMES_DICT[cfg.ORGAN_NAMES[cancer_type]]:
-                gene_list_for_cancer.append((gene, cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0]))
-                gene_freq_list_for_cancer.append(cancer_prob[cfg.ORGAN_NAMES[cancer_type]][gene].values[0])
-
-            # find the top 1 gene's index in pandas frame
-            top_1_index = list(reversed(
-                sorted(range(len(gene_freq_list_for_cancer)), key=lambda i: gene_freq_list_for_cancer[i])[-1:]))
-
-            # find those gene and their freq as (gene,freq)
-            res_list = [gene_list_for_cancer[i] for i in top_1_index]
-
-            # append the gene name into gene_list_final_for_cancer list
-            # append the gene mutation frequency to gene_freq_list_final_for_cancer list
-            for (a, b) in res_list:
-                gene_list_final_for_cancer.append(a)
-                gene_freq_list_final_for_cancer.append(b)
-
-            # here, we append the driver gene's name and cancer name for future visualization in ROC
-            cancer_driver_gene.append(gene_list_final_for_cancer[0])
-            # see what is the driver gene in that cancer
-            print(gene_list_final_for_cancer, cfg.ORGAN_NAMES[cancer_type])
-            # see the frequency of that driver gene in the cancer
-            print(gene_freq_list_final_for_cancer)
-
-            # we load the weight of sbs in that cancer in that fold ,normalize the weights and find the powerful
-            # signature in that cancer
-            cancer_type_path = '../classification_cancer_analysis/result/cancer_type-weight_' + str(fold) + '.npy'
-            cancer_type_weight = np.load(cancer_type_path).T  # shape (49,32)
-            cancer_type_scaler = MinMaxScaler()
-            cancer_type_nor_weight = cancer_type_scaler.fit_transform(abs(cancer_type_weight))
-            # normalize it to 0 and 1
-            cancer_type_zero_one_weight = cancer_type_nor_weight / np.sum(cancer_type_nor_weight, axis=0).reshape(1, 32)
-
-            cancer_type_zero_one_weight_c = list(cancer_type_zero_one_weight[:, cancer_type])
-
-            # we find the top 10 weighted sbs signatures comes handy in identify this cancer
-
-            top_10_cancer_sbs_index = list(reversed(
-                sorted(range(len(cancer_type_zero_one_weight_c)), key=lambda k: cancer_type_zero_one_weight_c[k])[
-                -10:]))
-
-            # get the top 10 sbs signatures' column name(used for feature extraction)
-            res_cancer_sbs_weight_list = [cfg.SBS_NAMES[s] for s in top_10_cancer_sbs_index]
-
+            gene_list_final, gene_freq_list_final, top10_sbs_list, cancer_driver_gene = find_top_gene_top_10_sbs(fold,
+                                                                                                     cancer_type,
+                                                                                                     cancer_prob,
+                                                                                                     cancer_driver_gene)
             train_x, train_y, test_x, test_y = get_data(o_data, fold, cfg.ORGAN_NAMES[cancer_type],
-                                                        gene_list_final_for_cancer,
-                                                        res_cancer_sbs_weight_list)
+                                                        gene_list_final,
+                                                        top10_sbs_list)
 
-            valid_x, valid_y = process_data(valid_dataset, cfg.ORGAN_NAMES[cancer_type], gene_list_final_for_cancer,
-                                            res_cancer_sbs_weight_list)
+            valid_x, valid_y = process_data(valid_dataset, cfg.ORGAN_NAMES[cancer_type], gene_list_final,
+                                            top10_sbs_list)
             # constructing the simple CNN
             n_features = train_x.shape[1]
-            model = Sequential()
-            model.add(Conv1D(filters=8, kernel_size=3, padding='SAME', input_shape=(n_features, 1)))
-            model.add(Activation('tanh'))
-            model.add(Conv1D(16, kernel_size=3, strides=1, padding='same'))
-            model.add(Flatten())
-            model.add(Activation('tanh'))
-            model.add(Dropout(rate=0.5))
-            model.add(Dense(2))
-            model.add(Dense(1, kernel_initializer='normal', activation='sigmoid'))
-
-            # # plot the model.uncomment until you installed pydot and graphviz
-            # plot_model(model, to_file='./result/simple_cnn_model_plot.pdf', show_shapes=True, show_layer_names=True)
-
+            model = gene_model(n_features)
             # set up optimizer
             sgd = SGD(lr=0.001, decay=1e-9, momentum=0.9, nesterov=True)
             model.compile(loss=focal_loss(gamma=2., alpha=0.1),
@@ -300,11 +319,11 @@ if __name__ == '__main__':
             # train the model
             history = model.fit(x_train, train_y, epochs=200, batch_size=1000)
 
-            # save the model
-            model.save("./result/my_simple_cnn_model.h5")
+            # save the model (at moment, we don't need it)
+            # model.save("./result/my_simple_cnn_model.h5")
 
             # appending all of the gene's training process in each cancer types in each fold
-            total_gene_history.append((history, gene_list_final_for_cancer[0]))
+            total_gene_history.append((history, gene_list_final[0]))
 
             # test on testing data
             accuracy_test = score(model, x_test, test_y)
@@ -329,14 +348,12 @@ if __name__ == '__main__':
             valid_y_p[valid_y_p <= 0.5] = 0
 
             tool.gene_class_report(valid_y, valid_y_p, cfg.ORGAN_NAMES[cancer_type], fold,
-                                   gene_list_final_for_cancer, gene_freq_list_final_for_cancer)
-
+                                   gene_list_final, gene_freq_list_final)
             acc_test_valid = np.mean(np.sum((valid_y - valid_y_p) == 0, axis=0) / valid_y.shape[0])
 
             test_acc.append(accuracy_test)
             valid_acc.append(acc_test_valid)
             # -------------------------------------------------------------------------------------------------------
-
             print("Validation Accuracy: {:.4f}".format(acc_test_valid))
 
         # plot the converge graph for each fold
@@ -345,7 +362,8 @@ if __name__ == '__main__':
         roc_draw(all_gene_valid_y, all_gene_valid_pred, fold, cancer_driver_gene)
         # we do the weighted averaging calculation here for testing overall classification accuracy
         test_acc_fold.append(sum([acc * (weight / sum(weight_lst)) for acc, weight in zip(test_acc, weight_lst)]))
-        valid_acc_fold.append(sum([acc_1 * (weight_1 / sum(weight_lst)) for acc_1, weight_1 in zip(valid_acc, weight_lst)]))
+        valid_acc_fold.append(
+            sum([acc_1 * (weight_1 / sum(weight_lst)) for acc_1, weight_1 in zip(valid_acc, weight_lst)]))
 
     # save the classification result in each fold to log file for observation
     with open('./result/gene_generalized_accuracy/5_fold_accuracy_for_test_data.txt', 'w') as f:

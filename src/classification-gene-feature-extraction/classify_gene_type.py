@@ -1,7 +1,7 @@
 """
 
     This file is used to test on the self-build model on the classification_cancer_analysis of genes
-    based on mutation signature (SBS) using 5 fold cross validation(RESEARCH)
+    based on mutation signature (SBS) using 5 fold cross validation(RESEARCH AND DEPRECATED)
 
 """
 
