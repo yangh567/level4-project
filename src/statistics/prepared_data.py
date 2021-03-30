@@ -1,6 +1,6 @@
 """
 
-This file is used to split the original data into 6 folds
+This file is used to split the original data into 6 folds,
 5 fold used for 5-fold cross validation and one fold for
 validation in each fold
 

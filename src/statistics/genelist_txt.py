@@ -19,7 +19,7 @@ gene_list = ['CCND1', 'CCND2', 'CCND3', 'CCNE1', 'CDK4', 'CDK6', 'E2F1', 'E2F3',
              'ROS1', 'RPS6KA3', 'RPS6KB1', 'SFRP2', 'SFRP4', 'SFRP5', 'SOS1', 'SOST', 'SPEN', 'SPRED1', 'STK3', 'STK4',
              'TAOK1', 'TAOK2', 'TAOK3', 'TCF7', 'TCF7L1', 'TEAD2', 'THBS2', 'TLE1', 'TLE2', 'TLE3', 'TLE4', 'WIF1',
              'WWC1', 'CRB3', 'LRP5', 'NTRK2', 'PDGFRB', 'TEAD3', 'WWTR1']
-
+# write the gene into the txt
 f = open("geneList.txt", "a")
 for i in gene_list:
     f.write(i)

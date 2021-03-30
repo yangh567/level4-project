@@ -23,8 +23,7 @@ cancer_dict = {0: 'ACC', 1: 'BLCA', 2: 'BRCA', 3: 'CESC', 4: 'CHOL', 5: 'COAD', 
                18: 'MESO', 19: 'OV', 20: 'PAAD', 21: 'PCPG', 22: 'PRAD', 23: 'READ', 24: 'SARC', 25: 'SKCM', 26: 'TGCT',
                27: 'THCA', 28: 'THYM', 29: 'UCEC', 30: 'UCS', 31: 'UVM'}
 
-# cancer_sbs_weight = np.load("./result/cancer_type_normalized-weight.npy", mmap_mode='r').T
-
+# we only do it for 0 fold
 cancer_type_path = './result/cancer_type-weight_0.npy'
 cancer_type_weight = np.load(cancer_type_path).T  # shape (49,32)
 cancer_type_scaler = MinMaxScaler()
@@ -35,6 +34,7 @@ cancer_type_zero_one_weight = cancer_type_nor_weight / np.sum(cancer_type_nor_we
 
 cancer_similarities = {}
 
+# calculate the cosine similarity for each pairwise cancers
 for i in range(32):
     other_cancers = []
     for j in range(32):
@@ -42,18 +42,19 @@ for i in range(32):
             1 - spatial.distance.cosine(cancer_type_zero_one_weight[i], cancer_type_zero_one_weight[j]))
         cancer_similarities[i] = other_cancers
 
-# print(cancer_similarities)
 
 cancer_similarities_list = []
 for cancer in cancer_similarities:
     cancer_similarities_list.append(cancer_similarities[cancer])
 
 num = 0
+# find the top 5 similar cancers and their cosine similarity with each cancers
 for cancer_lst in cancer_similarities_list:
     index = list(reversed(sorted(range(len(cancer_lst)), key=lambda i: cancer_lst[i])[-5:]))
     print(cancer_list[num], [cancer_list[x] for x in index], [cancer_lst[y] for y in index])
     num += 1
 
+# convert the list to dataframe and plot the similarity with seaborn
 cancer_similarity_df = pd.DataFrame(cancer_similarities_list, columns=cancer_list)
 cancer_similarity_df.rename(index=cancer_dict, inplace=True)
 

@@ -155,9 +155,11 @@ def score(test_x, test_y, title=0, cancer__type="", gene_list=None, gene_list_mu
 
     y_pred = model(x_test).detach().numpy()
     if final:
+        # draw the roc graph
         roc_draw(y_test, y_pred, title, cancer__type, gene_list)
         y_pred[y_pred > 0.5] = 1
         y_pred[y_pred <= 0.5] = 0
+        # report on classification
         tool.gene_class_report(y_test.detach().numpy(), y_pred, cancer__type, title, gene_list, gene_list_mutation_prob)
 
     y_pred[y_pred > 0.5] = 1

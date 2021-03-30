@@ -28,8 +28,9 @@ for cancer in ORGAN_NAMES:
     for gene in cancer_driver_gene_dict[cancer]:
         driver_gene_list.append(gene)
 
-
+# extract out all of the repeated gene
 driver_gene_list = list(set(driver_gene_list))
 
+# show me the length and content of gene
 print(len(driver_gene_list))
 print(driver_gene_list)
