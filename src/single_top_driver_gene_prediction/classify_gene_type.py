@@ -179,9 +179,7 @@ if __name__ == '__main__':
     valid_dataset = valid_dataset.fillna(0)
 
     # set the recorder to record the trained model's best testing accuracy in each fold
-    test_acc = []
     test_acc_fold = []
-    valid_acc = []
     valid_acc_fold = []
 
     # load the gene occurrence probability in each cancer
@@ -191,13 +189,11 @@ if __name__ == '__main__':
         cancer_prob[name] = item
     # performing the 5 fold cross validation
     for fold in range(cfg.CROSS_VALIDATION_COUNT - 1):
-
+        test_acc = []
+        valid_acc = []
         # we load the weight of each sbs in that cancer
         for cancer_type in range(len(cfg.ORGAN_NAMES)):
 
-            # set up the cancer tpe encode here
-            # gene_list = []
-            # gene_list_mutation_prob = []
             gene_list_for_cancer = []
             gene_freq_list_for_cancer = []
 

@@ -1,5 +1,5 @@
 """
-This file provides the tools to analyse on the gene distribution in specific cancer and their classification accuracies
+This file provides the tools to analyse on the gene distribution in specific cancer and their classification accuracies(DEPRECATED)
 
 """
 
@@ -50,7 +50,7 @@ class MultiColumnLabelEncoder:
         return self.fit(X, y).transform(X)
 
 
-# used to print out the classification_cancer_analysis result for each genes
+# used to print out the classification_cancer_analysis result for each genes (DEPRECATED)
 def gene_class_report(y, y_hat, cancer__type, title, gene_list, gene_list_mutation_prob):
     gene_accuracy_dict = {}
     gene_list = gene_list
