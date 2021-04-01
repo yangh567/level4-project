@@ -30,9 +30,8 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # the weight of each class in averaging the classification accuracy
-weight_lst = [168, 98, 89, 86, 85, 85, 82, 80, 80, 73, 71, 69, 65, 62, 56, 51, 48, 41, 33, 31, 30, 26, 25, 20,
-              20,
-              17, 15, 13, 12, 11, 9, 7]
+weight_lst = [162, 98, 90, 87, 85, 84, 80, 80, 74, 73, 67, 67, 64, 60, 59, 50, 48, 43, 34, 34, 31, 29, 27, 25,
+              21, 19, 19, 18, 15, 13, 9, 8]
 
 
 # this function is used to plot the total summary loss and total summary accuracy in each fold
@@ -129,7 +128,9 @@ def process_data(data, cancer_type, gene_list, sbs_names, scale=True):
     for sbs_name in cfg.SBS_NAMES:
         # set the sbs that are not important to 0
         if not sbs_name in sbs_names:
-            data_copy[data_copy["organ"] == cancer_type][sbs_name] = 0
+            data_copy[data_copy["organ"] == cancer_type][sbs_name] = 0.001 * \
+                                                                     data_copy[data_copy["organ"] == cancer_type][
+                                                                         sbs_name]
     # feed the matrix
     x = data_copy[data_copy["organ"] == cancer_type][cfg.SBS_NAMES]
     y = data_copy[data_copy["organ"] == cancer_type][gene_list]
@@ -169,7 +170,7 @@ def score(cnn_model, test_x, test_y):
     return acc_test
 
 
-# the focal loss used to solve class imbalance problem
+# the focal loss used to solve class imbalance problem (DEPRECATED)
 def focal_loss(gamma, alpha):
     def focal_loss_fixed(y_true, y_pred):
         pt_1 = tf.where(tf.equal(y_true, 1), y_pred, tf.ones_like(y_pred))
@@ -240,15 +241,20 @@ def find_top_gene_top_10_sbs(fold, cancer_type, caner_probability, driver_gene_i
 
 # the function used to return the model built
 def gene_model(num_features):
-
     simple_model = Sequential()
+    # first conv layer
     simple_model.add(Conv1D(filters=8, kernel_size=3, padding='SAME', input_shape=(num_features, 1)))
     simple_model.add(Activation('tanh'))
+    # second conv layer
     simple_model.add(Conv1D(16, kernel_size=3, strides=1, padding='same'))
+    # flatten layer
     simple_model.add(Flatten())
     simple_model.add(Activation('tanh'))
+    # regularization
     simple_model.add(Dropout(rate=0.5))
+    # fully connected layer
     simple_model.add(Dense(2))
+    # output layer
     simple_model.add(Dense(1, kernel_initializer='normal', activation='sigmoid'))
 
     # # plot the model.uncomment until you installed pydot and graphviz
@@ -290,13 +296,11 @@ if __name__ == '__main__':
         all_gene_valid_pred = []
         # the list used to store the cancer type and driver gene in that cancer
         cancer_driver_gene = []
-        # we load the weight of each sbs in that cancer
         for cancer_type in range(len(cfg.ORGAN_NAMES)):
-
             gene_list_final, gene_freq_list_final, top10_sbs_list, cancer_driver_gene = find_top_gene_top_10_sbs(fold,
-                                                                                                     cancer_type,
-                                                                                                     cancer_prob,
-                                                                                                     cancer_driver_gene)
+                                                                                                                 cancer_type,
+                                                                                                                 cancer_prob,
+                                                                                                                 cancer_driver_gene)
             train_x, train_y, test_x, test_y = get_data(o_data, fold, cfg.ORGAN_NAMES[cancer_type],
                                                         gene_list_final,
                                                         top10_sbs_list)
@@ -308,7 +312,7 @@ if __name__ == '__main__':
             model = gene_model(n_features)
             # set up optimizer
             sgd = SGD(lr=0.001, decay=1e-9, momentum=0.9, nesterov=True)
-            model.compile(loss=focal_loss(gamma=2., alpha=0.1),
+            model.compile(loss="mean_squared_error",
                           optimizer=sgd,
                           metrics=['accuracy'])
             # reshape the input data
@@ -317,7 +321,7 @@ if __name__ == '__main__':
             x_valid = np.expand_dims(valid_x, -1)
 
             # train the model
-            history = model.fit(x_train, train_y, epochs=200, batch_size=1000)
+            history = model.fit(x_train, train_y, epochs=200, batch_size=10000)
 
             # save the model (at moment, we don't need it)
             # model.save("./result/my_simple_cnn_model.h5")

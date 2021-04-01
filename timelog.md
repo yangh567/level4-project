@@ -749,3 +749,17 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 ## 29 March 2020 Monday
 * *1 hour* working on dissertation evaluation part
 * *1 minute* writing timelog
+
+## 30 March 2020 Tuesday
+* *1 hour* working on dissertation evaluation part
+* *1 minute* writing timelog
+
+## 31 March 2020 Wednesday
+* *1 hour* working on dissertation evaluation part
+* *find a bug and debugged it( the frequency of driver gene in cancer is corrected)
+* *1 minute* writing timelog
+
+## 1 April 2020 Thursday
+* *1 hour* working on dissertation evaluation part
+* *1 hour* rerun the result to test the program
+* *1 minute* writing timelog

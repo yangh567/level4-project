@@ -1,5 +1,5 @@
 """
-The normalization of sbs weights in BLCA and BRCA
+The normalization of sbs weights in BLCA and LGG
 """
 import os
 import sys

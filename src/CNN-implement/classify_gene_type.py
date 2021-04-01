@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-from keras.layers import Dense, Activation, Flatten, Dropout, Conv1D, BatchNormalization, MaxPooling1D
+from keras.layers import Dense, Activation, Flatten, Dropout, Conv1D, BatchNormalization, MaxPooling1D, SpatialDropout1D
 from keras.models import Sequential
 from keras.optimizers import SGD
 from keras.optimizers import Adam
@@ -31,8 +31,8 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # the weight of each class in averaging the classification accuracy
-weight_lst = [168, 98, 89, 86, 85, 85, 82, 80, 80, 73, 71, 69, 65, 62, 56, 51, 48, 41, 33, 31, 30, 26, 25, 20,
-              20, 17, 15, 13, 12, 11, 9, 7]
+weight_lst = [162, 98, 90, 87, 85, 84, 80, 80, 74, 73, 67, 67, 64, 60, 59, 50, 48, 43, 34, 34, 31, 29, 27, 25,
+              21, 19, 19, 18, 15, 13, 9, 8]
 
 
 # this function is used to plot the total summary loss and total summary accuracy in each fold
@@ -130,7 +130,7 @@ def process_data(data, cancer_type, gene_list, sbs_names, scale=True):
     for sbs_name in cfg.SBS_NAMES:
         # set the sbs that are not important to 0
         if not sbs_name in sbs_names:
-            data_copy[data_copy["organ"] == cancer_type][sbs_name] = 0
+            data_copy[data_copy["organ"] == cancer_type][sbs_name] = 0.001*data_copy[data_copy["organ"] == cancer_type][sbs_name]
     # feed the matrix
     x = data_copy[data_copy["organ"] == cancer_type][cfg.SBS_NAMES]
     y = data_copy[data_copy["organ"] == cancer_type][gene_list]
@@ -170,7 +170,7 @@ def score(cnn_model, test_x, test_y):
     return acc_test
 
 
-# we define the focal loss to help with class imbalance problem here
+# we define the focal loss to help with class imbalance problem here (DEPRECATED)
 def focal_loss(gamma, alpha):
     def focal_loss_fixed(y_true, y_pred):
         pt_1 = tf.where(tf.equal(y_true, 1), y_pred, tf.ones_like(y_pred))
@@ -243,18 +243,25 @@ def find_top_gene_top_10_sbs(fold, cancer_type, caner_probability, driver_gene_i
 def gene_model(num_features):
 
     complex_model = Sequential()
+    # first conv layer
     complex_model.add(Conv1D(8, kernel_size=3, strides=1, padding='same', input_shape=(num_features, 1)))
     complex_model.add(BatchNormalization())
     complex_model.add(Activation('tanh'))
+    # second conv layer
     complex_model.add(Conv1D(8, kernel_size=3, strides=1, padding='same'))
+    # third conv layer
     complex_model.add(Conv1D(16, kernel_size=3, strides=1, padding='valid'))
     complex_model.add(BatchNormalization())
     complex_model.add(Activation('tanh'))
+    # fourth conv layer
     complex_model.add(Conv1D(16, kernel_size=3, strides=1, padding='same'))
     complex_model.add(BatchNormalization())
     complex_model.add(Activation('tanh'))
+    # flatten layer
     complex_model.add(Flatten())
-    complex_model.add(Dropout(0.5))
+    # regularization
+    complex_model.add(Dropout(0.7))
+    # output layer
     complex_model.add(Dense(1, kernel_initializer='normal', activation='sigmoid'))
 
     # # plot the model.uncomment until you installed pydot and graphviz
@@ -297,10 +304,7 @@ if __name__ == '__main__':
         all_gene_valid_pred = []
         # the list used to store the cancer type and driver gene in that cancer
         cancer_driver_gene = []
-        # we load the weight of each sbs in that cancer
-        # we load the weight of each sbs in that cancer
         for cancer_type in range(len(cfg.ORGAN_NAMES)):
-
             gene_list_final, gene_freq_list_final, top10_sbs_list, cancer_driver_gene = find_top_gene_top_10_sbs(fold,
                                                                                                                  cancer_type,
                                                                                                                  cancer_prob,
@@ -315,21 +319,24 @@ if __name__ == '__main__':
             # constructing the complex CNN
             n_features = train_x.shape[1]
             model = gene_model(n_features)
+
             # set up optimizer
-            sgd = SGD(lr=0.00091, decay=1e-9, momentum=0.9, nesterov=True)
+            sgd = SGD(lr=0.00088, decay=1e-9, momentum=0.9, nesterov=True)
 
-            adam = Adam(lr=0.00098, beta_1=0.9, beta_2=0.999, epsilon=1e-09)
+            # adam = Adam(lr=0.0096, beta_1=0.9, beta_2=0.999, epsilon=1e-09)
 
-            model.compile(loss=focal_loss(gamma=2., alpha=0.1),
-                          optimizer=adam,
-                          metrics=['accuracy'])
+            # compile the model
+            model.compile(loss="mean_squared_error",
+                          optimizer=sgd,
+                          metrics=['acc'])
+
             # reshape the input data
             x_train = np.expand_dims(train_x, -1)
             x_test = np.expand_dims(test_x, -1)
             x_valid = np.expand_dims(valid_x, -1)
 
             # train the model
-            history = model.fit(x_train, train_y, epochs=200, batch_size=100800)
+            history = model.fit(x_train, train_y, epochs=200, batch_size=8028)
 
             # save the model
             # model.save("./result/my_complex_cnn_model.h5")

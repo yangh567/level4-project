@@ -34,7 +34,7 @@ use_columns = ['organ', 'MEN1', 'ATRX', 'CTNNB1', 'TP53', 'PRKAR1A', 'RXRA', 'CU
                'ATF7IP', 'RFC1',
                'BCL2L11', 'MAP3K4', 'ZBTB7B', 'PLCB4', 'GNAQ', 'SRSF2', 'CYSLTR2']
 # we only need to extract those gene and their caner type to calculate their occurrence in each type in all samples
-data = pd.read_csv('../../data/cross_valid/validation_dataset.csv', usecols=use_columns, low_memory=True)
+data = pd.read_csv('../../data/processed/sample_id.sbs.organ.csv', usecols=use_columns, low_memory=True)
 
 data = data.fillna(0)
 print(data.columns.tolist())
