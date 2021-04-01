@@ -1,6 +1,6 @@
 """
 
-    This file is used to test on the self-build model on the classification_cancer_analysis of genes
+    This file is used to test on the self-build simple CNN model on the classification_cancer_analysis of genes
     based on mutation signature (SBS) using 5 fold cross validation
 
 """
@@ -14,6 +14,7 @@ import tensorflow as tf
 from keras.layers import Dense, Activation, Flatten, Dropout, Conv1D
 from keras.models import Sequential
 from keras.optimizers import SGD
+from keras.optimizers import RMSprop
 from sklearn.metrics import roc_curve, auc
 from copy import deepcopy
 from sklearn.preprocessing import StandardScaler
@@ -74,6 +75,20 @@ def plot_epoch_acc_loss(all_model_history, title, epochs):
         format='png',
         bbox_inches='tight')
     plt.close()
+
+
+# the function to save the accuracy results of gene in each cancers in a fold
+def save_accuracy_results(fold, cancer_list, cancer_gene, validation_acc, cancer_gene_freq):
+    data = {
+        'cancer_type': cancer_list,
+        'gene_name': cancer_gene,
+        'Accuracy': validation_acc,
+        'Mutation_frequency': cancer_gene_freq
+    }
+    # save as pandas dataframe and save to file
+    df = pd.DataFrame(data)
+    df.to_csv('./result/gene_classification_accuracy/The_classification_across_gene_in_fold_%d.csv' % (
+        fold))
 
 
 # implement the function of drawing the roc and auc graph
@@ -162,12 +177,15 @@ def get_data(o_data, index, cancer_type, gene_list, sbs_names):
 # score the classification accuracy for each gene in each cancer and draw the roc graph
 def score(cnn_model, test_x, test_y):
     y_pred = cnn_model.predict(test_x)
-    y_pred[y_pred > 0.5] = 1
-    y_pred[y_pred <= 0.5] = 0
 
-    acc_test = np.mean(np.sum((test_y - y_pred) == 0, axis=0) / test_y.shape[0])
+    y_c_pred = deepcopy(y_pred)
 
-    return acc_test
+    y_c_pred[y_c_pred > 0.5] = 1
+    y_c_pred[y_c_pred <= 0.5] = 0
+
+    acc_test = np.mean(np.sum((test_y - y_c_pred) == 0, axis=0) / test_y.shape[0])
+
+    return y_pred, acc_test
 
 
 # the focal loss used to solve class imbalance problem (DEPRECATED)
@@ -192,6 +210,7 @@ def find_top_gene_top_10_sbs(fold, cancer_type, caner_probability, driver_gene_i
     # the list used to contain the top driver gene's frequency in that cancer
     gene_freq_list_final_for_cancer = []
 
+    # we leave the list extension here to find the top frequently mutated gene if there is more
     for gene in cfg.GENE_NAMES_DICT[cfg.ORGAN_NAMES[cancer_type]]:
         gene_list_for_cancer.append((gene, caner_probability[cfg.ORGAN_NAMES[cancer_type]][gene].values[0]))
         gene_freq_list_for_cancer.append(caner_probability[cfg.ORGAN_NAMES[cancer_type]][gene].values[0])
@@ -225,11 +244,10 @@ def find_top_gene_top_10_sbs(fold, cancer_type, caner_probability, driver_gene_i
     cancer_type_nor_weight = cancer_type_scaler.fit_transform(abs(cancer_type_weight))
     # normalize it to 0 and 1
     cancer_type_zero_one_weight = cancer_type_nor_weight / np.sum(cancer_type_nor_weight, axis=0).reshape(1, 32)
-
+    # only take that cancer's weights
     cancer_type_zero_one_weight_c = list(cancer_type_zero_one_weight[:, cancer_type])
 
     # we find the top 10 weighted sbs signatures comes handy in identify this cancer
-
     top_10_cancer_sbs_index = list(reversed(
         sorted(range(len(cancer_type_zero_one_weight_c)), key=lambda k: cancer_type_zero_one_weight_c[k])[
         -10:]))
@@ -303,6 +321,7 @@ if __name__ == '__main__':
         cancer_driver_gene_freq = []
 
         for cancer_type in range(len(cfg.ORGAN_NAMES)):
+            # find the top frequently mutated gene in that cancer as well as the top 10 sbs signatures in that cancer
             gene_list_final, cancer_driver_gene_freq, top10_sbs_list, cancer_driver_gene = find_top_gene_top_10_sbs(
                 fold,
                 cancer_type,
@@ -314,13 +333,17 @@ if __name__ == '__main__':
 
             valid_x, valid_y = process_data(valid_dataset, cfg.ORGAN_NAMES[cancer_type], gene_list_final,
                                             top10_sbs_list)
+
+            # record the valid_y for the gene in the cancer for drawing ROC
+            all_gene_valid_y.append(valid_y)
             # constructing the simple CNN
             n_features = train_x.shape[1]
             model = gene_model(n_features)
             # set up optimizer
-            sgd = SGD(lr=0.001, decay=1e-9, momentum=0.9, nesterov=True)
-            model.compile(loss="mean_squared_error",
-                          optimizer=sgd,
+            # sgd = SGD(lr=0.0058, decay=1e-9, momentum=0.9, nesterov=True)
+            rmsp = RMSprop(lr=0.001, rho=0.9)
+            model.compile(loss="binary_crossentropy",
+                          optimizer=rmsp,
                           metrics=['accuracy'])
             # reshape the input data
             x_train = np.expand_dims(train_x, -1)
@@ -328,60 +351,31 @@ if __name__ == '__main__':
             x_valid = np.expand_dims(valid_x, -1)
 
             # train the model
-            history = model.fit(x_train, train_y, epochs=200, batch_size=10000)
+            history = model.fit(x_train, train_y, epochs=200, batch_size=1280)
 
             # save the model (at moment, we don't need it)
             # model.save("./result/my_simple_cnn_model.h5")
 
             # appending all of the gene's training process in each cancer types in each fold
             total_gene_history.append((history, gene_list_final[0]))
-
             # test on testing data
-            accuracy_test = score(model, x_test, test_y)
-            print("Testing Accuracy: {:.4f}".format(accuracy_test))
-
-            # --------------------------------------------------------------------------------------------------------
-            # validate on validation data and store the validation prediction value for later combination of ROC graph
-            all_gene_valid_y.append(valid_y)
-
+            _, accuracy_test = score(model, x_test, test_y)
+            # validate on validation data and store the validation prediction value for later combination of
+            # different gene in ROC graph
+            valid_y_pred, accuracy_valid = score(model, x_valid, valid_y)
             # store the validation y
-            valid_y_pred = model.predict(x_valid)
-
-            valid_y_p = deepcopy(valid_y_pred)
-
-            # store the validation prediction value
             all_gene_valid_pred.append(valid_y_pred)
-
-            # used to collect the classification of each gene in each cancer and stored into csv file under
-            # gene_classification_accuracy folder
-
-            valid_y_p[valid_y_p > 0.5] = 1
-            valid_y_p[valid_y_p <= 0.5] = 0
-
-            acc_test_valid = np.mean(np.sum((valid_y - valid_y_p) == 0, axis=0) / valid_y.shape[0])
-
+            # append the testing accuracy and validation accuracy for displaying
             test_acc.append(accuracy_test)
-            valid_acc.append(acc_test_valid)
-            # -------------------------------------------------------------------------------------------------------
-            print("Validation Accuracy: {:.4f}".format(acc_test_valid))
+            valid_acc.append(accuracy_valid)
+            print("Testing Accuracy: {:.4f}".format(accuracy_test))
+            print("Validation Accuracy: {:.4f}".format(accuracy_valid))
 
-        # Now, we can start validation here
+        # Now, we can start Evaluation here
         # plot the converge graph for each fold
         plot_epoch_acc_loss(total_gene_history, fold, 200)
-
         # save the classification result (accuracy) of gene across cancers of this fold to the file
-        gene_accuracy_dict = {}
-        data = {
-            'cancer_type': cfg.ORGAN_NAMES,
-            'gene_name': cancer_driver_gene,
-            'Accuracy': valid_acc,
-            'Mutation_frequency': cancer_driver_gene_freq
-        }
-        # save as pandas dataframe and save to file
-        df = pd.DataFrame(data)
-        df.to_csv('./result/gene_classification_accuracy/The_classification_across_gene_in_fold_%d.csv' % (
-            fold))
-
+        save_accuracy_results(fold, cfg.ORGAN_NAMES, cancer_driver_gene, valid_acc, cancer_driver_gene_freq)
         # now,we can finally draw the roc for every gene classification in each cancer in this fold
         roc_draw(all_gene_valid_y, all_gene_valid_pred, fold, cancer_driver_gene)
         # we do the weighted averaging calculation here for testing overall classification accuracy

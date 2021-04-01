@@ -179,6 +179,7 @@ def score(test_x, test_y, title=0, report=False):
 
     acc_test = accuracy_score(torch.argmax(y_test, dim=1).detach().numpy(), y_pred)
     if report:
+        # plot the confusion matrix
         n_classes = len(y_test[1])
         m_c_m.plot_confusion_matrix(torch.argmax(y_test, dim=1).detach().numpy(), y_pred, title,
                                     title="The confusion matrix for fold" + str(title), organ_list=cfg.ORGAN_NAMES)

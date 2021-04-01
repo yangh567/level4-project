@@ -21,7 +21,7 @@ os.chdir("..")
 # preparing data
 os.chdir("src/statistics")
 # commented until you downloaded the sample_id.sbs.organ.csv processed file from link provided in manual,md
-# execute_prepare_data = subprocess.run(["python", "prepared_data.py"])
+execute_prepare_data = subprocess.run(["python", "prepared_data.py"])
 execute_generate_small_data = subprocess.run(["python", "generate_small_data.py"])
 execute_static_gene_prob = subprocess.run(["python", "static_gene_prob.py"])
 
@@ -35,7 +35,7 @@ os.chdir("..")
 
 # Experiment 1
 os.chdir("src/classification_cancer_analysis")
-execute_classify_cancer = subprocess.run(["python", "classify_cancer_type_pytorch.py"])
+# execute_classify_cancer = subprocess.run(["python", "classify_cancer_type_pytorch.py"])
 execute_analysis = subprocess.run(["python", "Normalize_cancer_sbs_weight.py"])
 execute_heatmap_generator = subprocess.run(["python", "heatmap_generator.py"])
 execute_top10_sbs_heatmap_generator = subprocess.run(["python", "heatmap_of_top_10_sbs.py"])
