@@ -20,10 +20,16 @@ os.chdir("..")
 
 # preparing data
 os.chdir("src/statistics")
-# commented until you downloaded the sample_id.sbs.organ.csv processed file from link provided in manual,md
-execute_prepare_data = subprocess.run(["python", "prepared_data.py"])
+
+# we first take only the samples in each cancers that have 244 driver gene label and corresponding cancer label to
+# save memory
 execute_generate_small_data = subprocess.run(["python", "generate_small_data.py"])
+# we statistically analyse mutation frequency of each gene in each cancers for later finding the top frequently
+# mutated driver gene in each cancer
 execute_static_gene_prob = subprocess.run(["python", "static_gene_prob.py"])
+# commented until you downloaded the sample_id.sbs.organ.csv processed file from link provided in manual.md (
+# stratified sampling)
+# execute_prepare_data = subprocess.run(["python", "prepared_data.py"])
 
 print("\n")
 print("The data and related graphs are generated")
@@ -35,10 +41,16 @@ os.chdir("..")
 
 # Experiment 1
 os.chdir("src/classification_cancer_analysis")
-# execute_classify_cancer = subprocess.run(["python", "classify_cancer_type_pytorch.py"])
+# performing the cancer classification using sbs signatures
+execute_classify_cancer = subprocess.run(["python", "classify_cancer_type_pytorch.py"])
+# normalize the weight of each sbs is natures in each cancer
 execute_analysis = subprocess.run(["python", "Normalize_cancer_sbs_weight.py"])
+# generate the heatmap to show the contribution of sbs signatures in each cancer
 execute_heatmap_generator = subprocess.run(["python", "heatmap_generator.py"])
+# draw the top 10 sbs signatures contribution location in each cancer to form the idea of feeding those features to CNN
 execute_top10_sbs_heatmap_generator = subprocess.run(["python", "heatmap_of_top_10_sbs.py"])
+# find the similarity between cancers using their sbs signature weights (some share same sbs signature might be more
+# similar) to analyse on why there are some mis classification
 execute_cancer_cancer_similarity = subprocess.run(["python", "sbs_similarity_between_cancers.py"])
 
 print("\n")
@@ -52,6 +64,7 @@ os.chdir("..")
 
 # Experiment 2
 os.chdir("src/Simple-CNN-implement")
+# classify the gene mutation status using simple CNN
 execute_classify_gene_1 = subprocess.run(["python", "classify_gene_type.py"])
 
 print("\n")
@@ -64,6 +77,7 @@ os.chdir("..")
 
 # Experiment 3
 os.chdir("src/CNN-implement")
+# classify the gene mutation status using complex CNN
 execute_classify_gene_2 = subprocess.run(["python", "classify_gene_type.py"])
 
 print("\n")

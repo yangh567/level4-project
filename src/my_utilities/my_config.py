@@ -3,9 +3,7 @@
 This file is used to provide the hyper parameters needed
 
 training episodes for cancer : CANCER_EPOCH
-training episodes for gene :  GENE_EPOCH
 learning rate : LEARNING_RATE
-mini_batch size : BATCH_SIZE
 gene names : GENE_NAMES
 list of driver gene in each cancer : GENE_NAMES_DICT
 sbs signatures : SBS_NAMES
@@ -14,22 +12,18 @@ cancer types : ORGAN_NAMES
 data path : DATA_PATH
 result saving path : C_V_DATA_PATH
 fold numbers : CROSS_VALIDATION_COUNT
-top n genes related to cancer : GENE_COUNT
 
 """
 # train the hyper parameters
 
 CANCER_EPOCH = 1000
-GENE_EPOCH = 500
 LEARNING_RATE = 1e-3
-BATCH_SIZE = 512
 
 DATA_PATH = '../../data/processed/sample_id.sbs.organ.csv'
 C_V_DATA_PATH = '../../data/cross_valid'
 
 CROSS_VALIDATION_COUNT = 6
 GENE_PROB = 0.
-GENE_COUNT = 10
 
 GENE_NAMES = ['MEN1', 'ATRX', 'CTNNB1', 'TP53', 'PRKAR1A', 'RXRA', 'CUL1', 'NFE2L2', 'STAG2', 'EP300', 'FAT1', 'FOXA1',
               'ATM',

@@ -15,70 +15,7 @@ from sklearn.preprocessing import MinMaxScaler
 import my_config as cfg
 
 
-# The function used to extract the features(DEPRECATED)
-def feature_select(x, y):
-    """
-    :return:
-    """
-    clf = ExtraTreesClassifier()
-    clf.fit(x, y)
-    model = SelectFromModel(clf, prefit=True)
-    x_new = model.transform(x)
-    return x_new
-
-
-# the function to encode the labels into numbers (DEPRECATED)
-class MultiColumnLabelEncoder:
-    def __init__(self, columns=None):
-        self.columns = columns  # array of column names to encode
-
-    def fit(self, X, y=None):
-        return self  # not relevant here
-
-    def transform(self, X):
-        """
-        Transforms columns of X specified in self.columns using
-        LabelEncoder(). If no columns specified, transforms all
-        columns in X.
-        """
-        output = X.copy()
-        if self.columns is not None:
-            for col in self.columns:
-                output[col] = LabelEncoder().fit_transform(output[col])
-        else:
-            for colname, col in output.iteritems():
-                output[colname] = LabelEncoder().fit_transform(col)
-        return output
-
-    def fit_transform(self, X, y=None):
-        return self.fit(X, y).transform(X)
-
-
-# used to print out the classification_cancer_analysis result for each genes (DEPRECATED)
-def gene_class_report(y, y_hat, cancer__type, title, gene_list, gene_list_mutation_prob):
-    gene_accuracy_dict = {}
-    gene_list = gene_list
-
-    # calculate the predicting accuracy for the gene in that cancer
-    gene_accuracy_list = list(np.sum((y - y_hat) == 0, axis=0) / y.shape[0])
-
-    # record the classification results for each gene in each cancer
-    for i in range(len(gene_list)):
-        gene_accuracy_dict[gene_list[i]] = gene_accuracy_list[i]
-    data = {
-        'gene_name': gene_list,
-        'Accuracy': gene_accuracy_list,
-        'Mutation_frequency': gene_list_mutation_prob
-    }
-    # save as pandas dataframe and save to file
-    df = pd.DataFrame(data)
-    df.to_csv('./result/gene_classification_accuracy/The_classification_across_gene_fold_%d_for_cancer_%s.csv' % (
-        title, cancer__type))
-    return gene_accuracy_dict
-    pass
-
-
-# the weight of each class in averaging the classification accuracy
+# the weight of each class in averaging the classification accuracy of gene
 weight_lst = [162, 98, 90, 87, 85, 84, 80, 80, 74, 73, 67, 67, 64, 60, 59, 50, 48, 43, 34, 34, 31, 29, 27, 25,
               21, 19, 19, 18, 15, 13, 9, 8]
 
@@ -184,7 +121,7 @@ def roc_draw(y_t, y_p, title, cancer_driver_gene_list):
     plt.close()
 
 
-# score the classification accuracy for each gene in each cancer and draw the roc graph
+# score the classification accuracy for each gene in each cancer
 def score(cnn_model, test_x, test_y):
     y_pred = cnn_model.predict(test_x)
 
@@ -199,7 +136,7 @@ def score(cnn_model, test_x, test_y):
 
 
 # the function to find the top driver gene
-def find_top_gene(cancer_type, caner_probability, driver_gene_in_c, driver_gene_freq_in_c):
+def find_top_gene(cancer_type, caner_probability, driver_gene_in_c=None, driver_gene_freq_in_c=None):
     # the list used to contain all of the driver gene in that cancer
     gene_list_for_cancer = []
     # the list used to contain all of the driver gene's frequency in that cancer
@@ -225,10 +162,11 @@ def find_top_gene(cancer_type, caner_probability, driver_gene_in_c, driver_gene_
     for (a, b) in res_list:
         gene_list_final_for_cancer.append(a)
         gene_freq_list_final_for_cancer.append(b)
-
-    # here, we append the driver gene's name and cancer name for future visualization in ROC
-    driver_gene_in_c.append(gene_list_final_for_cancer[0])
-    driver_gene_freq_in_c.append(gene_freq_list_final_for_cancer[0])
+    if driver_gene_in_c is not None:
+        # here, we append the driver gene's name and cancer name for future visualization in ROC
+        driver_gene_in_c.append(gene_list_final_for_cancer[0])
+    if driver_gene_freq_in_c is not None:
+        driver_gene_freq_in_c.append(gene_freq_list_final_for_cancer[0])
     # see what is the driver gene in that cancer
     print(gene_list_final_for_cancer, cfg.ORGAN_NAMES[cancer_type])
     # see the frequency of that driver gene in the cancer

@@ -106,8 +106,8 @@ if __name__ == '__main__':
             '''Data processing'''
             # find the top frequently mutated gene in that cancer
             gene_list_final, cancer_driver_gene, cancer_driver_gene_freq = tool.find_top_gene(cancer_type, cancer_prob,
-                                                                                              cancer_driver_gene,
-                                                                                              cancer_driver_gene_freq)
+                                                                                              driver_gene_in_c=cancer_driver_gene,
+                                                                                              driver_gene_freq_in_c=cancer_driver_gene_freq)
             # find top 10 sbs signatures in that cancer
             top10_sbs_list = tool.find_top_10_sbs(fold, cancer_type)
 

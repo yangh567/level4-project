@@ -23,8 +23,8 @@ cancer_dict = {0: 'ACC', 1: 'BLCA', 2: 'BRCA', 3: 'CESC', 4: 'CHOL', 5: 'COAD', 
                18: 'MESO', 19: 'OV', 20: 'PAAD', 21: 'PCPG', 22: 'PRAD', 23: 'READ', 24: 'SARC', 25: 'SKCM', 26: 'TGCT',
                27: 'THCA', 28: 'THYM', 29: 'UCEC', 30: 'UCS', 31: 'UVM'}
 
-# we only do it for 0 fold
-cancer_type_path = './result/cancer_type-weight_0.npy'
+# we only do it for 0 fold (only take random fold for observation(4th fold))
+cancer_type_path = './result/cancer_type-weight_4.npy'
 cancer_type_weight = np.load(cancer_type_path).T  # shape (49,32)
 cancer_type_scaler = MinMaxScaler()
 cancer_type_nor_weight = cancer_type_scaler.fit_transform(abs(cancer_type_weight))
