@@ -13,7 +13,7 @@
 ![The example result from cancer classification](src/classification_cancer_analysis/result/cancer_classification_confusion_matrix/The_confusion_matrix_for_validation_in_fold_0.png)
 
 ![The example result from cancer classification 1](src/classification_cancer_analysis/result/cancer_classification_report/The_classification_report_for_validation_in_fold_0.png)
-![The example result from cancer classification 2](src/classification_cancer_analysis/result/cancer_classification_roc_auc/The_roc_auc_for_validation_in_fold_4.png)
+![The example result from cancer classification 2](src/classification_cancer_analysis/result/cancer_classification_roc_auc/The_roc_auc_for_validation_in_fold_0.png)
 
 
 * we then test the feasibility of using mutational signatures to validate the idea of predicting the gene mutation status for patients
@@ -49,6 +49,8 @@ The whole repository contains:
 *  `requirement.txt` -- used to store the required dependencies and libraries
 
 *  `timelog.md` -- used to record the timelog for everyday working status
+
+**Reminder:as the submission only contains data and src,The whole project can be find on github here:https://github.com/yangh567/level4-project/tree/1eaf986f7f5d8e35a9c23165ad9297afff1af0f5**
 
 
 

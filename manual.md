@@ -7,12 +7,12 @@
 
 
 #### (Note here, The automation for experiments is made , simply run `python automation_run.py` to finish all the steps below, or you can do it separately according to steps below, it takes some times to finish all experiments as the complexity of CNN and there are 5 fold for 32 cancers,which means 32 models in each fold, so, please wait)
-#### (Also, note that the line to perform stratified sampling is commented unless you have got the sample_id.sbs.organ.csv file)
+#### (Also, note that the line to perform most frequently mutated driver gene,stratified sampling is commented unless you have got the sample_id.sbs.organ.csv file)
 
 ### 2. The Steps to Run The Code Manually
 #### Part 1 : To obtain data:
 
-* *1. you can skip this part as the data is separated by stratified sampling and stored under `data/cross_valid`*
+* *1. you can skip this part as the data is separated by stratified sampling and stored under `data/cross_valid`, if you don't want to perform stratified sampling again*
    
 
       The processed file is already generated using the R script called "maf2sbs_change.fixID.r" with the TCGA maf files for each cancer types,all running step will be based on the cross validation data set and validation dataset file generated from the processed file generated in 
@@ -39,8 +39,9 @@
       you will need to run the prepared_data.py under "src/statistics/" to generate the stratified sampled files for performing 
       5-fold cross validation for evaluation (5 validation data set and 1 validation dataset) using command "python prepared_data.py".)
 
-
-* *2. Run heatmap_similarity.py under `data/similarity_heatmap` to visualize the similarity of mutational signatures and store the file at `processed/class_graphs` folder using command `python heatmap_similarity.py`.*
+* *2. When you have downloaded the sample_id.sbs.organ.csv from the provided link*
+  
+* *3. Run heatmap_similarity.py under `data/similarity_heatmap` to visualize the similarity of mutational signatures and store the file at `processed/class_graphs` folder using command `python heatmap_similarity.py`.*
 
    
 * *4. Run `python generate_small_data.py` under `src/statistics` to obtain the matrix only contains the gene mutation status of the driver gene we need to investigate on*
@@ -49,6 +50,8 @@
 * *5. Run the static_gene_prob.py under `src/statistics` directory using `python statistic_gene_prob.py` to get the mutation frequency of each gene in each cancer to help with extracting the frequently mutated driver gene in each cancer for future experiments.* 
 
 
+* *6. Run the prepared_data.py under `src/statistics` directory using `python prepared_data.py` to performing stratified sampling to obtain the cross validation data for evaluation and validation data for validation*
+
 
 #### Part 2 : Experiment 1 : To see the classification result of cancer 
 
@@ -56,14 +59,15 @@
  
 * *1. Run `python classify_cancer_type_pytorch.py` under `src/classification_cancer_gene_analysis` to performing the training of classifier on 
    the cancer and evaluate on the model.*
-   
+  
 
-* *3. Run `python Normalize_cancer_sbs_weight.py` under `src/classification_cancer_analysis` to normalize the selected weights*
+* *2. Run `python heatmap_generator.py` under `src/classification_cancer_analysis` to generate the heatmap of the normalized sbs signature weights in each cancer.*
 
 
-* *4. Run `python heatmap_generator.py` under `src/classification_cancer_analysis` to generate the heatmap of the sbs signature weights in each cancer.*
+* *3. Run `python heatmap_of_top_10_sbs.py` under `src/classification_cancer_analysis` to draw the top 10 sbs signatures contribution location in each cancer to support the idea of feeding those spatial features to CNN.*
    
    
+* *4. Run `python sbs_similarity_between_cancers.py` under `src/classification_cancer_analysis` to find the similarity between cancers using their sbs signature weights (some cancers shared same sbs signature might be more similar) to analyse on why there are some mis-classifications.*
 
 
    
