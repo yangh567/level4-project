@@ -25,12 +25,12 @@ os.chdir("src/statistics")
 
 # we first take only the samples in each cancers that have 244 driver gene label and corresponding cancer label to
 # save memory
-execute_generate_small_data = subprocess.run(["python", "generate_small_data.py"])
+'''execute_generate_small_data = subprocess.run(["python", "generate_small_data.py"])'''
 # we statistically analyse mutation frequency of each gene in each cancers for later finding the top frequently
 # mutated driver gene in each cancer
-execute_static_gene_prob = subprocess.run(["python", "static_gene_prob.py"])
+'''execute_static_gene_prob = subprocess.run(["python", "static_gene_prob.py"])'''
 # stratified sampling for gene mutation status in each cancer
-execute_prepare_data = subprocess.run(["python", "prepared_data.py"])
+'''execute_prepare_data = subprocess.run(["python", "prepared_data.py"])'''
 
 print("\n")
 print("The data and related graphs are generated")
@@ -44,9 +44,7 @@ os.chdir("..")
 os.chdir("src/classification_cancer_analysis")
 # performing the cancer classification using sbs signatures
 execute_classify_cancer = subprocess.run(["python", "classify_cancer_type_pytorch.py"])
-# normalize the weight of each sbs is natures in each cancer
-execute_analysis = subprocess.run(["python", "Normalize_cancer_sbs_weight.py"])
-# generate the heatmap to show the contribution of sbs signatures in each cancer
+# generate the heatmap to show the contribution of normalized sbs signatures in each cancer
 execute_heatmap_generator = subprocess.run(["python", "heatmap_generator.py"])
 # draw the top 10 sbs signatures contribution location in each cancer to form the idea of feeding those features to CNN
 execute_top10_sbs_heatmap_generator = subprocess.run(["python", "heatmap_of_top_10_sbs.py"])

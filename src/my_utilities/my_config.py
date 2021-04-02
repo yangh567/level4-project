@@ -8,6 +8,7 @@ gene names : GENE_NAMES
 list of driver gene in each cancer : GENE_NAMES_DICT
 sbs signatures : SBS_NAMES
 cancer types : ORGAN_NAMES
+cancer labels for visualization : cancer_dict
 
 data path : DATA_PATH
 result saving path : C_V_DATA_PATH
@@ -25,6 +26,7 @@ C_V_DATA_PATH = '../../data/cross_valid'
 CROSS_VALIDATION_COUNT = 6
 GENE_PROB = 0.
 
+# the overall driver gene across cancers (obtained from the paper)
 GENE_NAMES = ['MEN1', 'ATRX', 'CTNNB1', 'TP53', 'PRKAR1A', 'RXRA', 'CUL1', 'NFE2L2', 'STAG2', 'EP300', 'FAT1', 'FOXA1',
               'ATM',
               'ELF3', 'FOXQ1', 'ARID1A', 'ERBB3', 'PIK3CA', 'ASXL2', 'KRAS', 'TXNIP', 'ZFP36L1', 'HRAS', 'RHOB',
@@ -59,6 +61,7 @@ GENE_NAMES = ['MEN1', 'ATRX', 'CTNNB1', 'TP53', 'PRKAR1A', 'RXRA', 'CUL1', 'NFE2
               'ATF7IP', 'RFC1',
               'BCL2L11', 'MAP3K4', 'ZBTB7B', 'PLCB4', 'GNAQ', 'SRSF2', 'CYSLTR2']
 
+# the driver gene in each cancers (obtained from the paper)
 GENE_NAMES_DICT = {'ACC': ['ATRX', 'CTNNB1', 'MEN1', 'PRKAR1A', 'TP53'],
                    'BLCA': ['ARID1A', 'ASXL2', 'ATM', 'CDKN1A', 'CDKN2A', 'CREBBP', 'CTNNB1', 'CUL1', 'DIAPH2', 'ELF3',
                             'EP300', 'ERBB2', 'ERBB3', 'ERCC2', 'FAT1', 'FBXW7', 'FGFR3', 'FOXA1', 'FOXQ1', 'GNA13',
@@ -127,13 +130,19 @@ GENE_NAMES_DICT = {'ACC': ['ATRX', 'CTNNB1', 'MEN1', 'PRKAR1A', 'TP53'],
                    'UCS': ['ARID1A', 'BCL2L11', 'CHD4', 'FBXW7', 'KRAS', 'MAP3K4', 'PIK3CA', 'PIK3R1', 'PPP2R1A',
                            'PTEN', 'RB1', 'RFC1', 'TP53', 'ZBTB7B'],
                    'UVM': ['BAP1', 'CYSLTR2', 'EIF1AX', 'GNA11', 'GNAQ', 'PLCB4', 'SF3B1', 'SRSF2']}
-
+# the cancer types
 ORGAN_NAMES = ['ACC', 'BLCA', 'BRCA', 'CESC', 'CHOL', 'COAD', 'DLBC', 'ESCA', 'GBM', 'HNSC', 'KICH', 'KIRC', 'KIRP',
                'LAML',
                'LGG', 'LIHC', 'LUAD', 'LUSC', 'MESO', 'OV', 'PAAD', 'PCPG', 'PRAD', 'READ', 'SARC', 'SKCM', 'TGCT',
                'THCA',
                'THYM', 'UCEC', 'UCS', 'UVM']
+# the dict used for heatmap visualization
+cancer_dict = {0: 'ACC', 1: 'BLCA', 2: 'BRCA', 3: 'CESC', 4: 'CHOL', 5: 'COAD', 6: 'DLBC', 7: 'ESCA', 8: 'GBM',
+               9: 'HNSC', 10: 'KICH', 11: 'KIRC', 12: 'KIRP', 13: 'LAML', 14: 'LGG', 15: 'LIHC', 16: 'LUAD', 17: 'LUSC',
+               18: 'MESO', 19: 'OV', 20: 'PAAD', 21: 'PCPG', 22: 'PRAD', 23: 'READ', 24: 'SARC', 25: 'SKCM', 26: 'TGCT',
+               27: 'THCA', 28: 'THYM', 29: 'UCEC', 30: 'UCS', 31: 'UVM'}
 
+# the sbs signatures from Non-Negative factorization of TCGA maf files
 SBS_NAMES = ['SBS4', 'SBS5', 'SBS1', 'SBS39', 'SBS36', 'SBS2', 'SBS13', 'SBS10b', 'SBS9', 'SBSPON', 'SBS3', 'SBS6',
              'SBS30', 'SBSN', 'SBS10a', 'SBS15', 'SBS26', 'SBS29', 'SBS17b', 'SBS87', 'SBS16', 'SBS18', 'SBS52', 'SBS8',
              'SBS7b', 'SBS40', 'SBS50', 'SBS24', 'SBS27', 'SBS42', 'SBS86', 'SBS57', 'SBS33', 'SBS90', 'SBS17a',

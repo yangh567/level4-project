@@ -2,7 +2,7 @@
 
 This file is used to draw the heatmap for display the
 top 10 weighted sbs signatures in each cancer types to
-form the image to conduct convolutional neural network
+form the idea of using spatial features to conduct convolutional neural network
 
 """
 import os
@@ -11,20 +11,11 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import MinMaxScaler
 sys.path.append(os.path.abspath(os.path.join('..')))
 sys.path.append(os.path.abspath(os.path.join('..', 'my_utilities')))
 from my_utilities import my_config as cfg
 
-# given the cancer lists
-from sklearn.preprocessing import MinMaxScaler
-
-# given the cancer labels
-cancer_dict = {0: 'ACC', 1: 'BLCA', 2: 'BRCA', 3: 'CESC', 4: 'CHOL', 5: 'COAD', 6: 'DLBC', 7: 'ESCA', 8: 'GBM',
-               9: 'HNSC', 10: 'KICH', 11: 'KIRC', 12: 'KIRP', 13: 'LAML', 14: 'LGG', 15: 'LIHC', 16: 'LUAD', 17: 'LUSC',
-               18: 'MESO', 19: 'OV', 20: 'PAAD', 21: 'PCPG', 22: 'PRAD', 23: 'READ', 24: 'SARC', 25: 'SKCM', 26: 'TGCT',
-               27: 'THCA', 28: 'THYM', 29: 'UCEC', 30: 'UCS', 31: 'UVM'}
-
-# ---------------------------------------------------------------------------------------------------------------------
 # loading the cancer type sbs weight matrix from the running result(only take random fold for observation(4th fold))
 cancer_type_path = './result/cancer_type-weight_4.npy'
 cancer_type_weight = np.load(cancer_type_path).T  # shape (49,32)
@@ -48,7 +39,7 @@ for cancer_type in range(len(cfg.ORGAN_NAMES)):
 
 # assign the sbs signature columns to the cancer type sbs weight matrix,rename the index to cancer types
 cancer_df = pd.DataFrame(cancer_top10_sbs_array, columns=cfg.SBS_NAMES)
-cancer_df.rename(index=cancer_dict, inplace=True)
+cancer_df.rename(index=cfg.cancer_dict, inplace=True)
 
 # set up the heatmap for cancer type sbs weight matrix
 plt.subplots(figsize=(20, 15))
