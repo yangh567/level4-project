@@ -35,16 +35,16 @@ def complex_cnn_model(num_features):
     complex_model.add(Activation('tanh'))
     complex_model.add(Dense(2))
     # second conv layer
-    complex_model.add(Conv1D(8, kernel_size=3, strides=1, padding='same'))
+    complex_model.add(Conv1D(8, kernel_size=2, strides=1, padding='same'))
     # third conv layer
-    complex_model.add(Conv1D(16, kernel_size=3, strides=1, padding='same'))
+    complex_model.add(Conv1D(16, kernel_size=2, strides=1, padding='same'))
     complex_model.add(Activation('tanh'))
     complex_model.add(Dense(2))
     # fourth conv layer
-    complex_model.add(Conv1D(16, kernel_size=3, strides=1, padding='same'))
+    complex_model.add(Conv1D(16, kernel_size=2, strides=1, padding='same'))
     complex_model.add(Activation('tanh'))
     # fifth conv layer
-    complex_model.add(Conv1D(32, kernel_size=3, strides=1, padding='same'))
+    complex_model.add(Conv1D(32, kernel_size=2, strides=1, padding='same'))
     complex_model.add(Activation('tanh'))
     # flatten layer
     complex_model.add(Flatten())
