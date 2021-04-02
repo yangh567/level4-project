@@ -9,6 +9,7 @@ import sys
 import numpy as np
 import pandas as pd
 from keras.optimizers import RMSprop
+from keras.optimizers import Adam
 from sklearn.preprocessing import StandardScaler
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -103,8 +104,8 @@ if __name__ == '__main__':
             '''Data processing'''
             # find the top frequently mutated gene in that cancer
             gene_list_final, cancer_driver_gene, cancer_driver_gene_freq = tool.find_top_gene(cancer_type, cancer_prob,
-                                                                                              driver_gene_in_c=cancer_driver_gene,
-                                                                                              driver_gene_freq_in_c=cancer_driver_gene_freq)
+                                                                          driver_gene_in_c=cancer_driver_gene,
+                                                                          driver_gene_freq_in_c=cancer_driver_gene_freq)
             # find top 10 sbs signatures in that cancer
             top10_sbs_list = tool.find_top_10_sbs(fold, cancer_type)
 
@@ -125,11 +126,12 @@ if __name__ == '__main__':
             model = my_model.complex_cnn_model(n_features)
 
             # set up optimizer
-            rmsp = RMSprop(lr=0.001, rho=0.9)
+            # rmsp = RMSprop(lr=0.001, rho=0.9)
+            adam = Adam(lr=0.00098, beta_1=0.9, beta_2=0.999, epsilon=1e-09)
 
             # compile the model
-            model.compile(loss="binary_crossentropy",
-                          optimizer=rmsp,
+            model.compile(loss=tool.focal_loss(gamma=2., alpha=0.25),
+                          optimizer=adam,
                           metrics=['acc'])
 
             # reshape the input data

@@ -9,6 +9,7 @@ import sys
 import numpy as np
 import pandas as pd
 from keras.optimizers import RMSprop
+from keras.optimizers import Adam
 from sklearn.preprocessing import StandardScaler
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -123,10 +124,13 @@ if __name__ == '__main__':
             n_features = train_x.shape[1]
             model = my_model.simple_cnn_model(n_features)
             # set up optimizer
-            rmsp = RMSprop(lr=0.001, rho=0.9)
-            model.compile(loss="binary_crossentropy",
-                          optimizer=rmsp,
-                          metrics=['accuracy'])
+            # rmsp = RMSprop(lr=0.001, rho=0.9)
+            adam = Adam(lr=0.00098, beta_1=0.9, beta_2=0.999, epsilon=1e-09)
+
+            # compile the model
+            model.compile(loss=tool.focal_loss(gamma=2., alpha=0.25),
+                          optimizer=adam,
+                          metrics=['acc'])
             # reshape the input data
             x_train = np.expand_dims(train_x, -1)
             x_test = np.expand_dims(test_x, -1)

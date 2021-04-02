@@ -21,8 +21,7 @@ os.chdir("..")
 # preparing data
 os.chdir("src/statistics")
 
-# TODO commented until you downloaded the sample_id.sbs.organ.csv processed file from link provided in manual.md (
-#  stratified sampling)
+# TODO commented until you downloaded the sample_id.sbs.organ.csv processed file from link provided in manual.md
 
 # we first take only the samples in each cancers that have 244 driver gene label and corresponding cancer label to
 # save memory
@@ -30,6 +29,7 @@ execute_generate_small_data = subprocess.run(["python", "generate_small_data.py"
 # we statistically analyse mutation frequency of each gene in each cancers for later finding the top frequently
 # mutated driver gene in each cancer
 execute_static_gene_prob = subprocess.run(["python", "static_gene_prob.py"])
+# stratified sampling for gene mutation status in each cancer
 execute_prepare_data = subprocess.run(["python", "prepared_data.py"])
 
 print("\n")

@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt
 from copy import deepcopy
 from sklearn.metrics import roc_curve, auc
 from sklearn.preprocessing import MinMaxScaler
+import tensorflow as tf
+import keras.backend as K
 import my_config as cfg
 
 # the weight of each class in averaging the classification accuracy of gene
@@ -115,6 +117,17 @@ def roc_draw(y_t, y_p, title, cancer_driver_gene_list):
         bbox_inches='tight')
 
     plt.close()
+
+
+# we define the focal loss to help with class imbalance problem here
+def focal_loss(gamma, alpha):
+    def focal_loss_fixed(y_true, y_pred):
+        pt_1 = tf.where(tf.equal(y_true, 1), y_pred, tf.ones_like(y_pred))
+        pt_0 = tf.where(tf.equal(y_true, 0), y_pred, tf.zeros_like(y_pred))
+        return -K.mean(alpha * K.pow(1. - pt_1, gamma) * K.log(pt_1)) - K.mean(
+            (1 - alpha) * K.pow(pt_0, gamma) * K.log(1. - pt_0))
+
+    return focal_loss_fixed
 
 
 # score the classification accuracy for each gene in each cancer

@@ -58,6 +58,7 @@ def k_fold_split(train_df,gene_prob_in_cancer,k):
         index_cancer_1 = []
 
         for indx in index:
+            # getting the top frequently mutated driver gene in that cancer
             gene, _, _ = tool.find_top_gene(cancer_type, gene_prob_in_cancer)
             # if the driver gene is not mutated
             if data.iloc[indx][gene][0] == 0:
@@ -103,8 +104,8 @@ def k_fold_split(train_df,gene_prob_in_cancer,k):
 
     for i, item in enumerate(result):
         # test if we have accomplished the work here:
-        print(i,np.sum(item[item["organ"] == "CESC"]["PIK3CA"] == 1))
-        print(i, np.sum(item[item["organ"] == "CESC"]["PIK3CA"] == 0))
+        # print(i,np.sum(item[item["organ"] == "CESC"]["PIK3CA"] == 1))
+        # print(i, np.sum(item[item["organ"] == "CESC"]["PIK3CA"] == 0))
         # we save only the required gene column.sbs signature columns and organ column to the file
         save_item = item[cfg.SBS_NAMES + cfg.GENE_NAMES + ['organ']]
         static_data = dict(save_item['organ'].value_counts())
