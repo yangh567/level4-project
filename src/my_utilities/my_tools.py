@@ -7,13 +7,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from copy import deepcopy
-from sklearn.ensemble import ExtraTreesClassifier
-from sklearn.feature_selection import SelectFromModel
-from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import roc_curve, auc
 from sklearn.preprocessing import MinMaxScaler
 import my_config as cfg
-
 
 # the weight of each class in averaging the classification accuracy of gene
 weight_lst = [162, 98, 90, 87, 85, 84, 80, 80, 74, 73, 67, 67, 64, 60, 59, 50, 48, 43, 34, 34, 31, 29, 27, 25,
@@ -135,7 +131,7 @@ def score(cnn_model, test_x, test_y):
     return y_pred, acc_test
 
 
-# the function to find the top driver gene
+# the function to find the top driver gene in each cancer in overall data
 def find_top_gene(cancer_type, caner_probability, driver_gene_in_c=None, driver_gene_freq_in_c=None):
     # the list used to contain all of the driver gene in that cancer
     gene_list_for_cancer = []
@@ -162,15 +158,14 @@ def find_top_gene(cancer_type, caner_probability, driver_gene_in_c=None, driver_
     for (a, b) in res_list:
         gene_list_final_for_cancer.append(a)
         gene_freq_list_final_for_cancer.append(b)
-    if driver_gene_in_c is not None:
+    if driver_gene_in_c is not None and driver_gene_freq_in_c is not None:
         # here, we append the driver gene's name and cancer name for future visualization in ROC
         driver_gene_in_c.append(gene_list_final_for_cancer[0])
-    if driver_gene_freq_in_c is not None:
         driver_gene_freq_in_c.append(gene_freq_list_final_for_cancer[0])
-    # see what is the driver gene in that cancer
-    print(gene_list_final_for_cancer, cfg.ORGAN_NAMES[cancer_type])
-    # see the frequency of that driver gene in the cancer
-    print(gene_freq_list_final_for_cancer)
+        # see what is the driver gene in that cancer
+        print(gene_list_final_for_cancer, cfg.ORGAN_NAMES[cancer_type])
+        # see the frequency of that driver gene in the cancer
+        print(gene_freq_list_final_for_cancer)
 
     return gene_list_final_for_cancer, driver_gene_in_c, driver_gene_freq_in_c
 
@@ -196,3 +191,14 @@ def find_top_10_sbs(fold, cancer_type):
     res_cancer_sbs_weight_list = [cfg.SBS_NAMES[s] for s in top_10_cancer_sbs_index]
 
     return res_cancer_sbs_weight_list
+
+
+# The function to load the gene occurrence probability in each cancer
+def obtain_gene_prob_cancer():
+    # load the gene occurrence probability in each cancer
+    gene_prob = pd.read_csv('../statistics/gene_distribution/gene_prob.csv')
+    cancer_prob = {}
+    for name, item in gene_prob.groupby('cancer type'):
+        cancer_prob[name] = item
+
+    return cancer_prob

@@ -79,10 +79,7 @@ if __name__ == '__main__':
     valid_acc_fold = []
 
     # load the gene occurrence probability in each cancer
-    gene_prob = pd.read_csv('../statistics/gene_distribution/gene_prob.csv')
-    cancer_prob = {}
-    for name, item in gene_prob.groupby('cancer type'):
-        cancer_prob[name] = item
+    cancer_prob = tool.obtain_gene_prob_cancer()
 
     '''5 fold cross validation'''
     # performing the 5 fold cross validation

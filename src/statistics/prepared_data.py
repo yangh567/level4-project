@@ -14,6 +14,7 @@ import pandas as pd
 sys.path.append(os.path.abspath(os.path.join('..')))
 sys.path.append(os.path.abspath(os.path.join('..', 'my_utilities')))
 from my_utilities import my_config as cfg
+from my_utilities import my_tools as tool
 
 import matplotlib.pyplot as plt
 
@@ -35,13 +36,15 @@ def plt_figure(data, title):
     plt.close('all')
 
 
-def k_fold_split(train_df, k):
+def k_fold_split(train_df,gene_prob_in_cancer,k):
     # start the stratified sampling
     types = list(train_df.groupby("organ"))  # we group the data using cancer types for future sampling
     result = []
     indexs1 = []
     indexs0 = []
 
+    # we set up the cancer type encoding here for the find_top_gene function to find top gene in that cancer
+    cancer_type = 0
     # we generate the data from each of the cancer type and shuffle their index
     for cancer, data in types:
         # rest the index in each cancer
@@ -55,15 +58,19 @@ def k_fold_split(train_df, k):
         index_cancer_1 = []
 
         for indx in index:
+            gene, _, _ = tool.find_top_gene(cancer_type, gene_prob_in_cancer)
             # if the driver gene is not mutated
-            if data.iloc[indx][cfg.GENE_NAMES_DICT[cancer]][0] == 0:
+            if data.iloc[indx][gene][0] == 0:
                 index_cancer_0.append(indx)
             # if the driver gene is mutated
-            if data.iloc[indx][cfg.GENE_NAMES_DICT[cancer]][0] == 1:
+            if data.iloc[indx][gene][0] == 1:
                 index_cancer_1.append(indx)
         # only want to take k samples from each cancer and put into each fold
         indexs0.append((index_cancer_0, int(len(index_cancer_0) / k)))
         indexs1.append((index_cancer_1, int(len(index_cancer_1) / k)))
+
+        # increment the cancer type
+        cancer_type += 1
 
     for fold in range(k):
         tmp_result = []
@@ -96,8 +103,8 @@ def k_fold_split(train_df, k):
 
     for i, item in enumerate(result):
         # test if we have accomplished the work here:
-        # print(i,np.sum(item[item["organ"] == "CESC"]["PIK3CA"] == 1))
-        # print(i, np.sum(item[item["organ"] == "CESC"]["PIK3CA"] == 0))
+        print(i,np.sum(item[item["organ"] == "CESC"]["PIK3CA"] == 1))
+        print(i, np.sum(item[item["organ"] == "CESC"]["PIK3CA"] == 0))
         # we save only the required gene column.sbs signature columns and organ column to the file
         save_item = item[cfg.SBS_NAMES + cfg.GENE_NAMES + ['organ']]
         static_data = dict(save_item['organ'].value_counts())
@@ -121,5 +128,8 @@ if __name__ == "__main__":
 
     # we draw the cancer type distribution for all dataset here
     plt_figure(dict(train['organ'].value_counts()), 'all')
+
+    # load the gene occurrence probability in each cancer
+    cancer_prob = tool.obtain_gene_prob_cancer()
     # starting performing stratified sampling
-    k_fold_split(train, cfg.CROSS_VALIDATION_COUNT)
+    k_fold_split(train, cancer_prob,cfg.CROSS_VALIDATION_COUNT)
