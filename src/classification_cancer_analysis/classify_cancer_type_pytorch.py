@@ -32,13 +32,14 @@ if not os.path.exists(figure_data):
     os.makedirs(figure_data)
 
 
+# plot the convergence graph
 def draw_converge_graph(loss_lst, acc_lst, title):
     fig, axs = plt.subplots(2)
     fig.suptitle('The convergence of accuracy and loss for cancer classification in fold %d' % title)
 
-    axs[0].plot(loss_lst, label="loss",color="red")
+    axs[0].plot(loss_lst, label="loss", color="red")
 
-    axs[1].plot(acc_lst,label="accuracy")
+    axs[1].plot(acc_lst, label="accuracy")
 
     axs[0].legend(bbox_to_anchor=(1.0, 1.0), loc='upper left', prop={'size': 6})
     axs[1].legend(bbox_to_anchor=(1.0, 1.0), loc='upper left', prop={'size': 6})
@@ -122,7 +123,7 @@ def get_data(o_data, index):
 # and we take greatest accuracy of testing set and corresponding trained parameter as perfectly trained model
 
 
-# we start training the model here using batch Adam optimizer BPnet
+# we start training the model here using batch Adam optimizer
 def train_and_test(train_x, train_y, test_x, test_y, fold):
     x_train = torch.tensor(train_x, dtype=torch.float32)
     y_train = torch.tensor(train_y, dtype=torch.float32)
@@ -156,7 +157,7 @@ def train_and_test(train_x, train_y, test_x, test_y, fold):
         save_data_loss.append(epoch_loss / batch_count)
         save_data_accuracy.append(acc / batch_count)
         # save_data.append([epoch, epoch_loss / batch_count, acc / batch_count])
-    draw_converge_graph(save_data_loss, save_data_accuracy,fold)
+    draw_converge_graph(save_data_loss, save_data_accuracy, fold)
     acc_test = score(test_x, test_y)
 
     print("The cross-validation test accuracy on fold " + str(fold) + " is :", acc_test)
@@ -171,13 +172,13 @@ def score(test_x, test_y, title=0, report=False):
     y_test = torch.tensor(test_y, dtype=torch.float32)
 
     y_pred = model(x_test)
-
     y_p = y_pred.detach().numpy()
     y_t = y_test.detach().numpy()
 
     y_pred = torch.argmax(y_pred, dim=1).detach().numpy()
-
     acc_test = accuracy_score(torch.argmax(y_test, dim=1).detach().numpy(), y_pred)
+
+    # for the validation set
     if report:
         # plot the confusion matrix
         n_classes = len(y_test[1])
@@ -218,11 +219,12 @@ if __name__ == '__main__':
     valid_acc = []
 
     for i in range(cfg.CROSS_VALIDATION_COUNT - 1):
-        # sbs num : 49,cancer types num : 32
+        # setup model ,sbs num : 49,cancer types num : 32
         model = my_model.SoftMaxBPNet(49, 32)
         criterion = nn.MSELoss()
         optimizer = torch.optim.Adam(model.parameters(), lr=cfg.LEARNING_RATE)
 
+        # obtain training and testing data as well as validation data
         train_x, train_y, test_x, test_y = get_data(o_data, i)
         valid_x, valid_y = process_data(valid_dataset)
 
