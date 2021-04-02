@@ -1,5 +1,5 @@
 """
-This file provides the tools to analyse on the gene distribution in specific cancer and their classification accuracies(DEPRECATED)
+This file provides the tools for analytical visualization and label finding as well as feature extraction and etc
 
 """
 import os

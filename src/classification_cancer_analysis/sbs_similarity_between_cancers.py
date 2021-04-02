@@ -42,7 +42,8 @@ for cancer in cancer_similarities:
     cancer_similarities_list.append(cancer_similarities[cancer])
 
 num = 0
-# find the top 5 similar cancers and their cosine similarity with each cancers
+# find the top 5 similar cancers and their cosine similarity with each cancers and print them for experimental
+# support
 for cancer_lst in cancer_similarities_list:
     index = list(reversed(sorted(range(len(cancer_lst)), key=lambda i: cancer_lst[i])[-5:]))
     print(cancer_list[num], [cancer_list[x] for x in index], [cancer_lst[y] for y in index])

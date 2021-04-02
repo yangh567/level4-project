@@ -763,3 +763,9 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 * *1 hour* working on dissertation evaluation part
 * *1 hour* rerun the result to test the program
 * *1 minute* writing timelog
+
+## 2 April 2020 Friday
+* *10 minutes* deleted the deprecated research files (The methods that i have tried before)including 
+  "cancer-classify-gene","classification-gene-feature-extraction","ml_method","preprocessing","single_top_driver_gene_prediction"
+* *15 minutes* deleted the deprecated R research codes includes "code.R","experiment.R","maf2sbs.r","NMF-SBS.R","organ-19.R","swapPosition.R"
+* *1 minute* writing the timelog

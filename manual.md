@@ -12,36 +12,34 @@
 ### 2. The Steps to Run The Code Manually
 #### Part 1 : To obtain data:
 
-* *1. you can skip this part as the data is separated by stratified sampling and stored under `data/cross_valid`, if you don't want to perform stratified sampling again*
+* *1. you could skip this part as the data is separated by stratified sampling and stored under `data/cross_valid`, if you don't want to perform stratified sampling and generate data again*
    
 
       The processed file is already generated using the R script called "maf2sbs_change.fixID.r" with the TCGA maf files for each cancer types,all running step will be based on the cross validation data set and validation dataset file generated from the processed file generated in 
       "data/processed" folder called "sample_id.sbs.organ.csv", The reason why those maf file and sample_id.sbs.organ.csv were not uploaded is that the 32 TCGA maf files are too large to put into directory also,the generation of sbs signatures by sample_id matrix using 
-      non-negative matrix factorization requires several hours to complete, also, the similarity file of the NMF generated signatures, and the sbs signatures from Cosmic website is also provided as "sim.cancer_type.csv" to help with visualization.For the below tasks, 
-      you can just used the cross_validation data set and validation data set under "data/cross_valid" to do the job.
+      non-negative matrix factorization in R requires several hours to complete, also, the similarity file of the NMF generated signatures, and the sbs signatures from Cosmic website is also provided as "sim.cancer_type.csv" to help with visualization.For the below tasks, 
+      you can just used the cross_validation data set and validation data set under "data/cross_valid" to see the results or download the "sample_id.sbs.organ.csv" from the link provided below.
 
 
 
-      (Note: However,if you want to run maf2sbs_change.fixID.r to generate your own sbs x sample_id x gene mutation status x organ file, you will need to obtain TCGA maf format files for different cancers from https://portal.gdc.cancer.gov/repository or here:
+      (Note: However,if you want to run maf2sbs_change.fixID.r to generate your own sbs x sample_id x gene mutation status x organ(sample_id.sbs.organ.csv) file, you will need to obtain TCGA maf format files for different cancers from https://portal.gdc.cancer.gov/repository or here:
    
       https://drive.google.com/drive/folders/1oDvK3zpNO8zhLv4k9I1woT0xthrKGdAW?usp=sharing
    
-      and put them at "data/processed/R_codes_for_generating_data" folder,then,get into "processed/R_codes_for_generating_data" folder and run "sudo apt install r-base-core" to install Rscript and run "Rscript requirement.r" to install necessary packages and "Rscript maf2sbs_change.fixID.r" to generate the "sample_id.sbs.organ.csv" file 
+      and put them at "data/processed/" folder,then,get into "processed" folder and run "sudo apt install r-base-core" to install Rscript and run "Rscript requirement.r" to install necessary packages and "Rscript maf2sbs_change.fixID.r" to generate the "sample_id.sbs.organ.csv" file 
       which you can find here without running the procedures above:
    
       https://drive.google.com/file/d/1kk0PercSGP2-vewuwpFat-9zs5fixhzm/view?usp=sharing.
    
       (you will need to install devtools,remotes,BiocManager,sigminer,BSgenome.Hsapiens.UCSC.hg38,maftools and PoisonAlien/TCGAmutations)
       
-      (# Note: you will need to put "sample_id.sbs.organ.csv" under "data/processed" to help with later AI processes)
+      (# Note: you will need to keep "sample_id.sbs.organ.csv" under "data/processed" to use in the later AI processes)
 
-      also,if you have used r to generate "sample_id.sbs.organ.csv",in order to generate the cross_validation data set and validation data set for validation, 
-      you will need to run the prepared_data.py under "src/statistics/" to generate the stratified sampled files for performing 
-      5-fold cross validation for evaluation (5 validation data set and 1 validation dataset) using command "python prepared_data.py".)
 
-* *2. When you have downloaded the sample_id.sbs.organ.csv from the provided link*
+* *2. When you have downloaded the `sample_id.sbs.organ.csv` from the provided link or generated yourself using R codes and ensured it is in `data/processed`.*
+
   
-* *3. Run heatmap_similarity.py under `data/similarity_heatmap` to visualize the similarity of mutational signatures and store the file at `processed/class_graphs` folder using command `python heatmap_similarity.py`.*
+* *3. Run heatmap_similarity.py under `data/similarity_heatmap` to visualize the similarity of generated signatures and cosmic mutational signatures store the file at `processed/class_graphs` folder using command `python heatmap_similarity.py`.*
 
    
 * *4. Run `python generate_small_data.py` under `src/statistics` to obtain the matrix only contains the gene mutation status of the driver gene we need to investigate on*

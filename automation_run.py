@@ -21,7 +21,8 @@ os.chdir("..")
 # preparing data
 os.chdir("src/statistics")
 
-# TODO commented until you downloaded the sample_id.sbs.organ.csv processed file from link provided in manual.md
+# TODO commented until you downloaded the sample_id.sbs.organ.csv processed file from link provided in manual.md or
+#  generated yourself
 
 # we first take only the samples in each cancers that have 244 driver gene label and corresponding cancer label to
 # save memory

@@ -1,7 +1,6 @@
 """
 
-This file is used to provide the BackPropagation strategy for the model for
-taking weight for all sbs signatures for each cancers and gene
+This file is used to provide all of the models built
 
 """
 

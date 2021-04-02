@@ -1,4 +1,4 @@
-# the version of maf to sbs that fixed the duplicated sbs signatures
+# the version of maf to sbs that fixed the duplicated sbs signatures and generated the sbs signatures using non-negative matrix factorization
 rm(list = ls())
 ### step1 install packages--------
 if(F){
