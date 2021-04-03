@@ -36,8 +36,12 @@ def plot_epoch_acc_loss(all_model_history, title, epochs):
         total_gene_loss = [sum(y) for y in zip(total_gene_loss, model_history.history['loss'])]
         cancer_weight += 1
 
+    # print the accuracy in each epoch for observation
+    # print(total_gene_acc)
     # there are 32 cancers
     total_gene_loss = [x / 32 for x in total_gene_loss]
+    # print the loss in each epoch for observation
+    # print(total_gene_loss)
 
     axs[0].plot(total_gene_acc, label="train accuracy")
     # summarize history for loss

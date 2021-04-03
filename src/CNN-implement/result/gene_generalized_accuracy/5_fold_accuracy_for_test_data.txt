@@ -1,5 +1,5 @@
-The fold 1 accuracy : 0.7231157494343564
-The fold 2 accuracy : 0.7311986221474173
-The fold 3 accuracy : 0.7254471536476782
-The fold 4 accuracy : 0.7471929659894684
-The fold 5 accuracy : 0.7234566985206216
+The fold 1 accuracy : 0.7342957411963792
+The fold 2 accuracy : 0.7344452698993522
+The fold 3 accuracy : 0.738890749705156
+The fold 4 accuracy : 0.7235828156665587
+The fold 5 accuracy : 0.7410796166303001

@@ -10,10 +10,10 @@
 * we first tested the feasibility of using mutational signatures such as single based substitution signatures to identify cancers
 
 
-![The example result from cancer classification](src/classification_cancer_analysis/result/cancer_classification_confusion_matrix/The_confusion_matrix_for_validation_in_fold_4.png)
+![The example result from cancer classification](src/classification_cancer_analysis/result/cancer_classification_confusion_matrix/The_confusion_matrix_for_validation_in_fold_0.png)
 
-![The example result from cancer classification 1](src/classification_cancer_analysis/result/cancer_classification_report/The_classification_report_for_validation_in_fold_4.png)
-![The example result from cancer classification 2](src/classification_cancer_analysis/result/cancer_classification_roc_auc/The_roc_auc_for_validation_in_fold_4.png)
+![The example result from cancer classification 1](src/classification_cancer_analysis/result/cancer_classification_report/The_classification_report_for_validation_in_fold_0.png)
+![The example result from cancer classification 2](src/classification_cancer_analysis/result/cancer_classification_roc_auc/The_roc_auc_for_validation_in_fold_0.png)
 
 
 * we then test the feasibility of using mutational signatures to validate the idea of predicting the gene mutation status for patients
