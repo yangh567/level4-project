@@ -62,7 +62,7 @@
 * *2. Run `python heatmap_generator.py` under `src/classification_cancer_analysis` to generate the heatmap of the normalized sbs signature weights in each cancer.*
 
 
-* *3. Run `python heatmap_of_top_10_sbs.py` under `src/classification_cancer_analysis` to draw the top 10 sbs signatures contribution location in each cancer to support the idea of feeding those spatial features to CNN.*
+* *3. Run `python heatmap_of_top_10_sbs.py` under `src/classification_cancer_analysis` to draw the top 10 sbs signatures contribution location in each cancer to support the idea of feeding those features to CNN.*
    
    
 * *4. Run `python sbs_similarity_between_cancers.py` under `src/classification_cancer_analysis` to find the similarity between cancers using their sbs signature weights (some cancers shared same sbs signature might be more similar) to analyse on why there are some mis-classifications.*
