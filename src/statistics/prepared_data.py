@@ -92,7 +92,6 @@ def k_fold_split(train_df,gene_prob_in_cancer,k):
 
             # the final samples in the cancer in that fold will have some of their driver gene mutated and some will
             # not(ensure every fold have mutated and not mutated driver gene in that cancer)
-            np.random.shuffle(final_index)
             final_index = index0 + index1
             sample = data.iloc[final_index]
             tmp_result.append(sample)
