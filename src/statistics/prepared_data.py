@@ -93,6 +93,7 @@ def k_fold_split(train_df,gene_prob_in_cancer,k):
             # the final samples in the cancer in that fold will have some of their driver gene mutated and some will
             # not(ensure every fold have mutated and not mutated driver gene in that cancer)
             final_index = index0 + index1
+            np.random.shuffle(final_index)
             sample = data.iloc[final_index]
             tmp_result.append(sample)
         result.append(pd.concat(tmp_result))
@@ -116,7 +117,7 @@ def k_fold_split(train_df,gene_prob_in_cancer,k):
             plt_figure(static_data, 'cross_validation_%d' % i)
             save_item.to_csv(os.path.join('../../data/cross_valid', 'cross_validation_%d.csv' % i))
         else:
-            # save the last 1 folds to validation data file
+            # save the last fold to validation data file
             plt_figure(static_data, 'validation_dataset')
             save_item.to_csv(os.path.join('../../data/cross_valid', 'validation_dataset.csv'))
     print('finished')
@@ -124,13 +125,13 @@ def k_fold_split(train_df,gene_prob_in_cancer,k):
 
 if __name__ == "__main__":
     # read the data
-    train = pd.read_csv(cfg.DATA_PATH, usecols=cfg.SBS_NAMES + cfg.GENE_NAMES + ['organ'], low_memory=True)
-    train = train.fillna(0)  # handling the NaN
+    overall = pd.read_csv(cfg.DATA_PATH, usecols=cfg.SBS_NAMES + cfg.GENE_NAMES + ['organ'], low_memory=True)
+    overall = overall.fillna(0)  # handling the NaN
 
     # we draw the cancer type distribution for all dataset here
-    plt_figure(dict(train['organ'].value_counts()), 'all')
+    plt_figure(dict(overall['organ'].value_counts()), 'all')
 
     # load the gene occurrence probability in each cancer
     cancer_prob = tool.obtain_gene_prob_cancer()
     # starting performing stratified sampling
-    k_fold_split(train, cancer_prob,cfg.CROSS_VALIDATION_COUNT)
+    k_fold_split(overall, cancer_prob,cfg.CROSS_VALIDATION_COUNT)
