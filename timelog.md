@@ -790,3 +790,7 @@ Deciphering signatures of mutational processes operative in human cancer to unde
 * *1 hour* examing on the dissertation
 * *1 minute* writing the timelog
 
+## 7 April 2020 Wednesday
+* *1 hour* examing on the dissertation and rearranging it
+* *1 minute* writing the timelog
+
