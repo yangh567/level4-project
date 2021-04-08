@@ -129,7 +129,7 @@ sample.sbs<-c("Sample_ID",sbs_name)
 sampleid<-result%>%select("Sample_ID")
 SBS<-result%>%select(sbs_name)
 gene<-result%>%select(-sample.sbs)
-
+# get columns of final data
 final.data<-data.table(sampleid,SBS,gene)
 colnames(final.data)
 
