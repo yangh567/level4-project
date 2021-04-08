@@ -50,8 +50,7 @@ The whole repository contains:
 
 *  `timelog.md` -- used to record the timelog for everyday working status
 
-**Reminder:as the submission only contains data and src,The whole project can be find on github here:https://github.com/yangh567/level4-project/tree/1eaf986f7f5d8e35a9c23165ad9297afff1af0f5**
-
+**Reminder:as the submission only contains data and src,The whole project can be find on github here:https://github.com/yangh567/level4-project
 
 
 ## 2.Build instructions
